@@ -4,7 +4,6 @@ import AboutPage from '../pages/AboutPage';
 import AddTreatmentPage from '../pages/AddTreatmentPage';
 import ForgetPasswordPage from '../pages/ForgetPasswordPage';
 import HomePage from '../pages/HomePage/HomePage';
-
 import LoginPage from '../pages/LoginPage/LoginPage';
 import Page404 from '../pages/Page404';
 import ResetPasswordPage from '../pages/ResetPasswordPage';
@@ -12,7 +11,7 @@ import SearchResultPage from '../pages/SearchResultPage';
 import SignUpPage from '../pages/SignUpPage/SignUpPage';
 import VerifyAccountPage from '../pages/VerifyAccountPage/VerifyAccountPage';
 import ProtectedRoute from './ProtectedRoute';
-import AddDiseasePage from './../pages/AddDiseasePage/AddDiseasePage';
+import AddDiseasePage from '../pages/AddDiseasePage/AddDiseasePage';
 
 const AllRoutes = () => (
     <Routes>
