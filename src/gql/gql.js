@@ -71,3 +71,25 @@ export const GET_DISEASES = gql`
         }
     }
 `;
+
+export const CREATE_DISEASE = gql`
+    mutation diseasesCreation(
+        $diseaseName: String!
+        $descriptions: String!
+        $diseaseCategoriesId: [ID]!
+    ) {
+        createDisease(
+            diseaseName: $diseaseName
+            descriptions: $descriptions
+            diseaseCategoriesId: $diseaseCategoriesId
+        ) {
+            disease {
+                diseaseName
+                descriptions
+                diseaseCategories {
+                    id
+                }
+            }
+        }
+    }
+`;

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import AboutPage from '../pages/AboutPage';
-import AddDiseasePage from '../pages/AddDiseasePage';
 import AddTreatmentPage from '../pages/AddTreatmentPage';
 import ForgetPasswordPage from '../pages/ForgetPasswordPage';
 import HomePage from '../pages/HomePage/HomePage';
@@ -13,6 +12,7 @@ import SearchResultPage from '../pages/SearchResultPage';
 import SignUpPage from '../pages/SignUpPage/SignUpPage';
 import VerifyAccountPage from '../pages/VerifyAccountPage/VerifyAccountPage';
 import ProtectedRoute from './ProtectedRoute';
+import AddDiseasePage from './../pages/AddDiseasePage/AddDiseasePage';
 
 const AllRoutes = () => (
     <Routes>
