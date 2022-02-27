@@ -1,9 +1,11 @@
-import React from 'react';
+import React from "react";
+import { MainLayout } from "../../layouts/MainLayout";
+import AddDisease from "./AddDisease";
 
 const AddDiseasePage = () => (
-    <div>
-        <p>Add Disease Page</p>
-    </div>
+  <MainLayout>
+    <AddDisease />
+  </MainLayout>
 );
 
 export default AddDiseasePage;
