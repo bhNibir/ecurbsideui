@@ -1,3 +1,4 @@
+import SaveIcon from "@mui/icons-material/Save";
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -81,7 +82,7 @@ const AddDiseasesForm = ({ onSubmit }) => {
               type="submit"
               color="primary"
               variant="contained"
-              // startIcon={<SaveIcon />}
+              startIcon={<SaveIcon />}
             >
               <Typography>
                 <Box component="span" fontWeight={600}>

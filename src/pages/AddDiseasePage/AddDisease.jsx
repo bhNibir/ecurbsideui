@@ -15,7 +15,7 @@ const AddDisease = () => {
 
   const onSubmit = (userData) => {
     register({ variables: userData });
-    console.log("userData", userData);
+    console.log("Add Diseases", userData);
   };
 
   // if (mutationLoading) return <Loading />;
