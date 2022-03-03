@@ -9,6 +9,7 @@ import React, { useEffect, useState } from "react";
 import { GET_DISEASES } from "./../../gql/gql";
 import CustomPagination from "./../StyledComponents/CustomPagination";
 import DiseaseAvatar from "./DiseaseAvatar";
+import DiseaseFav from "./DiseaseFav";
 import DiseasesLoadingOverlay from "./DiseasesLoadingOverlay";
 import NoRowsOverlay from "./NoRowsOverlay";
 
@@ -99,7 +100,7 @@ const dataColumns = [
   {
     field: "favorite",
     headerName: "Favorite",
-    // renderCell: Fav,
+    renderCell: DiseaseFav,
     width: 100,
   },
 ];

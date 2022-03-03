@@ -2,14 +2,14 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Box, IconButton } from "@mui/material";
 import React from "react";
 
-const Fav = () => {
+const DiseaseFav = () => {
   return (
     <Box>
-      <IconButton aria-label="favorite" color="#ff3d47">
+      <IconButton aria-label="favorite" color="secondary">
         <FavoriteIcon />
       </IconButton>
     </Box>
   );
 };
 
-export default Fav;
+export default DiseaseFav;
