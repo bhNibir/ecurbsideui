@@ -6,7 +6,7 @@ const DiseasesLoadingOverlay = () => {
   return (
     <GridOverlay>
       <div style={{ position: "absolute", top: 0, width: "100%" }}>
-        <LinearProgress />
+        <LinearProgress color="secondary" />
       </div>
     </GridOverlay>
   );
