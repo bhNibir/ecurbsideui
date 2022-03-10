@@ -14,7 +14,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
-import LogoImg from "../../assets/images/logo.png";
+import LogoImg from "../../assets/images/logo.svg";
 import ElevateAppBar from "./ElevateAppBar";
 import NavBtn from "./NavBtn";
 import ProfileMenu from "./ProfileMenu";
