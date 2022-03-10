@@ -1,62 +1,9 @@
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { Chip, Paper, Stack, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
-import { DataGrid } from "@mui/x-data-grid";
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
-import DiseaseAvatar from "./DiseaseAvatar";
-import DiseaseFav from "./DiseaseFav";
-import DiseasesCat from "./DiseasesCat";
-import DiseasesDateTime from "./DiseasesDateTime";
-import DiseasesLoadingOverlay from "./DiseasesLoadingOverlay";
 import DiseasesTable from "./DiseasesTable";
-
-const dataColumns = [
-  {
-    field: "avatar",
-    headerName: "",
-    renderCell: DiseaseAvatar,
-    width: 80,
-    sortable: false,
-    filterable: false,
-  },
-  {
-    field: "id",
-    headerName: "ID",
-    width: 50,
-    sortable: false,
-    filterable: false,
-  },
-  {
-    field: "diseaseName",
-    headerName: "Disease Name",
-    type: "string",
-    width: 200,
-    flex: 0.5,
-  },
-  {
-    field: "updatedAt",
-    headerName: "Last Update",
-    renderCell: DiseasesDateTime,
-    width: 200,
-    type: "date",
-  },
-  {
-    field: "categories",
-    headerName: "Category",
-    renderCell: DiseasesCat,
-    width: 200,
-    flex: 1,
-    sortable: false,
-  },
-  {
-    field: "favorite",
-    headerName: "Favorite",
-    renderCell: DiseaseFav,
-    width: 80,
-    sortable: false,
-  },
-];
 
 const Diseases = ({ loading, error, data }) => {
   if (error) return <p>Error :(</p>;
@@ -106,19 +53,9 @@ const Diseases = ({ loading, error, data }) => {
 
         <Box marginY={3} style={{ width: "100%", height: "100%" }}>
           {loading ? (
-            <DataGrid
-              density="comfortable"
-              autoHeight
-              pagination
-              loading={loading}
-              components={{
-                LoadingOverlay: DiseasesLoadingOverlay,
-              }}
-              columns={dataColumns}
-              rows={[]}
-            />
+            <DiseasesTable data={[]} loading={loading} />
           ) : (
-            <DiseasesTable data={data} dataColumns={dataColumns} />
+            <DiseasesTable data={data} loading={loading} />
           )}
         </Box>
       </Paper>

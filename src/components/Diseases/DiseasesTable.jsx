@@ -1,6 +1,11 @@
 import { DataGrid } from "@mui/x-data-grid";
 import React, { useEffect, useState } from "react";
 import CustomPagination from "./../StyledComponents/CustomPagination";
+import DiseaseAvatar from "./DiseaseAvatar";
+import DiseaseFav from "./DiseaseFav";
+import DiseasesCat from "./DiseasesCat";
+import DiseasesDateTime from "./DiseasesDateTime";
+import DiseasesLoadingOverlay from "./DiseasesLoadingOverlay";
 import DiseasesQuickSearchToolbar from "./DiseasesQuickSearchToolbar";
 import NoRowsOverlay from "./NoRowsOverlay";
 
@@ -8,21 +13,72 @@ function escapeRegExp(value) {
   return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 }
 
-const DiseasesTable = ({ data, dataColumns }) => {
+const dataColumns = [
+  {
+    field: "avatar",
+    headerName: "",
+    renderCell: DiseaseAvatar,
+    width: 80,
+    sortable: false,
+    filterable: false,
+  },
+  {
+    field: "id",
+    headerName: "ID",
+    width: 50,
+    sortable: false,
+    filterable: false,
+  },
+  {
+    field: "diseaseName",
+    headerName: "Disease Name",
+    type: "string",
+    width: 200,
+    flex: 0.5,
+  },
+  {
+    field: "updatedAt",
+    headerName: "Last Update",
+    renderCell: DiseasesDateTime,
+    width: 200,
+    type: "date",
+  },
+  {
+    field: "categories",
+    headerName: "Category",
+    renderCell: DiseasesCat,
+    width: 200,
+    flex: 1,
+    sortable: false,
+  },
+  {
+    field: "favorite",
+    headerName: "Favorite",
+    renderCell: DiseaseFav,
+    width: 80,
+    sortable: false,
+  },
+];
+
+const DiseasesTable = ({ data, loading }) => {
   const [searchText, setSearchText] = useState("");
-  const [rows, setRows] = useState(data.diseases);
+  const [rows, setRows] = useState([]);
 
   const requestSearch = (searchValue) => {
     setSearchText(searchValue);
     const searchRegex = new RegExp(escapeRegExp(searchValue), "i");
-    const filteredRows = rows.filter((row) =>
-      Object.keys(row).some((field) => searchRegex.test(row[field].toString()))
+    const filteredRows = data.diseases.filter((disease) =>
+      Object.keys(disease).some((field) =>
+        searchRegex.test(disease[field].toString())
+      )
     );
     setRows(filteredRows);
   };
 
   useEffect(() => {
-    setRows(data.diseases);
+    if (data.diseases) {
+      setRows(data.diseases);
+    }
   }, [data.diseases]);
 
   return (
@@ -33,10 +89,12 @@ const DiseasesTable = ({ data, dataColumns }) => {
         pagination
         pageSize={5}
         rowsPerPageOptions={[5]}
+        loading={loading}
         components={{
           Toolbar: DiseasesQuickSearchToolbar,
           Pagination: CustomPagination,
           NoRowsOverlay: NoRowsOverlay,
+          LoadingOverlay: DiseasesLoadingOverlay,
         }}
         disableColumnSelector
         disableColumnMenu
