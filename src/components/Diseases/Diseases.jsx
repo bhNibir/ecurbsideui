@@ -1,105 +1,45 @@
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import ClearIcon from "@mui/icons-material/Clear";
-import SearchIcon from "@mui/icons-material/Search";
 import { Chip, Paper, Stack, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-import TextField from "@mui/material/TextField";
-import { DataGrid, GridToolbarFilterButton } from "@mui/x-data-grid";
-import React, { useEffect, useState } from "react";
+import { DataGrid } from "@mui/x-data-grid";
+import React from "react";
 import { Link as RouterLink } from "react-router-dom";
-import CustomPagination from "./../StyledComponents/CustomPagination";
 import DiseaseAvatar from "./DiseaseAvatar";
 import DiseaseFav from "./DiseaseFav";
 import DiseasesCat from "./DiseasesCat";
 import DiseasesDateTime from "./DiseasesDateTime";
 import DiseasesLoadingOverlay from "./DiseasesLoadingOverlay";
-import NoRowsOverlay from "./NoRowsOverlay";
-
-function escapeRegExp(value) {
-  return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-}
-
-function QuickSearchToolbar({ value, onChange, clearSearch }) {
-  return (
-    <Box
-      sx={{
-        p: 0.5,
-        pb: 0,
-        justifyContent: "space-between",
-        display: "flex",
-        alignItems: "flex-start",
-        flexWrap: "wrap",
-      }}
-    >
-      <div>
-        <GridToolbarFilterButton />
-        {/* <GridToolbarDensitySelector /> */}
-      </div>
-      <TextField
-        variant="standard"
-        value={value}
-        onChange={onChange}
-        placeholder="Search…"
-        InputProps={{
-          startAdornment: <SearchIcon fontSize="small" />,
-          endAdornment: (
-            <IconButton
-              title="Clear"
-              aria-label="Clear"
-              size="small"
-              style={{ visibility: value ? "visible" : "hidden" }}
-              onClick={clearSearch}
-            >
-              <ClearIcon fontSize="small" />
-            </IconButton>
-          ),
-        }}
-        sx={{
-          width: {
-            xs: 1,
-            sm: "auto",
-          },
-          m: (theme) => theme.spacing(1, 0.5, 1.5),
-          "& .MuiSvgIcon-root": {
-            mr: 0.5,
-          },
-          "& .MuiInput-underline:before": {
-            borderBottom: 1,
-            borderColor: "divider",
-          },
-        }}
-      />
-    </Box>
-  );
-}
+import DiseasesTable from "./DiseasesTable";
 
 const dataColumns = [
   {
     field: "avatar",
     headerName: "",
     renderCell: DiseaseAvatar,
-    width: 100,
-    flex: 1,
+    width: 80,
+    sortable: false,
+    filterable: false,
   },
-  // {
-  //   field: "id",
-  //   headerName: "ID",
-  //   width: 100,
-  //   flex: 1,
-  // },
+  {
+    field: "id",
+    headerName: "ID",
+    width: 50,
+    sortable: false,
+    filterable: false,
+  },
   {
     field: "diseaseName",
     headerName: "Disease Name",
+    type: "string",
     width: 200,
-    flex: 1,
+    flex: 0.5,
   },
   {
     field: "updatedAt",
     headerName: "Last Update",
     renderCell: DiseasesDateTime,
     width: 200,
-    flex: 1,
+    type: "date",
   },
   {
     field: "categories",
@@ -107,43 +47,24 @@ const dataColumns = [
     renderCell: DiseasesCat,
     width: 200,
     flex: 1,
+    sortable: false,
   },
   {
     field: "favorite",
     headerName: "Favorite",
     renderCell: DiseaseFav,
-    width: 100,
-    flex: 1,
+    width: 80,
+    sortable: false,
   },
 ];
 
 const Diseases = ({ loading, error, data }) => {
-  const dataRows = data ? data.diseases : [];
-  console.log("All Diseases:", data);
-  console.log(dataRows);
-
-  const [searchText, setSearchText] = useState("");
-  const [rows, setRows] = useState(dataRows);
-
-  const requestSearch = (searchValue) => {
-    setSearchText(searchValue);
-    const searchRegex = new RegExp(escapeRegExp(searchValue), "i");
-    const filteredRows = rows.filter((row) =>
-      Object.keys(row).some((field) => searchRegex.test(row[field].toString()))
-    );
-    setRows(filteredRows);
-  };
-
-  useEffect(() => {
-    setRows(rows);
-  }, [rows]);
-
   if (error) return <p>Error :(</p>;
 
   return (
     <Box marginY={1}>
-      <Paper elevation={0} sx={{ borderRadius: 5, paddingX: 3, paddingY: 2 }}>
-        <Box marginX={3} marginY={2}>
+      <Paper elevation={0} sx={{ borderRadius: 5, padding: 2 }}>
+        <Box marginX={3} marginY={1}>
           <Stack
             direction="row"
             justifyContent="space-between"
@@ -183,30 +104,22 @@ const Diseases = ({ loading, error, data }) => {
           </Stack>
         </Box>
 
-        <Box style={{ width: "100%", height: "100%" }}>
-          <DataGrid
-            density="comfortable"
-            autoHeight
-            pagination
-            loading={loading}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
-            components={{
-              Toolbar: QuickSearchToolbar,
-              Pagination: CustomPagination,
-              NoRowsOverlay: NoRowsOverlay,
-              LoadingOverlay: DiseasesLoadingOverlay,
-            }}
-            columns={dataColumns}
-            rows={dataRows}
-            componentsProps={{
-              toolbar: {
-                value: searchText,
-                onChange: (event) => requestSearch(event.target.value),
-                clearSearch: () => requestSearch(""),
-              },
-            }}
-          />
+        <Box marginY={3} style={{ width: "100%", height: "100%" }}>
+          {loading ? (
+            <DataGrid
+              density="comfortable"
+              autoHeight
+              pagination
+              loading={loading}
+              components={{
+                LoadingOverlay: DiseasesLoadingOverlay,
+              }}
+              columns={dataColumns}
+              rows={[]}
+            />
+          ) : (
+            <DiseasesTable data={data} dataColumns={dataColumns} />
+          )}
         </Box>
       </Paper>
     </Box>

@@ -5,7 +5,7 @@ import VirusImg from "../../assets/images/virus.png";
 const DiseaseAvatar = () => {
   return (
     <>
-      <Box sx={{ p: 2, display: "flex" }}>
+      <Box textAlign="center" sx={{ p: 2 }}>
         <Avatar alt="Cindy Baker" src={VirusImg} />
       </Box>
     </>
