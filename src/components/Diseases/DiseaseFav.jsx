@@ -5,7 +5,9 @@ import React, { useState } from "react";
 
 const DiseaseFav = () => {
   const [fav, setFav] = useState(false);
-  const handleFav = () => {
+
+  const handleFav = (event) => {
+    event.stopPropagation();
     setFav(!fav);
     console.log(fav);
   };

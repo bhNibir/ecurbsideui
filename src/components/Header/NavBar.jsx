@@ -54,7 +54,7 @@ const pages = [
   },
 ];
 
-const NavBar = () => {
+const NavBar = ({ btnLabel, btnPath }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
@@ -145,10 +145,10 @@ const NavBar = () => {
       </Box>
       <Chip
         color="secondary"
-        label="Add Review"
+        label={btnLabel || "Add Disease"}
         icon={<AddCircleIcon />}
         component={RouterLink}
-        to="/add-review"
+        to={btnPath || "/add-disease"}
         sx={{
           display: { xs: "none", md: "flex" },
           textTransform: "capitalize",

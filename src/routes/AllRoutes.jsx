@@ -11,6 +11,7 @@ import ResetPasswordPage from "../pages/ResetPasswordPage";
 import SearchResultPage from "../pages/SearchResultPage";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";
 import VerifyAccountPage from "../pages/VerifyAccountPage/VerifyAccountPage";
+import TreatmentListPage from "./../pages/TreatmentListPage/TreatmentListPage";
 import ProtectedRoute from "./ProtectedRoute";
 
 const AllRoutes = () => (
@@ -18,7 +19,7 @@ const AllRoutes = () => (
     <Route
       path="/"
       element={
-        <ProtectedRoute auth>
+        <ProtectedRoute>
           <HomePage />
         </ProtectedRoute>
       }
@@ -26,14 +27,45 @@ const AllRoutes = () => (
     <Route
       path="/home"
       element={
-        <ProtectedRoute auth>
+        <ProtectedRoute>
           <HomePage />
         </ProtectedRoute>
       }
     />
+
+    <Route
+      path="/add-disease"
+      element={
+        <ProtectedRoute>
+          <AddDiseasePage />
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/diseases"
+      element={
+        <ProtectedRoute>
+          <HomePage />
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/disease/:id"
+      element={
+        <ProtectedRoute>
+          <TreatmentListPage />
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/add-treatment"
+      element={
+        <ProtectedRoute>
+          <AddTreatmentPage />
+        </ProtectedRoute>
+      }
+    />
     <Route path="about" element={<AboutPage />} />
-    <Route path="add-disease" element={<AddDiseasePage />} />
-    <Route path="add-treatment" element={<AddTreatmentPage />} />
     <Route path="search" element={<SearchResultPage />} />
     <Route path="login" element={<LoginPage />} />
     <Route path="sign-up" element={<SignUpPage />} />

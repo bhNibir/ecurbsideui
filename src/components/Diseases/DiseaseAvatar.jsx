@@ -6,7 +6,7 @@ const DiseaseAvatar = () => {
   return (
     <>
       <Box textAlign="center" sx={{ p: 2 }}>
-        <Avatar alt="Cindy Baker" src={VirusImg} />
+        <Avatar variant="rounded" alt="Cindy Baker" src={VirusImg} />
       </Box>
     </>
   );

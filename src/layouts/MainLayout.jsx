@@ -6,14 +6,14 @@ import NavBar from "../components/Header/NavBar";
 // This main Layout Component All Component rapped by this componet
 
 // eslint-disable-next-line import/prefer-default-export
-export const MainLayout = ({ children }) => (
+export const MainLayout = ({ btnLabel, btnPath, children }) => (
   <>
     <Box
       sx={{
         backgroundColor: "#F4FDFB",
       }}
     >
-      <NavBar />
+      <NavBar btnLabel={btnLabel} btnPath={btnPath} />
       <Container
         maxWidth="lg"
         sx={{

@@ -1,5 +1,6 @@
 import { DataGrid } from "@mui/x-data-grid";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import CustomPagination from "./../StyledComponents/CustomPagination";
 import DiseaseAvatar from "./DiseaseAvatar";
 import DiseaseFav from "./DiseaseFav";
@@ -63,6 +64,7 @@ const dataColumns = [
 const DiseasesTable = ({ data, loading }) => {
   const [searchText, setSearchText] = useState("");
   const [rows, setRows] = useState([]);
+  let navigate = useNavigate();
 
   const requestSearch = (searchValue) => {
     setSearchText(searchValue);
@@ -73,6 +75,10 @@ const DiseasesTable = ({ data, loading }) => {
       )
     );
     setRows(filteredRows);
+  };
+
+  const handleRowClick = (event) => {
+    navigate(`/disease/${event.id}`);
   };
 
   useEffect(() => {
@@ -98,8 +104,10 @@ const DiseasesTable = ({ data, loading }) => {
         }}
         disableColumnSelector
         disableColumnMenu
+        disableSelectionOnClick={true}
         columns={dataColumns}
         rows={rows}
+        onRowClick={handleRowClick}
         componentsProps={{
           toolbar: {
             value: searchText,
