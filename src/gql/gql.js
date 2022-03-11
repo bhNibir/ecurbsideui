@@ -102,3 +102,32 @@ export const GET_CATEGORIES = gql`
     }
   }
 `;
+
+export const GET_TREATMENT_BY_DISEASE_ID = gql`
+  query GetTreatmentByDiseaseId($diseaseId: String!) {
+    treatmentByDiseaseId(diseaseId: $diseaseId) {
+      id
+      treatmentName
+      otherName
+      image
+      descriptions
+      disease {
+        id
+        diseaseName
+      }
+
+      treatmentCategories {
+        id
+        name
+      }
+
+      createBy {
+        id
+        firstName
+        lastName
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;

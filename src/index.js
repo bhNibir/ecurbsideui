@@ -17,8 +17,8 @@ import reportWebVitals from "./reportWebVitals";
 import theme from "./theme";
 
 const httpLink = createHttpLink({
-  //   uri: "http://127.0.0.1:8000/graphql/",
-  uri: "https://ecurbsideapi.herokuapp.com/graphql/",
+  uri: "http://127.0.0.1:8000/graphql/",
+  // uri: "https://ecurbsideapi.herokuapp.com/graphql/",
 });
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
