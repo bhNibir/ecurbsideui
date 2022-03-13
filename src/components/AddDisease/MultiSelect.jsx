@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { Autocomplete, CircularProgress, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { Controller } from "react-hook-form";
-import { GET_CATEGORIES } from "./../../gql/gql";
+import { GET_CATEGORIES } from "../../gql/gql";
 
 const MultiSelect = ({ control, setValue }) => {
   const [inputValue, setInputValue] = useState("");

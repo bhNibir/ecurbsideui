@@ -1,8 +1,8 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import AboutPage from "../pages/AboutPage";
-import AddDiseasePage from "../pages/AddDiseasePage/AddDiseasePage";
 import AddTreatmentPage from "../pages/AddTreatmentPage";
+import AddDiseasePage from "../pages/DiseasePages/AddDiseasePage";
 import ForgetPasswordPage from "../pages/ForgetPasswordPage";
 import HomePage from "../pages/HomePage/HomePage";
 import LoginPage from "../pages/LoginPage/LoginPage";
@@ -10,8 +10,9 @@ import Page404 from "../pages/Page404";
 import ResetPasswordPage from "../pages/ResetPasswordPage";
 import SearchResultPage from "../pages/SearchResultPage";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";
+import TreatmentDetailPage from "../pages/TreatmentPages/TreatmentDetailPage";
 import VerifyAccountPage from "../pages/VerifyAccountPage/VerifyAccountPage";
-import TreatmentListPage from "./../pages/TreatmentListPage/TreatmentListPage";
+import TreatmentListPage from "./../pages/TreatmentPages/TreatmentListPage";
 import ProtectedRoute from "./ProtectedRoute";
 
 const AllRoutes = () => (
@@ -62,6 +63,14 @@ const AllRoutes = () => (
       element={
         <ProtectedRoute>
           <AddTreatmentPage />
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/treatment/:id"
+      element={
+        <ProtectedRoute>
+          <TreatmentDetailPage />
         </ProtectedRoute>
       }
     />

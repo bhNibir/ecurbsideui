@@ -36,13 +36,14 @@ const dataColumns = [
     type: "string",
     width: 200,
     flex: 0.5,
+    filterable: false,
   },
   {
     field: "updatedAt",
     headerName: "Last Update",
     renderCell: DiseasesDateTime,
     width: 200,
-    type: "date",
+    type: "dateTime",
   },
   {
     field: "categories",
@@ -58,10 +59,19 @@ const dataColumns = [
     renderCell: DiseaseFav,
     width: 80,
     sortable: false,
+    type: "actions",
+  },
+  {
+    field: "medicalSpecialty",
+    headerName: "Specialty",
+    width: 80,
+    sortable: false,
+    hide: true,
   },
 ];
 
 const DiseasesTable = ({ data, loading }) => {
+  console.log(data);
   const [searchText, setSearchText] = useState("");
   const [rows, setRows] = useState([]);
   let navigate = useNavigate();

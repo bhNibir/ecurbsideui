@@ -65,6 +65,12 @@ export const GET_DISEASES = gql`
         id
         firstName
         lastName
+        professionalProfile {
+          medicalSpecialty {
+            id
+            name
+          }
+        }
       }
       createdAt
       updatedAt

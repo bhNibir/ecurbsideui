@@ -1,8 +1,8 @@
 import { useMutation } from "@apollo/client";
 import { Box, Typography } from "@mui/material";
 import React from "react";
-import DiseasesPaper from "../../components/StyledComponents/DiseasesPaper";
 import { CREATE_DISEASE } from "../../gql/gql";
+import DiseasesPaper from "../StyledComponents/DiseasesPaper";
 import AddDiseasesForm from "./AddDiseasesForm";
 
 const AddDisease = () => {
