@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import { Box, Button, Divider, Link } from "@mui/material";
+import { Box, Button, Divider, Link, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import SnackbarMessage from "../../components/Messages/SnackbarMessage";
@@ -23,7 +23,6 @@ const LoginPage = () => {
           navigate(from, { replace: true });
           console.log(data, mutationError);
         } else {
-          // eslint-disable-next-line no-alert
           console.log(data, mutationError);
           setErrorMessage(result?.tokenAuth?.errors?.nonFieldErrors[0].message);
         }
@@ -50,12 +49,27 @@ const LoginPage = () => {
             setOpen={setErrorMessage}
           />
         )}
-        <FormPaper
-          sx={{
-            mx: 0.5,
-          }}
-          elevation={5}
-        >
+        <FormPaper sx={{ mx: 0.5 }} elevation={5}>
+          <Box sx={{ mb: 1 }}>
+            <Typography
+              align="center"
+              sx={{ color: (theme) => theme.palette.textColor }}
+              variant="body1"
+              fontWeight="bold"
+            >
+              Login to
+            </Typography>
+            <Typography
+              fontWeight="bold"
+              align="center"
+              variant="h4"
+              color="primary"
+              gutterBottom
+            >
+              Ecubside
+            </Typography>
+            <Divider variant="middle" />
+          </Box>
           <LoginForm
             onSubmitData={onSubmitData}
             mutationLoading={mutationLoading}

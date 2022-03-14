@@ -17,10 +17,6 @@ const SnackbarMessage = ({ open, setOpen, message }) => {
   return (
     <div>
       <Stack spacing={2} sx={{ width: "100%" }}>
-        {/* <Button variant="outlined" onClick={handleClick}>
-        Open success snackbar
-      </Button> */}
-
         <Snackbar
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
           open={Boolean(open)}
