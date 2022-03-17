@@ -6,7 +6,7 @@ import AddDiseasePage from "../pages/DiseasePages/AddDiseasePage";
 import ForgetPasswordPage from "../pages/ForgetPasswordPage";
 import HomePage from "../pages/HomePage/HomePage";
 import LoginPage from "../pages/LoginPage/LoginPage";
-import Page404 from "../pages/Page404";
+import Page404 from "../pages/NotFoundPage/Page404";
 import ResetPasswordPage from "../pages/ResetPasswordPage";
 import SearchResultPage from "../pages/SearchResultPage";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";

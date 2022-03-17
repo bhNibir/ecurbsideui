@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import React from "react";
 import { useParams } from "react-router-dom";
-import TreatmentList from "../../components/TreatmentList/TreatmentList";
+import Treatment from "../../components/Treatment/Treatment";
 import { GET_TREATMENT_BY_DISEASE_ID } from "../../gql/gql";
 import { MainLayout } from "../../layouts/MainLayout";
 
@@ -17,7 +17,7 @@ const TreatmentListPage = () => {
 
   return (
     <MainLayout btnLabel="Add Treatment" btnPath="/add-treatment">
-      <TreatmentList loading={loading} error={error} data={data} />
+      <Treatment loading={loading} error={error} data={data} />
     </MainLayout>
   );
 };
