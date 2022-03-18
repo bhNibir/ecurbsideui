@@ -10,7 +10,7 @@ function escapeRegExp(value) {
   return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 }
 
-const TreatmentDataGrid = ({ loading, error, data, dataColumns }) => {
+const TreatmentDataGrid = ({ loading, error, treatments, dataColumns }) => {
   const [searchText, setSearchText] = useState("");
   const [rows, setRows] = useState([]);
   let navigate = useNavigate();
@@ -18,7 +18,7 @@ const TreatmentDataGrid = ({ loading, error, data, dataColumns }) => {
   const requestSearch = (searchValue) => {
     setSearchText(searchValue);
     const searchRegex = new RegExp(escapeRegExp(searchValue), "i");
-    const filteredRows = data.treatmentByDiseaseId.filter((disease) =>
+    const filteredRows = treatments.filter((disease) =>
       Object.keys(disease).some((field) =>
         searchRegex.test(disease[field].toString())
       )
@@ -31,10 +31,10 @@ const TreatmentDataGrid = ({ loading, error, data, dataColumns }) => {
   };
 
   useEffect(() => {
-    if (data.treatmentByDiseaseId) {
-      setRows(data.treatmentByDiseaseId);
+    if (treatments) {
+      setRows(treatments);
     }
-  }, [data.treatmentByDiseaseId]);
+  }, [treatments]);
 
   return (
     <>

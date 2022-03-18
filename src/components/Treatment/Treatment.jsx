@@ -2,26 +2,22 @@ import { Avatar, Chip, Paper, Stack, Typography } from "@mui/material";
 import { red } from "@mui/material/colors";
 import { Box } from "@mui/system";
 import React from "react";
-import TreatmentList from "../TreatmentList/TreatmentList";
+import TreatmentList from "./../TreatmentList/TreatmentList";
 
 const Treatment = ({ loading, error, data }) => {
-  const [chipData] = React.useState([
-    { key: 0, label: "Angular" },
-    { key: 1, label: "jQuery" },
-    { key: 2, label: "Polymer" },
-    { key: 3, label: "React" },
-    { key: 4, label: "Vue.js" },
-  ]);
-  console.log(data);
-  if (loading) return "Submitting...";
+  if (loading) return "Loading...";
   if (error) return `Submission error! ${error.message}`;
+  console.log(data.diseaseById);
+  const { diseaseName, createBy, descriptions, diseaseCategories, treatments } =
+    data.diseaseById;
+
   return (
     <>
       <Paper sx={{ mt: 2, mb: 2, borderRadius: 5, padding: 2 }} elevation={3}>
         <Box paddingX={3} paddingY={1.5}>
           <Box>
             <Typography variant="h3" color="text.secondary" gutterBottom>
-              Strep Pharyngitis
+              {diseaseName ? diseaseName : "Disease Name"}
             </Typography>
           </Box>
           <Stack
@@ -39,7 +35,7 @@ const Treatment = ({ loading, error, data }) => {
             </Avatar>
             <Box paddingTop={1.25}>
               <Typography variant="subtitle2" lineHeight={0.5} component="p">
-                Nibir
+                {"@" + createBy.username}
               </Typography>
               <Typography
                 variant="caption"
@@ -50,10 +46,7 @@ const Treatment = ({ loading, error, data }) => {
               </Typography>
             </Box>
           </Stack>
-          <Typography>
-            Also known as strep throat, is an infection of the throat including
-            the tonsils caused by group A streptococcus.
-          </Typography>
+          <Typography>{descriptions}</Typography>
 
           <Stack
             direction="row"
@@ -65,16 +58,25 @@ const Treatment = ({ loading, error, data }) => {
             <Typography variant="subtitle2" color="text.secondary">
               Specialty:
             </Typography>
-            {chipData.map((data) => {
+            {diseaseCategories.map((category) => {
               return (
-                <Chip label={data.label} size="small" variant="outlined" />
+                <Chip
+                  key={category.id}
+                  label={category.name}
+                  size="small"
+                  variant="outlined"
+                />
               );
             })}
           </Stack>
         </Box>
       </Paper>
       <Paper sx={{ borderRadius: 5, padding: 2 }} elevation={3}>
-        <TreatmentList loading={loading} error={error} data={data} />
+        <TreatmentList
+          loading={loading}
+          error={error}
+          treatments={treatments}
+        />
       </Paper>
     </>
   );

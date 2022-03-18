@@ -41,14 +41,14 @@ const dataColumns = [
   },
 ];
 
-const TreatmentList = ({ loading, error, data }) => {
+const TreatmentList = ({ loading, error, treatments }) => {
   return (
     <>
       <div>Treatment</div>
       <TreatmentDataGrid
         loading={loading}
         error={error}
-        data={data}
+        treatments={treatments}
         dataColumns={dataColumns}
       />
     </>

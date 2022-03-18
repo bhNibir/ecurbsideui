@@ -1,14 +1,5 @@
 import { gql } from "@apollo/client";
 
-export const ADD_TODO = gql`
-  mutation AddTodo($text: String!) {
-    addTodo(text: $text) {
-      id
-      text
-    }
-  }
-`;
-
 export const USER_REGISTER = gql`
   mutation UserRegister(
     $email: String!
@@ -100,7 +91,7 @@ export const CREATE_DISEASE = gql`
   }
 `;
 
-export const GET_CATEGORIES = gql`
+export const GET_DISEASE_CATEGORIES = gql`
   query GetCategories {
     diseasesCategories {
       id
@@ -109,31 +100,40 @@ export const GET_CATEGORIES = gql`
   }
 `;
 
-export const GET_TREATMENT_BY_DISEASE_ID = gql`
-  query GetTreatmentByDiseaseId($diseaseId: String!) {
-    treatmentByDiseaseId(diseaseId: $diseaseId) {
+export const GET_DISEASE_BY_ID = gql`
+  query GetDiseaseById($id: String!) {
+    diseaseById(id: $id) {
       id
-      treatmentName
-      otherName
-      image
+      diseaseName
       descriptions
-      disease {
-        id
-        diseaseName
-      }
-
-      treatmentCategories {
+      diseaseCategories {
         id
         name
       }
-
       createBy {
         id
         firstName
         lastName
+        username
       }
       createdAt
       updatedAt
+
+      treatments {
+        id
+        treatmentName
+        imageUrl
+        treatmentCategories {
+          id
+          name
+        }
+        otherName
+        descriptions
+        createBy {
+          id
+          username
+        }
+      }
     }
   }
 `;
