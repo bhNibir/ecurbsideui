@@ -1,10 +1,11 @@
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { Avatar, Chip, Grid, Paper, Stack, Typography } from "@mui/material";
-import { red } from "@mui/material/colors";
+import { Chip, Grid, Paper, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import TreatmentList from "./../TreatmentList/TreatmentList";
+import TreatmentSpecialty from "./TreatmentSpecialty";
+import { TreatmentUser } from "./TreatmentUser";
 
 const Treatment = ({ loading, error, data }) => {
   if (loading) return "Loading...";
@@ -19,35 +20,6 @@ const Treatment = ({ loading, error, data }) => {
     createdAt,
   } = data.diseaseById;
 
-  const formateDate = (dateString) => {
-    const date = new Date(dateString);
-    const month = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-
-    return `${
-      month[date.getMonth()]
-    } ${date.getDate()} , ${date.getFullYear()}`;
-  };
-  const formateName = (userObj) => {
-    const { firstName, lastName, username } = userObj;
-    if (firstName) {
-      return firstName + " " + lastName;
-    }
-    return username;
-  };
-
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
@@ -60,40 +32,7 @@ const Treatment = ({ loading, error, data }) => {
                 alignItems="center"
                 spacing={2}
               >
-                <Box>
-                  <Stack
-                    direction="row"
-                    justifyContent="flex-start"
-                    alignItems="flex-start"
-                    spacing={1}
-                    marginY={2}
-                  >
-                    <Avatar
-                      sx={{ width: 35, height: 35, bgcolor: red[500] }}
-                      aria-label="recipe"
-                    >
-                      R
-                    </Avatar>
-                    <Box paddingTop={0.75}>
-                      <Typography
-                        variant="subtitle2"
-                        textTransform={"capitalize"}
-                        lineHeight={0.5}
-                        fontWeight="bold"
-                        color="primary"
-                      >
-                        {formateName(createBy)}
-                      </Typography>
-                      <Typography
-                        variant="caption"
-                        lineHeight={0}
-                        color="text.secondary"
-                      >
-                        {formateDate(createdAt)}
-                      </Typography>
-                    </Box>
-                  </Stack>
-                </Box>
+                <TreatmentUser createBy={createBy} createdAt={createdAt} />
                 <Box>
                   <Chip
                     color="primary"
@@ -129,27 +68,7 @@ const Treatment = ({ loading, error, data }) => {
                 <Typography variant="body2">{descriptions}</Typography>
               </Box>
             </Box>
-
-            <Stack
-              direction="row"
-              justifyContent="flex-start"
-              alignItems="flex-start"
-              spacing={1}
-              marginY={3}
-            >
-              <Typography variant="subtitle2">Specialty:</Typography>
-              {diseaseCategories.map((category) => {
-                return (
-                  <Chip
-                    key={category.id}
-                    label={category.name}
-                    color="success"
-                    size="small"
-                    variant="outlined"
-                  />
-                );
-              })}
-            </Stack>
+            <TreatmentSpecialty diseaseCategories={diseaseCategories} />
           </Box>
         </Paper>
       </Grid>
