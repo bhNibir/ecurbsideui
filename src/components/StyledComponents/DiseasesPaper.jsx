@@ -4,12 +4,13 @@ const CustomizePaper = styled(Paper)(({ theme }) => ({
   marginTop: theme.spacing(3),
   marginBottom: theme.spacing(3),
   padding: theme.spacing(2),
+  borderRadius: theme.spacing(2),
   [theme.breakpoints.up("md")]: {
-    marginTop: theme.spacing(6),
-    marginBottom: theme.spacing(6),
+    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(1),
 
-    marginLeft: theme.spacing(42),
-    marginRight: theme.spacing(42),
+    marginLeft: theme.spacing(44),
+    marginRight: theme.spacing(44),
     padding: theme.spacing(4),
   },
 }));

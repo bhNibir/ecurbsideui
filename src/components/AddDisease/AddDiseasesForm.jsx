@@ -77,7 +77,7 @@ const AddDiseasesForm = ({ onSubmit }) => {
           </Grid>
         </Grid>
         <>
-          <div>
+          <Box marginTop={1}>
             <Button
               type="submit"
               color="primary"
@@ -90,7 +90,7 @@ const AddDiseasesForm = ({ onSubmit }) => {
                 </Box>
               </Typography>
             </Button>
-          </div>
+          </Box>
         </>
       </form>
     </>

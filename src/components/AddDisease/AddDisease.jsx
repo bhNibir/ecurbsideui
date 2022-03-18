@@ -22,17 +22,23 @@ const AddDisease = () => {
   // if (mutationError) return <Errors message={data.register.errors} />;
 
   return (
-    <main>
-      <DiseasesPaper>
-        <Typography component="h1" variant="h4" align="center" color="primary">
-          Add new Diseases
+    <>
+      <DiseasesPaper elevation={3}>
+        <Typography
+          component="h1"
+          variant="h4"
+          align="center"
+          color="primary"
+          gutterBottom
+        >
+          Add New Diseases
         </Typography>
 
-        <Box my={2}>
+        <Box>
           <AddDiseasesForm onSubmit={onSubmit} />
         </Box>
       </DiseasesPaper>
-    </main>
+    </>
   );
 };
 

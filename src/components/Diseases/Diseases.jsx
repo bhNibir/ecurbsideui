@@ -10,7 +10,7 @@ const Diseases = ({ loading, error, data }) => {
 
   return (
     <Box marginY={1}>
-      <Paper elevation={0} sx={{ borderRadius: 5, padding: 2 }}>
+      <Paper elevation={3} sx={{ borderRadius: 5, padding: 2 }}>
         <Box marginX={3} marginY={1}>
           <Stack
             direction="row"

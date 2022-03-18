@@ -11,10 +11,6 @@ const TreatmentListPage = () => {
     variables: { diseaseId: id },
   });
 
-  console.log(data);
-  if (loading) return "Submitting...";
-  if (error) return `Submission error! ${error.message}`;
-
   return (
     <MainLayout btnLabel="Add Treatment" btnPath="/add-treatment">
       <Treatment loading={loading} error={error} data={data} />

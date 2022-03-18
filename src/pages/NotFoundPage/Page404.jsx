@@ -8,8 +8,6 @@ import { MotionContainer, varBounceIn } from "../../components/animate";
 import DefaultLayout from "./../../layouts/DefaultLayout";
 // ----------------------------------------------------------------------
 
-// ----------------------------------------------------------------------
-
 export default function Page404() {
   return (
     <DefaultLayout>
@@ -29,15 +27,23 @@ export default function Page404() {
               <Box
                 component="img"
                 src={Img404}
-                sx={{ height: 260, mx: "auto", my: { xs: 3, sm: 4 } }}
+                sx={{
+                  height: {
+                    sm: 260,
+                    xs: "100%",
+                  },
+                  width: "100%",
+                  mx: "auto",
+                  my: { xs: 2, sm: 2, md: 5 },
+                }}
               />
             </motion.div>
 
             <Button
               to="/"
-              size="large"
               variant="contained"
               disableElevation
+              disableRipple
               component={RouterLink}
             >
               Go to Home
