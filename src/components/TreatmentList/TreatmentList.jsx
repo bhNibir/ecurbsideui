@@ -1,5 +1,8 @@
 import React from "react";
+import AddReviewBtn from "./AddReviewBtn";
+import TreatmentCat from "./TreatmentCat";
 import TreatmentDataGrid from "./TreatmentDataGrid";
+import TreatmentRating from "./TreatmentRating";
 const dataColumns = [
   {
     field: "treatmentName",
@@ -12,15 +15,15 @@ const dataColumns = [
   {
     field: "treatmentCategories",
     headerName: "Category",
-    // renderCell: DiseasesCat,
+    renderCell: TreatmentCat,
     width: 200,
     sortable: false,
   },
   {
     field: "",
     headerName: "Rating",
-    // renderCell: DiseaseFav,
-    width: 100,
+    renderCell: TreatmentRating,
+    width: 200,
     sortable: false,
     type: "number",
   },
@@ -33,8 +36,8 @@ const dataColumns = [
     type: "number",
   },
   {
-    field: "",
     headerName: "Add Review",
+    renderCell: AddReviewBtn,
     width: 120,
     sortable: false,
     type: "actions",
