@@ -10,7 +10,7 @@ export const MainLayout = ({ btnLabel, btnPath, children }) => (
   <>
     <Box
       sx={{
-        backgroundColor: "#f0f2f5",
+        backgroundColor: "#f4fdfb",
       }}
     >
       <NavBar btnLabel={btnLabel} btnPath={btnPath} />
