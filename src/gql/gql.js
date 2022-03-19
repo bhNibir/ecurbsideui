@@ -129,6 +129,8 @@ export const GET_DISEASE_BY_ID = gql`
         }
         otherName
         descriptions
+        totalReviews
+        avgRating
         createBy {
           id
           username

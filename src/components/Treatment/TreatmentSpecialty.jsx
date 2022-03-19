@@ -34,10 +34,9 @@ const TreatmentSpecialty = ({ diseaseCategories }) => {
         </Box>
         {diseaseCategories.map((category) => {
           return (
-            <Box component="span" margin={0.25}>
+            <Box component="span" margin={0.25} key={category.id}>
               <Tooltip title={category.name} placement="top" arrow>
                 <Chip
-                  key={category.id}
                   label={formateLabel(category.name)}
                   color="success"
                   size="small"

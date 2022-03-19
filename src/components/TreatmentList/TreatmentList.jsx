@@ -1,3 +1,4 @@
+import { Box, Typography } from "@mui/material";
 import React from "react";
 import AddReviewBtn from "./AddReviewBtn";
 import TreatmentCat from "./TreatmentCat";
@@ -21,24 +22,23 @@ const dataColumns = [
     sortable: false,
   },
   {
-    field: "",
+    field: "avgRating",
     headerName: "Rating",
     renderCell: TreatmentRating,
     width: 200,
     flex: 0.5,
-    sortable: false,
-    type: "number",
+    // sortable: false,
+    // type: "number",
   },
   {
-    field: "id",
+    field: "totalReviews",
     headerName: "Reviews",
-    // renderCell: DiseaseFav,
     width: 120,
-    sortable: false,
     flex: 0.5,
-    type: "number",
+    // type: "number",
   },
   {
+    field: " ",
     headerName: "Add Review",
     renderCell: AddReviewBtn,
     width: 120,
@@ -51,7 +51,11 @@ const dataColumns = [
 const TreatmentList = ({ loading, error, treatments }) => {
   return (
     <>
-      <div>Treatment</div>
+      <Box marginX={1} marginY={2}>
+        <Typography variant="h6" color="primary" textTransform="uppercase">
+          Treatments
+        </Typography>
+      </Box>
       <TreatmentDataGrid
         loading={loading}
         error={error}

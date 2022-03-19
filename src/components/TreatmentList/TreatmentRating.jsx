@@ -10,12 +10,14 @@ const StyledRating = styled(Rating)({
   },
 });
 
-const TreatmentRating = () => {
+const TreatmentRating = ({ id, value }) => {
   return (
     <>
       <StyledRating
+        key={id}
         name="customized-color"
-        defaultValue={2}
+        defaultValue={0}
+        value={value}
         readOnly
         icon={<StarRoundedIcon fontSize="inherit" />}
         emptyIcon={<StarOutlineRoundedIcon fontSize="inherit" />}
