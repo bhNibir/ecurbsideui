@@ -9,7 +9,7 @@ const dataColumns = [
     headerName: "Treatment",
     type: "string",
     width: 200,
-
+    flex: 1,
     filterable: false,
   },
   {
@@ -17,6 +17,7 @@ const dataColumns = [
     headerName: "Category",
     renderCell: TreatmentCat,
     width: 200,
+    flex: 1,
     sortable: false,
   },
   {
@@ -24,6 +25,7 @@ const dataColumns = [
     headerName: "Rating",
     renderCell: TreatmentRating,
     width: 200,
+    flex: 0.5,
     sortable: false,
     type: "number",
   },
@@ -33,6 +35,7 @@ const dataColumns = [
     // renderCell: DiseaseFav,
     width: 120,
     sortable: false,
+    flex: 0.5,
     type: "number",
   },
   {
@@ -40,6 +43,7 @@ const dataColumns = [
     renderCell: AddReviewBtn,
     width: 120,
     sortable: false,
+    flex: 0.5,
     type: "actions",
   },
 ];
