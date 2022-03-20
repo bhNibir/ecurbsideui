@@ -10,9 +10,9 @@ import Page404 from "../pages/NotFoundPage/Page404";
 import ResetPasswordPage from "../pages/ResetPasswordPage";
 import SearchResultPage from "../pages/SearchResultPage";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";
+import DiseaseTreatmentListPage from "../pages/TreatmentPages/DiseaseTreatmentListPage";
 import TreatmentDetailPage from "../pages/TreatmentPages/TreatmentDetailPage";
 import VerifyAccountPage from "../pages/VerifyAccountPage/VerifyAccountPage";
-import TreatmentListPage from "./../pages/TreatmentPages/TreatmentListPage";
 import ProtectedRoute from "./ProtectedRoute";
 
 const AllRoutes = () => (
@@ -54,7 +54,7 @@ const AllRoutes = () => (
       path="/disease/:id"
       element={
         <ProtectedRoute>
-          <TreatmentListPage />
+          <DiseaseTreatmentListPage />
         </ProtectedRoute>
       }
     />

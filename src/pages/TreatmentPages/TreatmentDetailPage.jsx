@@ -1,14 +1,23 @@
+import { useQuery } from "@apollo/client";
 import React from "react";
 import { useParams } from "react-router-dom";
+import TreatmentDetails from "../../components/TreatmentDetails/TreatmentDetails";
+import { GET_TREATMENT_BY_ID } from "../../gql/gql";
+import { MainLayout } from "./../../layouts/MainLayout";
 
 const TreatmentDetailPage = () => {
-  console.log("TreatmentDetailPage: ");
   let { id } = useParams();
+
+  const { loading, error, data } = useQuery(GET_TREATMENT_BY_ID, {
+    variables: { id: id },
+  });
+  if (loading) return "Loading...";
+  if (error) return `Submission error! ${error.message}`;
+
   return (
-    <>
-      <h1>Treatment Detail Page</h1>
-      <div>Treatment id : {id}</div>
-    </>
+    <MainLayout btnLabel="Add Review" btnPath="/add-review">
+      <TreatmentDetails data={data} />
+    </MainLayout>
   );
 };
 

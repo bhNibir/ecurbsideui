@@ -139,3 +139,28 @@ export const GET_DISEASE_BY_ID = gql`
     }
   }
 `;
+export const GET_TREATMENT_BY_ID = gql`
+  query GetTreatmentById($id: String!) {
+    treatmentById(id: $id) {
+      id
+      treatmentName
+      descriptions
+      imageUrl
+      treatmentCategories {
+        id
+        name
+      }
+      otherName
+      descriptions
+
+      createBy {
+        id
+        firstName
+        lastName
+        username
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;

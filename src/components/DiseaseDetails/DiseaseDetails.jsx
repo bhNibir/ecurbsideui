@@ -4,10 +4,10 @@ import { Box } from "@mui/system";
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import TreatmentList from "./../TreatmentList/TreatmentList";
-import TreatmentSpecialty from "./TreatmentSpecialty";
-import { TreatmentUser } from "./TreatmentUser";
+import DiseaseDetailsSpecialty from "./DiseaseDetailsSpecialty";
+import DiseaseDetailsUser from "./DiseaseDetailsUser";
 
-const Treatment = ({ loading, error, data }) => {
+const DiseaseDetails = ({ loading, error, data }) => {
   if (loading) return "Loading...";
   if (error) return `Submission error! ${error.message}`;
   console.log(data.diseaseById);
@@ -32,7 +32,7 @@ const Treatment = ({ loading, error, data }) => {
                 alignItems="center"
                 spacing={2}
               >
-                <TreatmentUser createBy={createBy} createdAt={createdAt} />
+                <DiseaseDetailsUser createBy={createBy} createdAt={createdAt} />
                 <Box>
                   <Chip
                     color="primary"
@@ -68,7 +68,7 @@ const Treatment = ({ loading, error, data }) => {
                 <Typography variant="body2">{descriptions}</Typography>
               </Box>
             </Box>
-            <TreatmentSpecialty diseaseCategories={diseaseCategories} />
+            <DiseaseDetailsSpecialty diseaseCategories={diseaseCategories} />
           </Box>
         </Paper>
       </Grid>
@@ -85,4 +85,4 @@ const Treatment = ({ loading, error, data }) => {
   );
 };
 
-export default Treatment;
+export default DiseaseDetails;
