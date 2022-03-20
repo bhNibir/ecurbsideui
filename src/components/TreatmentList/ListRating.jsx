@@ -10,7 +10,7 @@ const StyledRating = styled(Rating)({
   },
 });
 
-const TreatmentRating = ({ id, value }) => {
+const ListRating = ({ id, value }) => {
   return (
     <>
       <StyledRating
@@ -26,4 +26,4 @@ const TreatmentRating = ({ id, value }) => {
   );
 };
 
-export default TreatmentRating;
+export default ListRating;

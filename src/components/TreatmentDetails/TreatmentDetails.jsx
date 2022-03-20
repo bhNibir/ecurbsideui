@@ -1,8 +1,8 @@
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { Chip, Grid, Paper, Stack, Typography } from "@mui/material";
+import { Grid, Paper, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
-import { Link as RouterLink } from "react-router-dom";
+import TreatmentCategory from "./TreatmentCategory";
+import TreatmentRating from "./TreatmentRating";
 import { TreatmentUser } from "./TreatmentUser";
 
 const TreatmentDetails = ({ data }) => {
@@ -11,6 +11,8 @@ const TreatmentDetails = ({ data }) => {
     createBy,
     descriptions,
     treatmentCategories,
+    otherName,
+    avgRating,
     createdAt,
   } = data.treatmentById;
   console.log(data);
@@ -21,6 +23,11 @@ const TreatmentDetails = ({ data }) => {
           <Paper sx={{ mt: 2, mb: 2, borderRadius: 5 }} elevation={3}>
             <Box paddingX={6} paddingY={2}>
               <Box>
+                <Typography variant="h2" fontWeight={"400"} gutterBottom>
+                  {treatmentName ? treatmentName : "treatment Name"}
+                </Typography>
+              </Box>
+              <Box marginBottom={3}>
                 <Stack
                   direction="row"
                   justifyContent="space-between"
@@ -28,7 +35,8 @@ const TreatmentDetails = ({ data }) => {
                   spacing={2}
                 >
                   <TreatmentUser createBy={createBy} createdAt={createdAt} />
-                  <Box>
+                  <TreatmentRating value={avgRating} />
+                  {/* <Box>
                     <Chip
                       color="primary"
                       label="Add Treatment"
@@ -48,22 +56,28 @@ const TreatmentDetails = ({ data }) => {
                         },
                       }}
                     />
-                  </Box>
+                  </Box> */}
                 </Stack>
               </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "start",
+                }}
+                marginY={0.5}
+              >
+                <Typography paddingRight={0.5} variant="subtitle2">
+                  Other Name:{" "}
+                </Typography>
+                <Typography variant="body2">{otherName}</Typography>
+              </Box>
+              <TreatmentCategory category={treatmentCategories} />
 
-              <Box marginTop={1}>
-                <Box>
-                  <Typography variant="h6" color="secondary" gutterBottom>
-                    {treatmentName ? treatmentName : "treatment Name"}
-                  </Typography>
-                </Box>
-
+              <Box marginTop={3}>
                 <Box paddingBottom={2}>
                   <Typography variant="body2">{descriptions}</Typography>
                 </Box>
               </Box>
-              {/* <TreatmentSpecialty treatmentCategories={treatmentCategories} /> */}
             </Box>
           </Paper>
         </Grid>

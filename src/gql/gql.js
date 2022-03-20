@@ -159,6 +159,7 @@ export const GET_TREATMENT_BY_ID = gql`
         lastName
         username
       }
+      avgRating
       createdAt
       updatedAt
     }

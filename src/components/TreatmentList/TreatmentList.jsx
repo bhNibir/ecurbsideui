@@ -1,9 +1,9 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
 import AddReviewBtn from "./AddReviewBtn";
+import ListRating from "./ListRating";
 import TreatmentCat from "./TreatmentCat";
 import TreatmentDataGrid from "./TreatmentDataGrid";
-import TreatmentRating from "./TreatmentRating";
 const dataColumns = [
   {
     field: "treatmentName",
@@ -24,7 +24,7 @@ const dataColumns = [
   {
     field: "avgRating",
     headerName: "Rating",
-    renderCell: TreatmentRating,
+    renderCell: ListRating,
     width: 200,
     flex: 0.5,
     // sortable: false,

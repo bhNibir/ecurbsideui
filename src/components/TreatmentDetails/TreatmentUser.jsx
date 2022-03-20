@@ -39,7 +39,6 @@ export const TreatmentUser = ({ createBy, createdAt }) => {
           justifyContent="flex-start"
           alignItems="flex-start"
           spacing={1}
-          marginY={2}
         >
           <Avatar
             sx={{ width: 35, height: 35, bgcolor: red[500] }}
