@@ -92,7 +92,7 @@ export const CREATE_DISEASE = gql`
 `;
 
 export const GET_DISEASE_CATEGORIES = gql`
-  query GetCategories {
+  query GetDiseaseCategories {
     diseasesCategories {
       id
       name
@@ -162,6 +162,15 @@ export const GET_TREATMENT_BY_ID = gql`
       avgRating
       createdAt
       updatedAt
+    }
+  }
+`;
+
+export const GET_TREATMENT_CATEGORIES = gql`
+  query GetTreatmentCategories {
+    treatmentsCategories {
+      id
+      name
     }
   }
 `;

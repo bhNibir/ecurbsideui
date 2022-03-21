@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import AboutPage from "../pages/AboutPage";
-import AddTreatmentPage from "../pages/AddTreatmentPage";
 import AddDiseasePage from "../pages/DiseasePages/AddDiseasePage";
 import ForgetPasswordPage from "../pages/ForgetPasswordPage";
 import HomePage from "../pages/HomePage/HomePage";
@@ -10,6 +9,7 @@ import Page404 from "../pages/NotFoundPage/Page404";
 import ResetPasswordPage from "../pages/ResetPasswordPage";
 import SearchResultPage from "../pages/SearchResultPage";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";
+import AddTreatmentPage from "../pages/TreatmentPages/AddTreatmentPage";
 import DiseaseTreatmentListPage from "../pages/TreatmentPages/DiseaseTreatmentListPage";
 import TreatmentDetailPage from "../pages/TreatmentPages/TreatmentDetailPage";
 import VerifyAccountPage from "../pages/VerifyAccountPage/VerifyAccountPage";

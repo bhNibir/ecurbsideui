@@ -23,7 +23,7 @@ const TreatmentDetails = ({ data }) => {
           <Paper sx={{ mt: 2, mb: 2, borderRadius: 5 }} elevation={3}>
             <Box paddingX={6} paddingY={2}>
               <Box>
-                <Typography variant="h2" fontWeight={"400"} gutterBottom>
+                <Typography variant="h3" fontWeight={"400"} gutterBottom>
                   {treatmentName ? treatmentName : "treatment Name"}
                 </Typography>
               </Box>

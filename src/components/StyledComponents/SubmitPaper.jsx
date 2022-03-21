@@ -15,8 +15,8 @@ const CustomizePaper = styled(Paper)(({ theme }) => ({
   },
 }));
 
-const DiseasesPaper = (props) => {
+const SubmitPaper = (props) => {
   return <CustomizePaper {...props} />;
 };
 
-export default DiseasesPaper;
+export default SubmitPaper;

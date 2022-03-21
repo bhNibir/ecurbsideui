@@ -2,7 +2,7 @@ import { useMutation } from "@apollo/client";
 import { Box, Typography } from "@mui/material";
 import React from "react";
 import { CREATE_DISEASE } from "../../gql/gql";
-import DiseasesPaper from "../StyledComponents/DiseasesPaper";
+import SubmitPaper from "../StyledComponents/SubmitPaper";
 import AddDiseasesForm from "./AddDiseasesForm";
 
 const AddDisease = () => {
@@ -23,7 +23,7 @@ const AddDisease = () => {
 
   return (
     <>
-      <DiseasesPaper elevation={3}>
+      <SubmitPaper elevation={3}>
         <Typography
           component="h1"
           variant="h4"
@@ -37,7 +37,7 @@ const AddDisease = () => {
         <Box>
           <AddDiseasesForm onSubmit={onSubmit} />
         </Box>
-      </DiseasesPaper>
+      </SubmitPaper>
     </>
   );
 };
