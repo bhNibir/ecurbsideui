@@ -13,6 +13,7 @@ import AddTreatmentPage from "../pages/TreatmentPages/AddTreatmentPage";
 import DiseaseTreatmentListPage from "../pages/TreatmentPages/DiseaseTreatmentListPage";
 import TreatmentDetailPage from "../pages/TreatmentPages/TreatmentDetailPage";
 import VerifyAccountPage from "../pages/VerifyAccountPage/VerifyAccountPage";
+import { AddReviewPage } from "./../pages/ReviewPage/AddReviewPage";
 import ProtectedRoute from "./ProtectedRoute";
 
 const AllRoutes = () => (
@@ -71,6 +72,14 @@ const AllRoutes = () => (
       element={
         <ProtectedRoute>
           <TreatmentDetailPage />
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/add-review/:id"
+      element={
+        <ProtectedRoute>
+          <AddReviewPage />
         </ProtectedRoute>
       }
     />
