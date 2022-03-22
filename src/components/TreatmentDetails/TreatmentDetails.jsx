@@ -1,6 +1,7 @@
 import { Grid, Paper, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
+import RatingView from "./../RatingView/RatingView";
 import TreatmentCategory from "./TreatmentCategory";
 import TreatmentRating from "./TreatmentRating";
 import { TreatmentUser } from "./TreatmentUser";
@@ -80,10 +81,22 @@ const TreatmentDetails = ({ data }) => {
               </Box>
             </Box>
           </Paper>
+          <Paper sx={{ mt: 2, mb: 2, borderRadius: 5 }} elevation={3}>
+            <Box paddingX={6} paddingY={3}>
+              <Typography variant="h6">Reviews</Typography>
+              <Typography variant="subtitle2">From users</Typography>
+            </Box>
+            <Box paddingX={6} paddingBottom={3}>
+              <RatingView createBy={createBy} createdAt={createdAt} />
+              <RatingView createBy={createBy} createdAt={createdAt} />
+              <RatingView createBy={createBy} createdAt={createdAt} />
+              <RatingView createBy={createBy} createdAt={createdAt} />
+              <RatingView createBy={createBy} createdAt={createdAt} />
+              <RatingView createBy={createBy} createdAt={createdAt} />
+            </Box>
+          </Paper>
         </Grid>
-        <Grid item xs={12} md={5}>
-          <Paper>Treatment Reviews</Paper>
-        </Grid>
+        <Grid item xs={12} md={5}></Grid>
       </Grid>
     </>
   );
