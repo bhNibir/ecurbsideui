@@ -1,6 +1,7 @@
 import { Paper, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
+import AddReviewForm from "./AddReviewForm";
 
 const AddReview = () => {
   return (
@@ -10,7 +11,7 @@ const AddReview = () => {
           <Typography variant="h6"> Add Review</Typography>
         </Box>
         <Box paddingX={6} paddingBottom={3}>
-          From
+          <AddReviewForm />
         </Box>
       </Paper>
     </>
