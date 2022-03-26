@@ -1,13 +1,18 @@
 import { useMutation } from "@apollo/client";
 import { Box, Typography } from "@mui/material";
 import React from "react";
-import { CREATE_DISEASE } from "../../gql/gql";
+import { CREATE_DISEASE, GET_DISEASES } from "../../gql/gql";
 import SubmitPaper from "../StyledComponents/SubmitPaper";
 import AddDiseasesForm from "./AddDiseasesForm";
 
 const AddDisease = () => {
   const [register, { data, loading: mutationLoading, error: mutationError }] =
-    useMutation(CREATE_DISEASE);
+    useMutation(CREATE_DISEASE, {
+      refetchQueries: [
+        GET_DISEASES, // DocumentNode object parsed with gql
+        "GetDiseases", // Query name
+      ],
+    });
 
   console.log("mutationLoading", mutationLoading);
   console.log("mutationError", mutationError);
