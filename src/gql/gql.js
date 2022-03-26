@@ -81,6 +81,7 @@ export const CREATE_DISEASE = gql`
       diseaseCategoriesId: $diseaseCategoriesId
     ) {
       disease {
+        id
         diseaseName
         descriptions
         diseaseCategories {

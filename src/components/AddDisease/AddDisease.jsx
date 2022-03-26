@@ -1,13 +1,19 @@
 import { useMutation } from "@apollo/client";
 import { Box, Typography } from "@mui/material";
 import React from "react";
-import { CREATE_DISEASE } from "../../gql/gql";
+import { useNavigate } from "react-router-dom";
+import { CREATE_DISEASE, GET_DISEASES } from "../../gql/gql";
 import SubmitPaper from "../StyledComponents/SubmitPaper";
 import AddDiseasesForm from "./AddDiseasesForm";
 
 const AddDisease = () => {
+  let navigate = useNavigate();
   const [register, { data, loading: mutationLoading, error: mutationError }] =
-    useMutation(CREATE_DISEASE);
+    useMutation(CREATE_DISEASE, {
+      refetchQueries: [{ query: GET_DISEASES }],
+      onCompleted: (data) =>
+        navigate(`/disease/${data.createDisease.disease.id}`),
+    });
 
   console.log("mutationLoading", mutationLoading);
   console.log("mutationError", mutationError);
