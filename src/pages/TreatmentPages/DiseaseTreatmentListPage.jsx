@@ -12,10 +12,7 @@ const DiseaseTreatmentListPage = () => {
   });
 
   return (
-    <MainLayout
-      btnLabel="Add Treatment"
-      btnPath={`/disease/${id}/add-treatment`}
-    >
+    <MainLayout>
       <DiseaseDetails loading={loading} error={error} data={data} />
     </MainLayout>
   );

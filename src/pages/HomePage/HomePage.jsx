@@ -10,7 +10,7 @@ const HomePage = () => {
 
   return (
     <>
-      <MainLayout btnLabel="Add Disease" btnPath="/add-disease">
+      <MainLayout>
         <HomeHero />
         <Diseases loading={loading} error={error} data={data} />
       </MainLayout>

@@ -1,6 +1,7 @@
 import StarIcon from "@mui/icons-material/Star";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
+import { styled } from "@mui/material/styles";
 import React from "react";
 
 const labels = {
@@ -10,6 +11,12 @@ const labels = {
   4: "Good",
   5: "Excellent",
 };
+
+const StyledRating = styled(Rating)({
+  "& .MuiRating-iconFilled": {
+    color: "#ff3d47",
+  },
+});
 
 const RatingScale = ({ value, onChange, error }) => {
   const [hover, setHover] = React.useState(-1);
@@ -21,7 +28,8 @@ const RatingScale = ({ value, onChange, error }) => {
         alignItems: "center",
       }}
     >
-      <Rating
+      <StyledRating
+        size="large"
         name="hover-feedback"
         value={Number(value)}
         precision={1}
