@@ -1,10 +1,11 @@
 import SaveIcon from "@mui/icons-material/Save";
-import { Box, Button, Grid, TextField, Typography } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
+import { Box, Grid, TextField, Typography } from "@mui/material";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import TreatmentSelectCategory from "./TreatmentSelectCategory";
 
-const AddTreatmentForm = ({ onSubmit }) => {
+const AddTreatmentForm = ({ onSubmit, mutationLoading }) => {
   const { register, setValue, handleSubmit, control } = useForm();
 
   return (
@@ -105,7 +106,8 @@ const AddTreatmentForm = ({ onSubmit }) => {
         </Grid>
         <>
           <Box marginTop={1}>
-            <Button
+            <LoadingButton
+              loading={mutationLoading}
               type="submit"
               color="primary"
               variant="contained"
@@ -116,7 +118,7 @@ const AddTreatmentForm = ({ onSubmit }) => {
                   Save
                 </Box>
               </Typography>
-            </Button>
+            </LoadingButton>
           </Box>
         </>
       </form>
