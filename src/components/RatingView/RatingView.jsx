@@ -2,7 +2,7 @@ import { Box, Paper, Typography } from "@mui/material";
 import React from "react";
 import RatingUser from "./RatingUser";
 
-const RatingView = ({ createBy, createdAt }) => {
+const RatingView = ({ review }) => {
   return (
     <Paper
       variant="outlined"
@@ -12,12 +12,12 @@ const RatingView = ({ createBy, createdAt }) => {
     >
       <Box padding={2}>
         <Box marginBottom={1}>
-          <RatingUser createBy={createBy} createdAt={createdAt} />
+          <RatingUser review={review} />
         </Box>
 
         <Box>
           <Box paddingBottom={1}>
-            <Typography variant="body1">Works great!</Typography>
+            <Typography variant="body1">{review?.content}</Typography>
           </Box>
         </Box>
       </Box>

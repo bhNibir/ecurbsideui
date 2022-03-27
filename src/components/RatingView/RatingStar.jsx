@@ -23,6 +23,7 @@ const RatingStar = ({ id, value }) => {
         sx={{
           fontSize: "1rem",
         }}
+        readOnly
       />
     </>
   );

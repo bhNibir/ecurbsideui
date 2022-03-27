@@ -35,7 +35,6 @@ const TreatmentCategory = ({ category }) => {
               label={formateLabel(category.name)}
               variant="outlined"
               size="small"
-              ou
             />
           </Tooltip>
         </Box>

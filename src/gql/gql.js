@@ -163,6 +163,19 @@ export const GET_TREATMENT_BY_ID = gql`
       avgRating
       createdAt
       updatedAt
+      reviews {
+        id
+        content
+        rating
+        createBy {
+          id
+          firstName
+          lastName
+          username
+        }
+        createdAt
+        updatedAt
+      }
     }
   }
 `;
@@ -190,6 +203,27 @@ export const CREATE_TREATMENT = gql`
       diseaseId: $diseaseId
       descriptions: $descriptions
     ) {
+      treatment {
+        id
+      }
+    }
+  }
+`;
+
+export const GET_REVIEWS_BY_TREATMENT_ID = gql`
+  query GetReviewsByTreatmentId($treatmentId: String!) {
+    reviewsByTreatmentId(treatmentId: $treatmentId) {
+      id
+      content
+      rating
+      createBy {
+        id
+        firstName
+        lastName
+        username
+      }
+      createdAt
+      updatedAt
       treatment {
         id
       }

@@ -16,6 +16,7 @@ const TreatmentDetails = ({ data }) => {
     otherName,
     avgRating,
     createdAt,
+    reviews,
   } = data.treatmentById;
   console.log(data);
   return (
@@ -88,12 +89,9 @@ const TreatmentDetails = ({ data }) => {
               <Typography variant="subtitle2">From users</Typography>
             </Box>
             <Box paddingX={6} paddingBottom={3}>
-              <RatingView createBy={createBy} createdAt={createdAt} />
-              <RatingView createBy={createBy} createdAt={createdAt} />
-              <RatingView createBy={createBy} createdAt={createdAt} />
-              <RatingView createBy={createBy} createdAt={createdAt} />
-              <RatingView createBy={createBy} createdAt={createdAt} />
-              <RatingView createBy={createBy} createdAt={createdAt} />
+              {reviews.map((review) => (
+                <RatingView key={review.id} review={review} />
+              ))}
             </Box>
           </Paper>
         </Grid>

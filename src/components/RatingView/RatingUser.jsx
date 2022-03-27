@@ -3,7 +3,7 @@ import { red } from "@mui/material/colors";
 import React from "react";
 import RatingStar from "./RatingStar";
 
-const RatingUser = ({ createBy, createdAt }) => {
+const RatingUser = ({ review }) => {
   const formateDate = (dateString) => {
     const date = new Date(dateString);
     const month = [
@@ -61,15 +61,15 @@ const RatingUser = ({ createBy, createdAt }) => {
                 fontWeight="bold"
                 gutterBottom
               >
-                {formateName(createBy)}
+                {formateName(review?.createBy)}
               </Typography>
-              <RatingStar id={1} value={3} />
+              <RatingStar id={1} value={review?.rating} />
             </Box>
           </Stack>
         </Box>
         <Box>
           <Typography variant="subtitle2" color="text.secondary">
-            {formateDate(createdAt)}
+            {formateDate(review?.createdAt)}
           </Typography>
         </Box>
       </Stack>
