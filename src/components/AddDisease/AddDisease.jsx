@@ -1,5 +1,6 @@
 import { useMutation } from "@apollo/client";
 import { Box, Typography } from "@mui/material";
+import { useSnackbar } from "notistack";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { CREATE_DISEASE, GET_DISEASES } from "../../gql/gql";
@@ -8,11 +9,17 @@ import AddDiseasesForm from "./AddDiseasesForm";
 
 const AddDisease = () => {
   let navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
+
   const [register, { data, loading: mutationLoading, error: mutationError }] =
     useMutation(CREATE_DISEASE, {
       refetchQueries: [{ query: GET_DISEASES }],
-      onCompleted: (data) =>
-        navigate(`/disease/${data.createDisease.disease.id}`),
+      onCompleted: (data) => {
+        enqueueSnackbar("Successfully add a new Disease!", {
+          variant: "success",
+        });
+        navigate(`/disease/${data.createDisease.disease.id}`);
+      },
     });
 
   console.log("mutationLoading", mutationLoading);
@@ -41,7 +48,10 @@ const AddDisease = () => {
         </Typography>
 
         <Box>
-          <AddDiseasesForm onSubmit={onSubmit} />
+          <AddDiseasesForm
+            mutationLoading={mutationLoading}
+            onSubmit={onSubmit}
+          />
         </Box>
       </SubmitPaper>
     </>

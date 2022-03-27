@@ -59,6 +59,7 @@ const MultiSelect = ({ control, setValue }) => {
           )}
         />
       )}
+      rules={{ required: "Category is required" }}
     />
   );
 };
