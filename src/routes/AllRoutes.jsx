@@ -60,7 +60,7 @@ const AllRoutes = () => (
       }
     />
     <Route
-      path="/add-treatment"
+      path="/disease/:id/add-treatment"
       element={
         <ProtectedRoute>
           <AddTreatmentPage />

@@ -175,3 +175,24 @@ export const GET_TREATMENT_CATEGORIES = gql`
     }
   }
 `;
+export const CREATE_TREATMENT = gql`
+  mutation treatmentCreation(
+    $treatmentName: String!
+    $otherName: String
+    $treatmentCategoryId: ID!
+    $diseaseId: ID!
+    $descriptions: String!
+  ) {
+    createTreatment(
+      treatmentName: $treatmentName
+      otherName: $otherName
+      treatmentCategoryId: $treatmentCategoryId
+      diseaseId: $diseaseId
+      descriptions: $descriptions
+    ) {
+      treatment {
+        id
+      }
+    }
+  }
+`;

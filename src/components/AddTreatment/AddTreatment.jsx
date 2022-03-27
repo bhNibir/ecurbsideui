@@ -1,18 +1,23 @@
+import { useMutation } from "@apollo/client";
 import { Box, Typography } from "@mui/material";
 import React from "react";
+import { useParams } from "react-router-dom";
+import { CREATE_TREATMENT } from "../../gql/gql";
 import SubmitPaper from "../StyledComponents/SubmitPaper";
 import AddTreatmentForm from "./AddTreatmentForm";
 
 const AddTreatment = () => {
-  //   const [register, { data, loading: mutationLoading, error: mutationError }] =
-  //     useMutation(CREATE_DISEASE);
+  let { id } = useParams();
+  const [register, { data, loading: mutationLoading, error: mutationError }] =
+    useMutation(CREATE_TREATMENT);
 
-  //   console.log("mutationLoading", mutationLoading);
-  //   console.log("mutationError", mutationError);
-  //   console.log("data", data);
+  console.log("mutationLoading", mutationLoading);
+  console.log("mutationError", mutationError);
+  console.log("data", data);
 
   const onSubmit = (treatmentData) => {
-    //   register({ variables: userData });
+    treatmentData.diseaseId = id;
+    register({ variables: treatmentData });
     console.log("Add Treatment", treatmentData);
   };
 

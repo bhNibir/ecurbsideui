@@ -12,6 +12,7 @@ const DiseaseDetails = ({ loading, error, data }) => {
   if (error) return `Submission error! ${error.message}`;
   console.log(data.diseaseById);
   const {
+    id,
     diseaseName,
     createBy,
     descriptions,
@@ -39,7 +40,7 @@ const DiseaseDetails = ({ loading, error, data }) => {
                     label="Add Treatment"
                     icon={<AddCircleIcon />}
                     component={RouterLink}
-                    to="/add-treatment"
+                    to={`/disease/${id}/add-treatment`}
                     sx={{
                       textTransform: "uppercase",
                       fontWeight: "bold",
