@@ -1,29 +1,9 @@
 import { Avatar, Box, Stack, Typography } from "@mui/material";
 import { red } from "@mui/material/colors";
+import dayjs from "dayjs";
 import React from "react";
 
 export const TreatmentUser = ({ createBy, createdAt }) => {
-  const formateDate = (dateString) => {
-    const date = new Date(dateString);
-    const month = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-
-    return `${
-      month[date.getMonth()]
-    } ${date.getDate()} , ${date.getFullYear()}`;
-  };
   const formateName = (userObj) => {
     const { firstName, lastName, username } = userObj;
     if (firstName) {
@@ -57,7 +37,7 @@ export const TreatmentUser = ({ createBy, createdAt }) => {
               {formateName(createBy)}
             </Typography>
             <Typography variant="caption" lineHeight={0} color="text.secondary">
-              {formateDate(createdAt)}
+              {dayjs(createdAt).format("MMMM DD, YYYY")}
             </Typography>
           </Box>
         </Stack>

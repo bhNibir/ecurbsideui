@@ -1,4 +1,4 @@
-import AddIcon from "@mui/icons-material/Add";
+import RateReviewRoundedIcon from "@mui/icons-material/RateReviewRounded";
 import Fab from "@mui/material/Fab";
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -21,7 +21,7 @@ const AddReviewBtn = ({ id }) => {
         aria-label="add review"
         onClick={handleAddReview}
       >
-        <AddIcon />
+        <RateReviewRoundedIcon />
       </Fab>
     </>
   );
