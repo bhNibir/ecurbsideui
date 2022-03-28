@@ -13,7 +13,7 @@ const Diseases = ({ loading, error, data }) => {
       <Paper elevation={3} sx={{ borderRadius: 5, padding: 2 }}>
         <Box marginX={3} marginY={1}>
           <Stack
-            direction="row"
+            direction={{ xs: "column", sm: "row" }}
             justifyContent="space-between"
             alignItems="center"
             spacing={2}
