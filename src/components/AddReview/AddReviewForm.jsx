@@ -1,15 +1,12 @@
 import SaveIcon from "@mui/icons-material/Save";
-import { Box, Button, Grid, TextField, Typography } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
+import { Box, Grid, TextField, Typography } from "@mui/material";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import RatingScale from "./RatingScale";
 
-const AddReviewForm = () => {
+const AddReviewForm = ({ onSubmit, mutationLoading }) => {
   const { register, setValue, handleSubmit, control } = useForm();
-  const onSubmit = (ReviewData) => {
-    //   register({ variables: userData });
-    console.log("Add Review", ReviewData);
-  };
 
   return (
     <>
@@ -32,7 +29,7 @@ const AddReviewForm = () => {
 
           <Grid item xs={12} my={1}>
             <Controller
-              name="comments"
+              name="content"
               control={control}
               defaultValue=""
               render={({
@@ -43,10 +40,10 @@ const AddReviewForm = () => {
                   variant="outlined"
                   margin="dense"
                   fullWidth
-                  id="comments"
+                  id="content"
                   label="Comments"
                   placeholder="Add your comment"
-                  name="comments"
+                  name="content"
                   multiline
                   rows={3}
                   value={value}
@@ -62,7 +59,8 @@ const AddReviewForm = () => {
         </Grid>
         <>
           <Box marginTop={1}>
-            <Button
+            <LoadingButton
+              loading={mutationLoading}
               type="submit"
               color="primary"
               variant="contained"
@@ -73,7 +71,7 @@ const AddReviewForm = () => {
                   Save
                 </Box>
               </Typography>
-            </Button>
+            </LoadingButton>
           </Box>
         </>
       </form>

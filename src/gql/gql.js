@@ -153,7 +153,9 @@ export const GET_TREATMENT_BY_ID = gql`
       }
       otherName
       descriptions
-
+      disease {
+        id
+      }
       createBy {
         id
         firstName
@@ -163,6 +165,19 @@ export const GET_TREATMENT_BY_ID = gql`
       avgRating
       createdAt
       updatedAt
+      reviews {
+        id
+        content
+        rating
+        createBy {
+          id
+          firstName
+          lastName
+          username
+        }
+        createdAt
+        updatedAt
+      }
     }
   }
 `;
@@ -172,6 +187,51 @@ export const GET_TREATMENT_CATEGORIES = gql`
     treatmentsCategories {
       id
       name
+    }
+  }
+`;
+export const CREATE_TREATMENT = gql`
+  mutation treatmentCreation(
+    $treatmentName: String!
+    $otherName: String
+    $treatmentCategoryId: ID!
+    $diseaseId: ID!
+    $descriptions: String!
+  ) {
+    createTreatment(
+      treatmentName: $treatmentName
+      otherName: $otherName
+      treatmentCategoryId: $treatmentCategoryId
+      diseaseId: $diseaseId
+      descriptions: $descriptions
+    ) {
+      treatment {
+        id
+      }
+    }
+  }
+`;
+
+export const CREATE_REVIEW = gql`
+  mutation reviewCreation($content: String!, $rating: Int!, $treatmentId: ID!) {
+    createReview(
+      content: $content
+      rating: $rating
+      treatmentId: $treatmentId
+    ) {
+      review {
+        id
+        rating
+        content
+        createdAt
+        updatedAt
+        createBy {
+          id
+          firstName
+          lastName
+          username
+        }
+      }
     }
   }
 `;

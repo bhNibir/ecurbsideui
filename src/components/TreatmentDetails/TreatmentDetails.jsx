@@ -9,6 +9,8 @@ import { TreatmentUser } from "./TreatmentUser";
 
 const TreatmentDetails = ({ data }) => {
   const {
+    id,
+    disease,
     treatmentName,
     createBy,
     descriptions,
@@ -16,8 +18,9 @@ const TreatmentDetails = ({ data }) => {
     otherName,
     avgRating,
     createdAt,
+    reviews,
   } = data.treatmentById;
-  console.log(data);
+  console.log("treatmentById", data);
   return (
     <>
       <Grid container spacing={6}>
@@ -88,17 +91,14 @@ const TreatmentDetails = ({ data }) => {
               <Typography variant="subtitle2">From users</Typography>
             </Box>
             <Box paddingX={6} paddingBottom={3}>
-              <RatingView createBy={createBy} createdAt={createdAt} />
-              <RatingView createBy={createBy} createdAt={createdAt} />
-              <RatingView createBy={createBy} createdAt={createdAt} />
-              <RatingView createBy={createBy} createdAt={createdAt} />
-              <RatingView createBy={createBy} createdAt={createdAt} />
-              <RatingView createBy={createBy} createdAt={createdAt} />
+              {reviews.map((review) => (
+                <RatingView key={review.id} review={review} />
+              ))}
             </Box>
           </Paper>
         </Grid>
         <Grid item xs={12} md={5}>
-          <AddReview />
+          <AddReview diseaseId={disease.id} treatmentId={id} />
         </Grid>
       </Grid>
     </>

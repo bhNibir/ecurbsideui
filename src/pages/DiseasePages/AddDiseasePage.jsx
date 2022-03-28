@@ -3,7 +3,7 @@ import AddDisease from "../../components/AddDisease/AddDisease";
 import { MainLayout } from "../../layouts/MainLayout";
 
 const AddDiseasePage = () => (
-  <MainLayout btnLabel="Add Disease" btnPath="/add-disease">
+  <MainLayout>
     <AddDisease />
   </MainLayout>
 );

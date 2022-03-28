@@ -15,7 +15,7 @@ const TreatmentDetailPage = () => {
   if (error) return `Submission error! ${error.message}`;
 
   return (
-    <MainLayout btnLabel="Add Review" btnPath="/add-review">
+    <MainLayout>
       <TreatmentDetails data={data} />
     </MainLayout>
   );
