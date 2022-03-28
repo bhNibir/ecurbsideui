@@ -35,8 +35,11 @@ const AddReview = ({ diseaseId, treatmentId }) => {
 
   return (
     <>
-      <Paper sx={{ mt: 2, mb: 2, borderRadius: 5 }} elevation={3}>
-        <Box paddingX={6} paddingY={3}>
+      <Paper
+        sx={{ mt: 2, mb: 2, ml: { md: 3 }, borderRadius: 5 }}
+        elevation={3}
+      >
+        <Box paddingX={6} paddingTop={3} paddingBottom={1.5}>
           <Typography variant="h6"> Add Review</Typography>
         </Box>
         <Box paddingX={6} paddingBottom={3}>

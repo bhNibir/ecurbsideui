@@ -1,11 +1,12 @@
+import dayjs from "dayjs";
 import React from "react";
 
 const DiseasesDateTime = ({ formattedValue }) => {
   //   const { formattedValue } = props;
-  const date = new Date(formattedValue);
-  //   console.log(formattedValue);
+  // const date = dayjs.utc(formattedValue);
+  console.log(formattedValue);
 
-  return <p>{date.toLocaleString()}</p>;
+  return <p>{dayjs(formattedValue).format("MMMM DD, YYYY")}</p>;
 };
 
 export default DiseasesDateTime;

@@ -1,29 +1,9 @@
 import { Avatar, Box, Stack, Typography } from "@mui/material";
 import { red } from "@mui/material/colors";
+import dayjs from "dayjs";
 import React from "react";
 
 export const DiseaseDetailsUser = ({ createBy, createdAt }) => {
-  const formateDate = (dateString) => {
-    const date = new Date(dateString);
-    const month = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-
-    return `${
-      month[date.getMonth()]
-    } ${date.getDate()} , ${date.getFullYear()}`;
-  };
   const formateName = (userObj) => {
     const { firstName, lastName, username } = userObj;
     if (firstName) {
@@ -31,6 +11,34 @@ export const DiseaseDetailsUser = ({ createBy, createdAt }) => {
     }
     return username;
   };
+  function stringToColor(string) {
+    let hash = 0;
+    let i;
+
+    /* eslint-disable no-bitwise */
+    for (i = 0; i < string.length; i += 1) {
+      hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+
+    let color = "#";
+
+    for (i = 0; i < 3; i += 1) {
+      const value = (hash >> (i * 8)) & 0xff;
+      color += `00${value.toString(16)}`.slice(-2);
+    }
+    /* eslint-enable no-bitwise */
+
+    return color;
+  }
+
+  function stringAvatar(name) {
+    return {
+      sx: {
+        bgcolor: stringToColor(name),
+      },
+      children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
+    };
+  }
   return (
     <>
       <Box>
@@ -39,26 +47,27 @@ export const DiseaseDetailsUser = ({ createBy, createdAt }) => {
           justifyContent="flex-start"
           alignItems="flex-start"
           spacing={1}
-          marginY={2}
+          marginTop={2}
+          marginBottom={{ md: 2, sm: 1 }}
         >
-          <Avatar
-            sx={{ width: 35, height: 35, bgcolor: red[500] }}
-            aria-label="recipe"
-          >
-            R
-          </Avatar>
-          <Box paddingTop={0.75}>
+          <Box marginTop={0.25}>
+            <Avatar
+              sx={{ width: 35, height: 35, bgcolor: red[500] }}
+              aria-label="recipe"
+              {...stringAvatar(formateName(createBy))}
+            />
+          </Box>
+          <Box lineHeight={1}>
             <Typography
               variant="subtitle2"
               textTransform={"capitalize"}
-              lineHeight={0.5}
               fontWeight="bold"
               color="primary"
             >
               {formateName(createBy)}
             </Typography>
-            <Typography variant="caption" lineHeight={0} color="text.secondary">
-              {formateDate(createdAt)}
+            <Typography variant="caption" color="text.secondary">
+              {dayjs(createdAt).format("MMMM DD, YYYY")}
             </Typography>
           </Box>
         </Stack>

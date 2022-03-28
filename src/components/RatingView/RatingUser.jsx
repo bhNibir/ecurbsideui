@@ -1,30 +1,12 @@
 import { Avatar, Box, Stack, Typography } from "@mui/material";
 import { red } from "@mui/material/colors";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 import React from "react";
 import RatingStar from "./RatingStar";
 
 const RatingUser = ({ review }) => {
-  const formateDate = (dateString) => {
-    const date = new Date(dateString);
-    const month = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-
-    return `${
-      month[date.getMonth()]
-    } ${date.getDate()} , ${date.getFullYear()}`;
-  };
+  dayjs.extend(relativeTime);
   const formateName = (userObj) => {
     const { firstName, lastName, username } = userObj;
     if (firstName) {
@@ -35,7 +17,7 @@ const RatingUser = ({ review }) => {
   return (
     <>
       <Stack
-        direction="row"
+        direction={{ xs: "column", sm: "row" }}
         justifyContent="space-between"
         alignItems="center"
         spacing={1}
@@ -57,7 +39,7 @@ const RatingUser = ({ review }) => {
               <Typography
                 variant="subtitle1"
                 textTransform={"capitalize"}
-                lineHeight={0.5}
+                lineHeight={{ xs: 1, sm: 0.5 }}
                 fontWeight="bold"
                 gutterBottom
               >
@@ -68,8 +50,12 @@ const RatingUser = ({ review }) => {
           </Stack>
         </Box>
         <Box>
-          <Typography variant="subtitle2" color="text.secondary">
-            {formateDate(review?.createdAt)}
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            textAlign="justify"
+          >
+            {dayjs(review?.createdAt).fromNow()}
           </Typography>
         </Box>
       </Stack>

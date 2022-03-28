@@ -28,13 +28,13 @@ const DiseaseDetails = ({ loading, error, data }) => {
           <Box paddingX={6} paddingY={2}>
             <Box>
               <Stack
-                direction="row"
+                direction={{ xs: "column", sm: "row" }}
+                alignItems={{ xs: "start", sm: "center" }}
                 justifyContent="space-between"
-                alignItems="center"
                 spacing={2}
               >
                 <DiseaseDetailsUser createBy={createBy} createdAt={createdAt} />
-                <Box>
+                <Box paddingTop={{ sm: 2, md: 0.5 }} paddingBottom={2}>
                   <Chip
                     color="primary"
                     label="Add Treatment"
@@ -66,7 +66,9 @@ const DiseaseDetails = ({ loading, error, data }) => {
               </Box>
 
               <Box paddingBottom={2}>
-                <Typography variant="body2">{descriptions}</Typography>
+                <Typography textAlign="justify" variant="body2">
+                  {descriptions}
+                </Typography>
               </Box>
             </Box>
             <DiseaseDetailsSpecialty diseaseCategories={diseaseCategories} />
