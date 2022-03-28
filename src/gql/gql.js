@@ -153,7 +153,9 @@ export const GET_TREATMENT_BY_ID = gql`
       }
       otherName
       descriptions
-
+      disease {
+        id
+      }
       createBy {
         id
         firstName
@@ -210,22 +212,25 @@ export const CREATE_TREATMENT = gql`
   }
 `;
 
-export const GET_REVIEWS_BY_TREATMENT_ID = gql`
-  query GetReviewsByTreatmentId($treatmentId: String!) {
-    reviewsByTreatmentId(treatmentId: $treatmentId) {
-      id
-      content
-      rating
-      createBy {
+export const CREATE_REVIEW = gql`
+  mutation reviewCreation($content: String!, $rating: Int!, $treatmentId: ID!) {
+    createReview(
+      content: $content
+      rating: $rating
+      treatmentId: $treatmentId
+    ) {
+      review {
         id
-        firstName
-        lastName
-        username
-      }
-      createdAt
-      updatedAt
-      treatment {
-        id
+        rating
+        content
+        createdAt
+        updatedAt
+        createBy {
+          id
+          firstName
+          lastName
+          username
+        }
       }
     }
   }

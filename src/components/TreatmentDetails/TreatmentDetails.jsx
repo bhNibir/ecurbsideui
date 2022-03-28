@@ -9,6 +9,8 @@ import { TreatmentUser } from "./TreatmentUser";
 
 const TreatmentDetails = ({ data }) => {
   const {
+    id,
+    disease,
     treatmentName,
     createBy,
     descriptions,
@@ -18,7 +20,7 @@ const TreatmentDetails = ({ data }) => {
     createdAt,
     reviews,
   } = data.treatmentById;
-  console.log(data);
+  console.log("treatmentById", data);
   return (
     <>
       <Grid container spacing={6}>
@@ -96,7 +98,7 @@ const TreatmentDetails = ({ data }) => {
           </Paper>
         </Grid>
         <Grid item xs={12} md={5}>
-          <AddReview />
+          <AddReview diseaseId={disease.id} treatmentId={id} />
         </Grid>
       </Grid>
     </>
