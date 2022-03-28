@@ -17,7 +17,7 @@ const RatingUser = ({ review }) => {
   return (
     <>
       <Stack
-        direction="row"
+        direction={{ xs: "column", sm: "row" }}
         justifyContent="space-between"
         alignItems="center"
         spacing={1}
@@ -39,7 +39,7 @@ const RatingUser = ({ review }) => {
               <Typography
                 variant="subtitle1"
                 textTransform={"capitalize"}
-                lineHeight={0.5}
+                lineHeight={{ xs: 1, sm: 0.5 }}
                 fontWeight="bold"
                 gutterBottom
               >
@@ -50,7 +50,11 @@ const RatingUser = ({ review }) => {
           </Stack>
         </Box>
         <Box>
-          <Typography variant="body2" color="text.secondary">
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            textAlign="justify"
+          >
             {dayjs(review?.createdAt).fromNow()}
           </Typography>
         </Box>

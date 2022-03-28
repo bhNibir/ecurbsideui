@@ -5,7 +5,7 @@ import AddReview from "../AddReview/AddReview";
 import RatingView from "./../RatingView/RatingView";
 import TreatmentCategory from "./TreatmentCategory";
 import TreatmentRating from "./TreatmentRating";
-import { TreatmentUser } from "./TreatmentUser";
+import TreatmentUser from "./TreatmentUser";
 
 const TreatmentDetails = ({ data }) => {
   const {
@@ -32,11 +32,11 @@ const TreatmentDetails = ({ data }) => {
                   {treatmentName ? treatmentName : "treatment Name"}
                 </Typography>
               </Box>
-              <Box marginBottom={3}>
+              <Box marginBottom={{ md: 1, sm: 2, xs: 3 }}>
                 <Stack
-                  direction="row"
+                  direction={{ xs: "column", sm: "row" }}
+                  alignItems={{ xs: "start", sm: "center" }}
                   justifyContent="space-between"
-                  alignItems="center"
                   spacing={2}
                 >
                   <TreatmentUser createBy={createBy} createdAt={createdAt} />
@@ -59,7 +59,9 @@ const TreatmentDetails = ({ data }) => {
 
               <Box marginTop={3}>
                 <Box paddingBottom={2}>
-                  <Typography variant="body2">{descriptions}</Typography>
+                  <Typography textAlign="justify" variant="body2">
+                    {descriptions}
+                  </Typography>
                 </Box>
               </Box>
             </Box>
