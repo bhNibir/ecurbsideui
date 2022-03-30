@@ -1,7 +1,17 @@
 import { yupResolver } from "@hookform/resolvers/yup";
+import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import { LoadingButton } from "@mui/lab";
-import { Box, Grid, Link, TextField, Typography } from "@mui/material";
-import React from "react";
+import {
+  Box,
+  Grid,
+  IconButton,
+  InputAdornment,
+  Link,
+  TextField,
+  Typography,
+} from "@mui/material";
+import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 
@@ -32,6 +42,9 @@ const schema = yup
   .required();
 
 const SignUpForm = ({ onSubmitData, mutationLoading, validationError }) => {
+  const [showPassBtn, setShowPassBtn] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
   const { control, handleSubmit, reset } = useForm({
     resolver: yupResolver(schema),
   });
@@ -215,10 +228,31 @@ const SignUpForm = ({ onSubmitData, mutationLoading, validationError }) => {
                     fullWidth
                     name="password"
                     label="Password"
-                    type="password"
                     id="password"
                     value={value}
                     onChange={onChange}
+                    type={showPassword ? "text" : "password"}
+                    onFocus={() => setShowPassBtn(true)}
+                    InputProps={{
+                      endAdornment: showPassBtn && (
+                        <InputAdornment position="end">
+                          <IconButton
+                            size="small"
+                            aria-label="toggle password visibility"
+                            onClick={() => setShowPassword(!showPassword)}
+                            edge="end"
+                          >
+                            {showPassword ? (
+                              <VisibilityOutlinedIcon sx={{ fontSize: 18 }} />
+                            ) : (
+                              <VisibilityOffOutlinedIcon
+                                sx={{ fontSize: 18 }}
+                              />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
                     error={!!error || !!validationError?.password2}
                     helperText={[
                       !error &&
