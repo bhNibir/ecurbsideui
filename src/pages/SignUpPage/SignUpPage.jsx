@@ -1,5 +1,6 @@
 import { useMutation } from "@apollo/client";
 import { Box, Divider, Link, Typography } from "@mui/material";
+import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import FormPaper from "../../components/StyledComponents/FormPaper";
@@ -9,8 +10,18 @@ import SignUpForm from "./SignUpForm";
 
 const SignUpPage = () => {
   const [validationError, setValidationError] = useState({});
-  const [addTodo, { data, loading: mutationLoading, error: mutationError }] =
-    useMutation(USER_REGISTER);
+  const { enqueueSnackbar } = useSnackbar();
+
+  const [addTodo, { data, loading: mutationLoading }] = useMutation(
+    USER_REGISTER,
+    {
+      onError: (error) => {
+        enqueueSnackbar(`Submission error! ${error.message}`, {
+          variant: "error",
+        });
+      },
+    }
+  );
 
   useEffect(() => {
     if (data) {
@@ -32,8 +43,6 @@ const SignUpPage = () => {
     console.log("Return Data", data);
     console.log("mutationLoading", mutationLoading);
   };
-
-  if (mutationError) return `Submission error! ${mutationError.message}`;
 
   return (
     <>
@@ -68,7 +77,6 @@ const SignUpPage = () => {
           <SignUpForm
             onSubmitData={onSubmitData}
             mutationLoading={mutationLoading}
-            mutationError={mutationError}
             validationError={validationError}
           />
         </FormPaper>

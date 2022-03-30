@@ -11,18 +11,24 @@ const AddTreatment = () => {
   let { id } = useParams();
   const { enqueueSnackbar } = useSnackbar();
 
-  const [register, { data, loading: mutationLoading, error: mutationError }] =
-    useMutation(CREATE_TREATMENT, {
+  const [register, { data, loading: mutationLoading }] = useMutation(
+    CREATE_TREATMENT,
+    {
       refetchQueries: [{ query: GET_DISEASE_BY_ID }],
       onCompleted: (data) => {
         enqueueSnackbar("Successfully add a new Treatment!", {
           variant: "success",
         });
       },
-    });
+      onError: (error) => {
+        enqueueSnackbar("Successfully add a new Treatment!", {
+          variant: "error",
+        });
+      },
+    }
+  );
 
   console.log("mutationLoading", mutationLoading);
-  console.log("mutationError", mutationError);
   console.log("data", data);
 
   const onSubmit = (treatmentData) => {

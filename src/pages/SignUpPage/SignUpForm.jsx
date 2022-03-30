@@ -31,12 +31,7 @@ const schema = yup
   })
   .required();
 
-const SignUpForm = ({
-  onSubmitData,
-  mutationError,
-  mutationLoading,
-  validationError,
-}) => {
+const SignUpForm = ({ onSubmitData, mutationLoading, validationError }) => {
   const { control, handleSubmit } = useForm({
     resolver: yupResolver(schema),
   });
@@ -58,7 +53,6 @@ const SignUpForm = ({
                   <TextField
                     size="small"
                     margin="none"
-                    autoComplete="fname"
                     name="firstName"
                     variant="outlined"
                     fullWidth
@@ -99,7 +93,6 @@ const SignUpForm = ({
                   <TextField
                     size="small"
                     margin="none"
-                    autoComplete="lname"
                     name="lastName"
                     variant="outlined"
                     fullWidth
@@ -144,7 +137,6 @@ const SignUpForm = ({
                     id="username"
                     label="Username"
                     name="username"
-                    autoComplete="username"
                     value={value}
                     onChange={onChange}
                     type="text"
@@ -183,7 +175,6 @@ const SignUpForm = ({
                     id="email"
                     label="Email address"
                     name="email"
-                    autoComplete="email"
                     value={value}
                     onChange={onChange}
                     error={!!error || !!validationError?.email}
@@ -223,12 +214,12 @@ const SignUpForm = ({
                     label="Password"
                     type="password"
                     id="password"
-                    autoComplete="current-password"
                     value={value}
                     onChange={onChange}
                     error={!!error || !!validationError?.password2}
                     helperText={[
-                      (error && validationError?.password2) ||
+                      !error &&
+                        !validationError?.password2 &&
                         "Password must have minimum 8 characters, uppercase, lowercase and numbers.",
                       error && (
                         <span key={error.message.length}>
