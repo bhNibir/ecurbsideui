@@ -1,25 +1,11 @@
-import { useMutation } from "@apollo/client";
 import { Box, Divider, Link, Typography } from "@mui/material";
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import FormPaper from "../../components/StyledComponents/FormPaper";
-import { USER_REGISTER } from "../../gql/gql";
 import LoginPageLayout from "../../layouts/LoginPageLayout";
 import SignUpForm from "./SignUpForm";
 
 const SignUpPage = () => {
-  const [addTodo, { data, loading: mutationLoading, error }] =
-    useMutation(USER_REGISTER);
-
-  if (error) return `Submission error! ${error.message}`;
-  const onSubmitData = (userData) => {
-    // register({ variables: userData });
-    addTodo({
-      variables: userData,
-    });
-    console.log("userData", userData);
-    console.log("Data", data);
-  };
   return (
     <>
       <LoginPageLayout>
@@ -50,10 +36,7 @@ const SignUpPage = () => {
             </Typography>
             <Divider variant="middle" />
           </Box>
-          <SignUpForm
-            onSubmitData={onSubmitData}
-            mutationLoading={mutationLoading}
-          />
+          <SignUpForm />
         </FormPaper>
       </LoginPageLayout>
     </>

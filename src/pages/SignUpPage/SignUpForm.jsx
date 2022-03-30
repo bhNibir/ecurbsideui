@@ -1,7 +1,9 @@
+import { useMutation } from "@apollo/client";
 import { LoadingButton } from "@mui/lab";
 import { Box, Grid, Link, TextField, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { USER_REGISTER } from "./../../gql/gql";
 
 // const useStyles = makeStyles((theme) => ({
 //     paper: {
@@ -15,17 +17,35 @@ import { Controller, useForm } from "react-hook-form";
 //     },
 // }));
 
-const SignUpForm = ({ onSubmitData, mutationLoading }) => {
+const SignUpForm = () => {
   const { control, handleSubmit } = useForm();
+  const [validationError, setValidationError] = useState({});
 
-  // const [register, { data, loading: mutationLoading, error: mutationError }] =
-  //     useMutation(REGISTER_USER);
-  // console.log('mutationLoading', mutationLoading);
-  // console.log('mutationError', mutationError);
-  // console.log('data', data);
+  const [addTodo, { data, loading: mutationLoading, error: mutationError }] =
+    useMutation(USER_REGISTER);
 
-  // if (mutationLoading) return <Loading />;
-  // if (mutationError) return <Errors message={data.register.errors} />;
+  const onSubmitData = (userRegisterData) => {
+    addTodo({
+      variables: userRegisterData,
+    });
+    console.log("userRegisterData", userRegisterData);
+    console.log("Return Data", data);
+    console.log("mutationLoading", mutationLoading);
+  };
+
+  useEffect(() => {
+    if (data) {
+      if (data.register.errors) {
+        setValidationError(data.register.errors);
+        console.log(data.register.errors);
+      }
+      if (data.register.success) {
+        console.log(data.register.success);
+      }
+    }
+  }, [data, mutationLoading]);
+
+  if (mutationError) return `Submission error! ${mutationError.message}`;
   return (
     <>
       <div>
@@ -108,9 +128,23 @@ const SignUpForm = ({ onSubmitData, mutationLoading }) => {
                     autoComplete="username"
                     value={value}
                     onChange={onChange}
-                    error={!!error || console.log(error)}
-                    helperText={error ? error.message : null}
                     type="text"
+                    error={!!error || !!validationError?.username}
+                    helperText={[
+                      error && (
+                        <span key={error.message.length}>
+                          {error.message}
+                          <br />
+                        </span>
+                      ),
+
+                      validationError.username?.map(({ message }, index) => (
+                        <span key={index}>
+                          {message}
+                          <br />
+                        </span>
+                      )),
+                    ]}
                   />
                 )}
                 rules={{
@@ -137,8 +171,21 @@ const SignUpForm = ({ onSubmitData, mutationLoading }) => {
                     autoComplete="email"
                     value={value}
                     onChange={onChange}
-                    error={!!error}
-                    helperText={error ? error.message : null}
+                    error={!!error || !!validationError?.email}
+                    helperText={[
+                      error && (
+                        <span key={error.message.length}>
+                          {error.message}
+                          <br />
+                        </span>
+                      ),
+                      validationError.email?.map(({ message }, index) => (
+                        <span key={index}>
+                          {message}
+                          <br />
+                        </span>
+                      )),
+                    ]}
                     type="email"
                   />
                 )}
@@ -164,8 +211,22 @@ const SignUpForm = ({ onSubmitData, mutationLoading }) => {
                     autoComplete="current-password"
                     value={value}
                     onChange={onChange}
-                    error={!!error}
-                    helperText={error ? error.message : null}
+                    error={!!error || !!validationError?.password2}
+                    helperText={[
+                      error && (
+                        <span key={error.message.length}>
+                          {error.message}
+                          <br />
+                        </span>
+                      ),
+
+                      validationError.password2?.map(({ message }, index) => (
+                        <span key={index}>
+                          {message}
+                          <br />
+                        </span>
+                      )),
+                    ]}
                   />
                 )}
                 rules={{
@@ -173,7 +234,7 @@ const SignUpForm = ({ onSubmitData, mutationLoading }) => {
                   minLength: {
                     value: 8,
                     message:
-                      "Password must have uppercase, lowercase, numbers and minimum 8 characters",
+                      "Password must have uppercase, lowercase, numbers and minimum 8 characters.",
                   },
                 }}
               />
