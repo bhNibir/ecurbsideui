@@ -3,7 +3,7 @@ import { Box, Divider, Link, Typography } from "@mui/material";
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
-import ThankYouMessage from "../../components/Messages/ThankYouMessage";
+import ThankYouMessage from "../../components/AlertMessages/ThankYouMessage";
 import FormPaper from "../../components/StyledComponents/FormPaper";
 import LoginPageLayout from "../../layouts/LoginPageLayout";
 import { USER_REGISTER } from "./../../gql/gql";
@@ -28,6 +28,7 @@ const SignUpPage = () => {
 
   useEffect(() => {
     if (data) {
+      // set server validation error
       if (data.register.errors) {
         setValidationError(data.register.errors);
         console.log(data.register.errors);
@@ -38,14 +39,18 @@ const SignUpPage = () => {
     }
   }, [data, mutationLoading]);
 
-  const onSubmitData = (userRegisterData) => {
+  const onSubmitData = (userRegisterData, resetFrom) => {
     addTodo({
       variables: userRegisterData,
     });
+
+    // email for ThankYouMessage
     setUserEmail(userRegisterData?.email);
-    console.log("userRegisterData", userRegisterData);
-    console.log("Return Data", data);
-    console.log("mutationLoading", mutationLoading);
+
+    // from reset after successfully submit
+    if (data?.register?.success) {
+      resetFrom();
+    }
   };
 
   return (

@@ -32,14 +32,17 @@ const schema = yup
   .required();
 
 const SignUpForm = ({ onSubmitData, mutationLoading, validationError }) => {
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit, reset } = useForm({
     resolver: yupResolver(schema),
   });
 
   return (
     <>
       <div>
-        <form noValidate onSubmit={handleSubmit(onSubmitData)}>
+        <form
+          noValidate
+          onSubmit={handleSubmit((userData) => onSubmitData(userData, reset))}
+        >
           <Grid container spacing={1}>
             <Grid item xs={12} sm={6}>
               <Controller
