@@ -1,51 +1,46 @@
-import { useMutation } from "@apollo/client";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { LoadingButton } from "@mui/lab";
 import { Box, Grid, Link, TextField, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Controller, useForm } from "react-hook-form";
-import { USER_REGISTER } from "./../../gql/gql";
+import * as yup from "yup";
 
-// const useStyles = makeStyles((theme) => ({
-//     paper: {
-//         padding: theme.spacing(2),
-//         textAlign: 'center',
-//         color: theme.palette.text.secondary,
-//         borderRadius: '8px',
-//     },
-//     button: {
-//         fontWeight: 'bold',
-//     },
-// }));
+const schema = yup
+  .object()
+  .shape({
+    firstName: yup.string().required("First Name is required"),
+    lastName: yup.string().required("Last Name is required"),
+    username: yup.string().required("User Name is required"),
+    email: yup.string().email().required("Email is required"),
 
-const SignUpForm = () => {
-  const { control, handleSubmit } = useForm();
-  const [validationError, setValidationError] = useState({});
+    password: yup
+      .string()
+      .required("Password is required.")
+      .min(
+        8,
+        "Password must have minimum 8 characters, uppercase, lowercase and numbers."
+      )
+      .test(
+        "passwordRequirements",
+        "Password must have 1 uppercase, 1 lowercase, 1 number.",
+        (value) =>
+          [/[a-z]/, /[A-Z]/, /[0-9]/, /[^a-zA-Z0-9]/].every((pattern) =>
+            pattern.test(value)
+          )
+      ),
+  })
+  .required();
 
-  const [addTodo, { data, loading: mutationLoading, error: mutationError }] =
-    useMutation(USER_REGISTER);
+const SignUpForm = ({
+  onSubmitData,
+  mutationError,
+  mutationLoading,
+  validationError,
+}) => {
+  const { control, handleSubmit } = useForm({
+    resolver: yupResolver(schema),
+  });
 
-  const onSubmitData = (userRegisterData) => {
-    addTodo({
-      variables: userRegisterData,
-    });
-    console.log("userRegisterData", userRegisterData);
-    console.log("Return Data", data);
-    console.log("mutationLoading", mutationLoading);
-  };
-
-  useEffect(() => {
-    if (data) {
-      if (data.register.errors) {
-        setValidationError(data.register.errors);
-        console.log(data.register.errors);
-      }
-      if (data.register.success) {
-        console.log(data.register.success);
-      }
-    }
-  }, [data, mutationLoading]);
-
-  if (mutationError) return `Submission error! ${mutationError.message}`;
   return (
     <>
       <div>
@@ -72,12 +67,24 @@ const SignUpForm = () => {
                     autoFocus
                     value={value}
                     onChange={onChange}
-                    error={!!error}
-                    helperText={error ? error.message : null}
                     type="text"
+                    error={!!error || !!validationError?.firstName}
+                    helperText={[
+                      error && (
+                        <span key={error.message.length}>
+                          {error.message}
+                          <br />
+                        </span>
+                      ),
+                      validationError.firstName?.map(({ message }, index) => (
+                        <span key={index}>
+                          {message}
+                          <br />
+                        </span>
+                      )),
+                    ]}
                   />
                 )}
-                rules={{ required: "First Name required" }}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -100,12 +107,24 @@ const SignUpForm = () => {
                     label="Last Name"
                     value={value}
                     onChange={onChange}
-                    error={!!error}
-                    helperText={error ? error.message : null}
                     type="text"
+                    error={!!error || !!validationError?.lastName}
+                    helperText={[
+                      error && (
+                        <span key={error.message.length}>
+                          {error.message}
+                          <br />
+                        </span>
+                      ),
+                      validationError.lastName?.map(({ message }, index) => (
+                        <span key={index}>
+                          {message}
+                          <br />
+                        </span>
+                      )),
+                    ]}
                   />
                 )}
-                rules={{ required: "Last Name required" }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -147,10 +166,6 @@ const SignUpForm = () => {
                     ]}
                   />
                 )}
-                rules={{
-                  required: { value: true, message: "Username required" },
-                  // mixLength: { value: 4, message: 'error message' },
-                }}
               />
               <Controller
                 name="email"
@@ -213,6 +228,8 @@ const SignUpForm = () => {
                     onChange={onChange}
                     error={!!error || !!validationError?.password2}
                     helperText={[
+                      (error && validationError?.password2) ||
+                        "Password must have minimum 8 characters, uppercase, lowercase and numbers.",
                       error && (
                         <span key={error.message.length}>
                           {error.message}
@@ -229,14 +246,6 @@ const SignUpForm = () => {
                     ]}
                   />
                 )}
-                rules={{
-                  required: { value: true, message: "Password required" },
-                  minLength: {
-                    value: 8,
-                    message:
-                      "Password must have uppercase, lowercase, numbers and minimum 8 characters.",
-                  },
-                }}
               />
             </Grid>
 
