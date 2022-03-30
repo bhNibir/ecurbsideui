@@ -3,6 +3,7 @@ import { Box, Divider, Link, Typography } from "@mui/material";
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
+import ThankYouMessage from "../../components/Messages/ThankYouMessage";
 import FormPaper from "../../components/StyledComponents/FormPaper";
 import LoginPageLayout from "../../layouts/LoginPageLayout";
 import { USER_REGISTER } from "./../../gql/gql";
@@ -10,6 +11,8 @@ import SignUpForm from "./SignUpForm";
 
 const SignUpPage = () => {
   const [validationError, setValidationError] = useState({});
+  const [userEmail, setUserEmail] = useState("");
+  const [showThankYou, setShowThankYou] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
 
   const [addTodo, { data, loading: mutationLoading }] = useMutation(
@@ -30,7 +33,7 @@ const SignUpPage = () => {
         console.log(data.register.errors);
       }
       if (data.register.success) {
-        console.log(data.register.success);
+        setShowThankYou(data.register.success);
       }
     }
   }, [data, mutationLoading]);
@@ -39,6 +42,7 @@ const SignUpPage = () => {
     addTodo({
       variables: userRegisterData,
     });
+    setUserEmail(userRegisterData?.email);
     console.log("userRegisterData", userRegisterData);
     console.log("Return Data", data);
     console.log("mutationLoading", mutationLoading);
@@ -47,39 +51,46 @@ const SignUpPage = () => {
   return (
     <>
       <LoginPageLayout>
-        <FormPaper elevation={5}>
-          <Box
-            sx={{
-              mb: 2,
-            }}
-          >
-            <Typography
-              align="center"
-              sx={{ color: (theme) => theme.palette.textColor }}
-              variant="h4"
-              gutterBottom
-            >
-              Join
-            </Typography>
-            <Typography
-              align="center"
-              variant="body2"
-              sx={{ pb: 1 }}
-              gutterBottom
-            >
-              Already have an account?
-              <Link component={RouterLink} underline="none" to="/login">
-                <strong> Login</strong>
-              </Link>
-            </Typography>
-            <Divider variant="middle" />
-          </Box>
-          <SignUpForm
-            onSubmitData={onSubmitData}
-            mutationLoading={mutationLoading}
-            validationError={validationError}
+        {showThankYou ? (
+          <ThankYouMessage
+            email={userEmail}
+            titleText={" Thank You for Joining Us 😊!"}
           />
-        </FormPaper>
+        ) : (
+          <FormPaper elevation={5}>
+            <Box
+              sx={{
+                mb: 2,
+              }}
+            >
+              <Typography
+                align="center"
+                sx={{ color: (theme) => theme.palette.textColor }}
+                variant="h4"
+                gutterBottom
+              >
+                Join
+              </Typography>
+              <Typography
+                align="center"
+                variant="body2"
+                sx={{ pb: 1 }}
+                gutterBottom
+              >
+                Already have an account?
+                <Link component={RouterLink} underline="none" to="/login">
+                  <strong> Login</strong>
+                </Link>
+              </Typography>
+              <Divider variant="middle" />
+            </Box>
+            <SignUpForm
+              onSubmitData={onSubmitData}
+              mutationLoading={mutationLoading}
+              validationError={validationError}
+            />
+          </FormPaper>
+        )}
       </LoginPageLayout>
     </>
   );
