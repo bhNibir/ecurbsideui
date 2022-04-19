@@ -34,13 +34,27 @@ const SignUp = () => {
       if (data.register.errors) {
         setValidationError(data.register.errors);
         console.log(data.register.errors);
+
+        for (const [key, value] of Object.entries(data.register.errors)) {
+          value.map(({ message }) => handleShowErrorMessage(key, message));
+        }
       }
       if (data.register.success) {
         setShowThankYou(data.register.success);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, mutationLoading]);
 
+  const handleShowErrorMessage = (name, message) => {
+    enqueueSnackbar(`${name}: ${message}`, {
+      anchorOrigin: {
+        vertical: "top",
+        horizontal: "right",
+      },
+      variant: "error",
+    });
+  };
   const onSubmitData = (userRegisterData, resetFrom) => {
     addUserData({
       variables: userRegisterData,
@@ -57,7 +71,7 @@ const SignUp = () => {
 
   return (
     <>
-      {activeStep === steps.length && showThankYou ? (
+      {activeStep === steps.length - 1 && showThankYou ? (
         <ThankYouMessage
           email={userEmail}
           titleText={" Thank You for Joining Us 😊!"}
