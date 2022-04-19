@@ -194,7 +194,7 @@ const PersonalForm = ({ control, validationError }) => {
                 helperText={[
                   !error &&
                     !validationError?.password2 &&
-                    "Password must have minimum 8 characters, uppercase, lowercase and numbers.",
+                    "Password must have minimum 8 characters, uppercase, lowercase, numbers and symbol.",
                   error && (
                     <span key={error.message.length}>
                       {error.message}

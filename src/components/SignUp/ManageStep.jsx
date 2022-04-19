@@ -19,11 +19,11 @@ const schema = yup
       .required("Password is required.")
       .min(
         8,
-        "Password must have minimum 8 characters, uppercase, lowercase and numbers."
+        "Password must have minimum 8 characters, uppercase, lowercase , numbers and symbol."
       )
       .test(
         "passwordRequirements",
-        "Password must have 1 uppercase, 1 lowercase, 1 number.",
+        "Password must have 1 uppercase, 1 lowercase, 1 number, 1 symbol.",
         (value) =>
           [/[a-z]/, /[A-Z]/, /[0-9]/, /[^a-zA-Z0-9]/].every((pattern) =>
             pattern.test(value)
@@ -44,9 +44,8 @@ const ManageStep = ({
     resolver: yupResolver(schema),
   });
 
-  const handleNext = (userData) => {
+  const handleNext = () => {
     setActiveStep(activeStep + 1);
-    console.log(userData);
   };
 
   const handleBack = () => {
@@ -59,7 +58,11 @@ const ManageStep = ({
         // noValidate
         onSubmit={handleSubmit((userData) => onSubmitData(userData, reset))}
       >
-        <StepOption step={activeStep} control={control} />
+        <StepOption
+          step={activeStep}
+          control={control}
+          validationError={validationError}
+        />
 
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
           {activeStep !== 0 && (
