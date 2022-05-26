@@ -1,4 +1,3 @@
-import { yupResolver } from "@hookform/resolvers/yup";
 import { LoadingButton } from "@mui/lab";
 import { Box, Button } from "@mui/material";
 import React from "react";
@@ -41,7 +40,7 @@ const ManageStep = ({
   validationError,
 }) => {
   const { setValue, control, handleSubmit, reset } = useForm({
-    resolver: yupResolver(schema),
+    // resolver: yupResolver(schema),
   });
 
   const handleNext = () => {
