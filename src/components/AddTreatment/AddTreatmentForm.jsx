@@ -8,7 +8,7 @@ import { GET_TREATMENT_CATEGORIES } from "./../../gql/gql";
 import SingleSelect from "./../common/SingleSelect";
 
 const AddTreatmentForm = ({ onSubmit, mutationLoading }) => {
-  const { setValue, handleSubmit, control } = useForm();
+  const { handleSubmit, control } = useForm();
   const [CategoryData, setCategoryData] = useState([]);
   const { loading: CategoryLoading, error: CategoryError } = useQuery(
     GET_TREATMENT_CATEGORIES,
@@ -81,7 +81,6 @@ const AddTreatmentForm = ({ onSubmit, mutationLoading }) => {
           <Grid item xs={12}>
             <SingleSelect
               control={control}
-              setValue={setValue}
               name={"treatmentCategoryId"}
               loading={CategoryLoading}
               error={CategoryError}
