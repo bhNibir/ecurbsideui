@@ -13,7 +13,13 @@ const StepOption = ({ step, setValue, control, validationError }) => {
         />
       );
     case 1:
-      return <ProfessionalFrom control={control} />;
+      return (
+        <ProfessionalFrom
+          control={control}
+          setValue={setValue}
+          validationError={validationError}
+        />
+      );
     default:
       throw new Error("Unknown step");
   }

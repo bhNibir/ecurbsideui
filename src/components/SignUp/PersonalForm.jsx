@@ -1,17 +1,9 @@
 import { useQuery } from "@apollo/client";
-import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
-import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
-import {
-  Checkbox,
-  FormControlLabel,
-  Grid,
-  IconButton,
-  InputAdornment,
-  TextField,
-} from "@mui/material";
+import { Box, Grid, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { Controller } from "react-hook-form";
 import CountrySelect from "../common/CountrySelect";
+import RadioButtons from "../common/RadioButtons";
 import SingleSelect from "../common/SingleSelect";
 import {
   GET_DISEASE_CATEGORIES,
@@ -21,9 +13,6 @@ import {
 import MultiSelect from "./../common/MultiSelect";
 
 const PersonalForm = ({ control, setValue, validationError }) => {
-  const [showPassBtn, setShowPassBtn] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-
   const [MedicalProviderData, setMedicalProviderData] = useState([]);
   const [MedicalSettingData, setMedicalSettingData] = useState([]);
   const [medicalSpecialtyData, setMedicalSpecialtyData] = useState([]);
@@ -128,134 +117,6 @@ const PersonalForm = ({ control, setValue, validationError }) => {
           />
         </Grid>
         <Grid item xs={12}>
-          <Controller
-            name="username"
-            control={control}
-            defaultValue=""
-            render={({ field: { onChange, value }, fieldState: { error } }) => (
-              <TextField
-                size="small"
-                margin="dense"
-                variant="outlined"
-                fullWidth
-                id="username"
-                label="Username"
-                name="username"
-                value={value}
-                onChange={onChange}
-                type="text"
-                error={!!error || !!validationError?.username}
-                helperText={[
-                  error && (
-                    <span key={error.message.length}>
-                      {error.message}
-                      <br />
-                    </span>
-                  ),
-
-                  validationError?.username?.map(({ message }, index) => (
-                    <span key={index}>
-                      {message}
-                      <br />
-                    </span>
-                  )),
-                ]}
-              />
-            )}
-          />
-          <Controller
-            name="email"
-            control={control}
-            defaultValue=""
-            render={({ field: { onChange, value }, fieldState: { error } }) => (
-              <TextField
-                size="small"
-                margin="dense"
-                variant="outlined"
-                fullWidth
-                id="email"
-                label="Email address"
-                name="email"
-                value={value}
-                onChange={onChange}
-                error={!!error || !!validationError?.email}
-                helperText={[
-                  error && (
-                    <span key={error.message.length}>
-                      {error.message}
-                      <br />
-                    </span>
-                  ),
-                  validationError?.email?.map(({ message }, index) => (
-                    <span key={index}>
-                      {message}
-                      <br />
-                    </span>
-                  )),
-                ]}
-                type="email"
-              />
-            )}
-            rules={{ required: "Email required" }}
-          />
-          <Controller
-            name="password"
-            control={control}
-            defaultValue=""
-            render={({ field: { onChange, value }, fieldState: { error } }) => (
-              <TextField
-                size="small"
-                margin="dense"
-                variant="outlined"
-                fullWidth
-                name="password"
-                label="Password"
-                id="password"
-                value={value}
-                onChange={onChange}
-                type={showPassword ? "text" : "password"}
-                onFocus={() => setShowPassBtn(true)}
-                InputProps={{
-                  endAdornment: showPassBtn && (
-                    <InputAdornment position="end">
-                      <IconButton
-                        size="small"
-                        aria-label="toggle password visibility"
-                        onClick={() => setShowPassword(!showPassword)}
-                        edge="end"
-                      >
-                        {showPassword ? (
-                          <VisibilityOutlinedIcon sx={{ fontSize: 18 }} />
-                        ) : (
-                          <VisibilityOffOutlinedIcon sx={{ fontSize: 18 }} />
-                        )}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-                error={!!error || !!validationError?.password2}
-                helperText={[
-                  !error &&
-                    !validationError?.password2 &&
-                    "Password must have minimum 8 characters, uppercase, lowercase, numbers and symbol.",
-                  error && (
-                    <span key={error.message.length}>
-                      {error.message}
-                      <br />
-                    </span>
-                  ),
-
-                  validationError?.password2?.map(({ message }, index) => (
-                    <span key={index}>
-                      {message}
-                      <br />
-                    </span>
-                  )),
-                ]}
-              />
-            )}
-          />
-
           <CountrySelect
             control={control}
             name={"country"}
@@ -265,12 +126,15 @@ const PersonalForm = ({ control, setValue, validationError }) => {
             size="small"
           />
 
-          <FormControlLabel
+          {/* <FormControlLabel
             value="end"
             control={<Checkbox />}
             label="Are you a health care provider ?"
             labelPlacement="start"
-          />
+          /> */}
+          <Box>
+            <RadioButtons />
+          </Box>
           <SingleSelect
             control={control}
             name={"medicalProviderId"}
@@ -279,15 +143,6 @@ const PersonalForm = ({ control, setValue, validationError }) => {
             data={MedicalProviderData}
             size="small"
             label="Medical Provider Type"
-          />
-          <SingleSelect
-            control={control}
-            name={"medicalSettingId"}
-            loading={MedicalSettingLoading}
-            error={MedicalSettingError}
-            data={MedicalSettingData}
-            size="small"
-            label="Medical Setting"
           />
           <MultiSelect
             control={control}
@@ -298,6 +153,15 @@ const PersonalForm = ({ control, setValue, validationError }) => {
             data={medicalSpecialtyData}
             size="small"
             label="Medical Specialty"
+          />
+          <SingleSelect
+            control={control}
+            name={"medicalSettingId"}
+            loading={MedicalSettingLoading}
+            error={MedicalSettingError}
+            data={MedicalSettingData}
+            size="small"
+            label="Medical Setting"
           />
         </Grid>
       </Grid>

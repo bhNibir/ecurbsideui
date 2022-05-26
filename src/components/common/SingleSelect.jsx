@@ -12,7 +12,6 @@ const SingleSelect = ({
   label,
 }) => {
   if (error) return <p>Error :(</p>;
-  console.log(`All  ${name} Categories:, ${data}`);
 
   return (
     <>
@@ -23,6 +22,7 @@ const SingleSelect = ({
         render={({ field: { onChange, value }, fieldState: { error } }) => (
           <Autocomplete
             size={size}
+            margin="dense"
             loading={loading}
             options={data}
             getOptionLabel={(option) => option.name}
