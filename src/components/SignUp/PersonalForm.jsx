@@ -11,25 +11,45 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { Controller } from "react-hook-form";
+import CountrySelect from "../common/CountrySelect";
 import SingleSelect from "../common/SingleSelect";
-import { GET_TREATMENT_CATEGORIES } from "./../../gql/gql";
+import {
+  GET_DISEASE_CATEGORIES,
+  GET_MEDICAL_PROVIDER,
+  GET_MEDICAL_SETTING,
+} from "./../../gql/gql";
 import MultiSelect from "./../common/MultiSelect";
-import CountryInput from "./CountryInput";
 
 const PersonalForm = ({ control, setValue, validationError }) => {
   const [showPassBtn, setShowPassBtn] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const [CategoryData, setCategoryData] = useState([]);
-  const { loading: CategoryLoading, error: CategoryError } = useQuery(
-    GET_TREATMENT_CATEGORIES,
-    {
+  const [MedicalProviderData, setMedicalProviderData] = useState([]);
+  const [MedicalSettingData, setMedicalSettingData] = useState([]);
+  const [medicalSpecialtyData, setMedicalSpecialtyData] = useState([]);
+
+  const { loading: medicalProviderLoading, error: medicalProviderError } =
+    useQuery(GET_MEDICAL_PROVIDER, {
       onCompleted: (data) => {
-        console.log("data", data.treatmentsCategories);
-        setCategoryData(data.treatmentsCategories);
+        console.log("data", data.medicalProvider);
+        setMedicalProviderData(data.medicalProvider);
       },
-    }
-  );
+    });
+
+  const { loading: MedicalSettingLoading, error: MedicalSettingError } =
+    useQuery(GET_MEDICAL_SETTING, {
+      onCompleted: (data) => {
+        console.log("data", data.medicalSetting);
+        setMedicalSettingData(data.medicalSetting);
+      },
+    });
+
+  const { loading: medicalSpecialtyLoading, error: medicalSpecialtyError } =
+    useQuery(GET_DISEASE_CATEGORIES, {
+      onCompleted: (data) => {
+        setMedicalSpecialtyData(data.diseasesCategories);
+      },
+    });
 
   return (
     <>
@@ -236,7 +256,14 @@ const PersonalForm = ({ control, setValue, validationError }) => {
             )}
           />
 
-          <CountryInput />
+          <CountrySelect
+            control={control}
+            name={"country"}
+            // loading={CategoryLoading}
+            // error={CategoryError}
+            // data={CategoryData}
+            size="small"
+          />
 
           <FormControlLabel
             value="end"
@@ -246,21 +273,29 @@ const PersonalForm = ({ control, setValue, validationError }) => {
           />
           <SingleSelect
             control={control}
-            setValue={setValue}
-            name={"treatmentCategoryId"}
-            loading={CategoryLoading}
-            error={CategoryError}
-            data={CategoryData}
+            name={"medicalProviderId"}
+            loading={medicalProviderLoading}
+            error={medicalProviderError}
+            data={MedicalProviderData}
             size="small"
             label="Medical Provider Type"
+          />
+          <SingleSelect
+            control={control}
+            name={"medicalSettingId"}
+            loading={MedicalSettingLoading}
+            error={MedicalSettingError}
+            data={MedicalSettingData}
+            size="small"
+            label="Medical Setting"
           />
           <MultiSelect
             control={control}
             setValue={setValue}
-            name={"diseaseCategoriesId"}
-            loading={CategoryLoading}
-            error={CategoryError}
-            data={CategoryData}
+            name={"medicalSpecialty"}
+            loading={medicalSpecialtyLoading}
+            error={medicalSpecialtyError}
+            data={medicalSpecialtyData}
             size="small"
             label="Medical Specialty"
           />

@@ -5,7 +5,6 @@ import { Controller } from "react-hook-form";
 const SingleSelect = ({
   name,
   control,
-  setValue,
   loading,
   error,
   data,

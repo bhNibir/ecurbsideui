@@ -56,6 +56,7 @@ const SignUp = () => {
     });
   };
   const onSubmitData = (userRegisterData, resetFrom) => {
+    console.log(userRegisterData);
     addUserData({
       variables: userRegisterData,
     });

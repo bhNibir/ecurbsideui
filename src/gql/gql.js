@@ -1,5 +1,23 @@
 import { gql } from "@apollo/client";
 
+export const GET_MEDICAL_PROVIDER = gql`
+  query GetMedicalProvider {
+    medicalProvider {
+      id
+      name
+    }
+  }
+`;
+
+export const GET_MEDICAL_SETTING = gql`
+  query GetMedicalSetting {
+    medicalSetting {
+      id
+      name
+    }
+  }
+`;
+
 export const USER_REGISTER = gql`
   mutation UserRegister(
     $email: String!
@@ -140,6 +158,7 @@ export const GET_DISEASE_BY_ID = gql`
     }
   }
 `;
+
 export const GET_TREATMENT_BY_ID = gql`
   query GetTreatmentById($id: String!) {
     treatmentById(id: $id) {
@@ -190,6 +209,7 @@ export const GET_TREATMENT_CATEGORIES = gql`
     }
   }
 `;
+
 export const CREATE_TREATMENT = gql`
   mutation treatmentCreation(
     $treatmentName: String!
