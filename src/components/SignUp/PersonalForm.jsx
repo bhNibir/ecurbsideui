@@ -1,12 +1,35 @@
+import { useQuery } from "@apollo/client";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
-import { Grid, IconButton, InputAdornment, TextField } from "@mui/material";
+import {
+  Checkbox,
+  FormControlLabel,
+  Grid,
+  IconButton,
+  InputAdornment,
+  TextField,
+} from "@mui/material";
 import React, { useState } from "react";
 import { Controller } from "react-hook-form";
+import SingleSelect from "../common/SingleSelect";
+import { GET_TREATMENT_CATEGORIES } from "./../../gql/gql";
+import MultiSelect from "./../common/MultiSelect";
+import CountryInput from "./CountryInput";
 
-const PersonalForm = ({ control, validationError }) => {
+const PersonalForm = ({ control, setValue, validationError }) => {
   const [showPassBtn, setShowPassBtn] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  const [CategoryData, setCategoryData] = useState([]);
+  const { loading: CategoryLoading, error: CategoryError } = useQuery(
+    GET_TREATMENT_CATEGORIES,
+    {
+      onCompleted: (data) => {
+        console.log("data", data.treatmentsCategories);
+        setCategoryData(data.treatmentsCategories);
+      },
+    }
+  );
 
   return (
     <>
@@ -211,6 +234,35 @@ const PersonalForm = ({ control, validationError }) => {
                 ]}
               />
             )}
+          />
+
+          <CountryInput />
+
+          <FormControlLabel
+            value="end"
+            control={<Checkbox />}
+            label="Are you a health care provider ?"
+            labelPlacement="start"
+          />
+          <SingleSelect
+            control={control}
+            setValue={setValue}
+            name={"treatmentCategoryId"}
+            loading={CategoryLoading}
+            error={CategoryError}
+            data={CategoryData}
+            size="small"
+            label="Medical Provider Type"
+          />
+          <MultiSelect
+            control={control}
+            setValue={setValue}
+            name={"diseaseCategoriesId"}
+            loading={CategoryLoading}
+            error={CategoryError}
+            data={CategoryData}
+            size="small"
+            label="Medical Specialty"
           />
         </Grid>
       </Grid>

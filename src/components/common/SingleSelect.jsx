@@ -1,30 +1,37 @@
-import { useQuery } from "@apollo/client";
 import { Autocomplete, CircularProgress, TextField } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import { Controller } from "react-hook-form";
-import { GET_TREATMENT_CATEGORIES } from "./../../gql/gql";
 
-const TreatmentSelectCategory = ({ control, setValue }) => {
-  const [inputValue, setInputValue] = useState("");
-  const { loading, error, data } = useQuery(GET_TREATMENT_CATEGORIES);
-
-  //if (loading) return <p>Loading...</p>;
+const SingleSelect = ({
+  name,
+  control,
+  setValue,
+  loading,
+  error,
+  data,
+  size = "normal",
+  label,
+}) => {
   if (error) return <p>Error :(</p>;
-  console.log("All Traetment Categories:", data);
+  console.log(`All  ${name} Categories:, ${data}`);
 
   return (
     <>
       <Controller
+        name={name}
+        control={control}
+        rules={{ required: "Category is required" }}
         render={({ field: { onChange, value }, fieldState: { error } }) => (
           <Autocomplete
+            size={size}
             loading={loading}
-            options={data ? data.treatmentsCategories : []}
+            options={data}
             getOptionLabel={(option) => option.name}
             renderInput={(params) => (
               <TextField
                 {...params}
-                label="Select Category"
-                placeholder="Select Category"
+                label={label || "Select Category"}
+                placeholder={label || "Select Category"}
                 variant="outlined"
                 margin="dense"
                 fullWidth
@@ -46,12 +53,9 @@ const TreatmentSelectCategory = ({ control, setValue }) => {
             onChange={(_, value) => onChange(value?.id)}
           />
         )}
-        name="treatmentCategoryId"
-        control={control}
-        rules={{ required: "Category is required" }}
       />
     </>
   );
 };
 
-export default TreatmentSelectCategory;
+export default SingleSelect;

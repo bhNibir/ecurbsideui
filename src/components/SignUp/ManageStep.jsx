@@ -40,7 +40,7 @@ const ManageStep = ({
   mutationLoading,
   validationError,
 }) => {
-  const { control, handleSubmit, reset } = useForm({
+  const { setValue, control, handleSubmit, reset } = useForm({
     resolver: yupResolver(schema),
   });
 
@@ -62,6 +62,7 @@ const ManageStep = ({
           step={activeStep}
           control={control}
           validationError={validationError}
+          setValue={setValue}
         />
 
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>

@@ -1,12 +1,23 @@
+import { useQuery } from "@apollo/client";
 import SaveIcon from "@mui/icons-material/Save";
 import { LoadingButton } from "@mui/lab";
 import { Box, Grid, TextField, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import TreatmentSelectCategory from "./TreatmentSelectCategory";
+import { GET_TREATMENT_CATEGORIES } from "./../../gql/gql";
+import SingleSelect from "./../common/SingleSelect";
 
 const AddTreatmentForm = ({ onSubmit, mutationLoading }) => {
-  const { register, setValue, handleSubmit, control } = useForm();
+  const { setValue, handleSubmit, control } = useForm();
+  const [CategoryData, setCategoryData] = useState([]);
+  const { loading: CategoryLoading, error: CategoryError } = useQuery(
+    GET_TREATMENT_CATEGORIES,
+    {
+      onCompleted: (data) => {
+        setCategoryData(data.treatmentsCategories);
+      },
+    }
+  );
 
   return (
     <>
@@ -68,10 +79,13 @@ const AddTreatmentForm = ({ onSubmit, mutationLoading }) => {
             />
           </Grid>
           <Grid item xs={12}>
-            <TreatmentSelectCategory
+            <SingleSelect
               control={control}
               setValue={setValue}
-              register={register}
+              name={"treatmentCategoryId"}
+              loading={CategoryLoading}
+              error={CategoryError}
+              data={CategoryData}
             />
           </Grid>
           <Grid item xs={12} my={1}>
