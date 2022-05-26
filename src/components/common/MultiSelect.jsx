@@ -15,16 +15,17 @@ const MultiSelect = ({
   const [inputValue, setInputValue] = useState("");
 
   if (error) return <p>Error :(</p>;
-  console.log(`All  ${name} Categories:, ${data}`);
 
   return (
     <Controller
       name={name}
       control={control}
+      value={inputValue}
       defaultValue={inputValue}
       render={({ field: { onChange, value }, fieldState: { error } }) => (
         <Autocomplete
           multiple
+          margin="dense"
           loading={loading}
           options={data}
           limitTags={2}

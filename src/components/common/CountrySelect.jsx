@@ -15,7 +15,6 @@ const CountrySelect = ({
   label,
 }) => {
   if (error) return <p>Error :(</p>;
-  console.log(`All  ${name} Categories:, ${data}`);
 
   return (
     <>
@@ -28,9 +27,9 @@ const CountrySelect = ({
             id="country-select"
             options={countries}
             autoHighlight
+            margin="dense"
             size={size}
             loading={loading}
-            value={value}
             getOptionLabel={(option) => option.label}
             renderOption={(props, option) => (
               <Box
