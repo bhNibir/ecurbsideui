@@ -1,12 +1,23 @@
+import { useQuery } from "@apollo/client";
 import SaveIcon from "@mui/icons-material/Save";
 import { LoadingButton } from "@mui/lab";
 import { Box, Grid, TextField, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import MultiSelect from "./MultiSelect";
+import { GET_DISEASE_CATEGORIES } from "../../gql/gql";
+import MultiSelect from "../common/MultiSelect";
 
 const AddDiseasesForm = ({ onSubmit, mutationLoading }) => {
-  const { register, setValue, handleSubmit, control } = useForm();
+  const { setValue, handleSubmit, control } = useForm();
+  const [CategoryData, setCategoryData] = useState([]);
+  const { loading: CategoryLoading, error: CategoryError } = useQuery(
+    GET_DISEASE_CATEGORIES,
+    {
+      onCompleted: (data) => {
+        setCategoryData(data.diseasesCategories);
+      },
+    }
+  );
 
   return (
     <>
@@ -44,7 +55,10 @@ const AddDiseasesForm = ({ onSubmit, mutationLoading }) => {
             <MultiSelect
               control={control}
               setValue={setValue}
-              register={register}
+              name={"diseaseCategoriesId"}
+              loading={CategoryLoading}
+              error={CategoryError}
+              data={CategoryData}
             />
           </Grid>
           <Grid item xs={12} my={1}>
