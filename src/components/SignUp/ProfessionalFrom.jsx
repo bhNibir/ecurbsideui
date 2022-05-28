@@ -11,7 +11,6 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { Controller } from "react-hook-form";
-import AvatarUpload from "./AvatarUpload";
 
 const ProfessionalFrom = ({ control, setValue, validationError }) => {
   const [showPassBtn, setShowPassBtn] = useState(false);
@@ -20,10 +19,6 @@ const ProfessionalFrom = ({ control, setValue, validationError }) => {
   return (
     <>
       <Grid container spacing={1}>
-        <Grid item xs={12} textAlign="center">
-          <AvatarUpload control={control} />
-        </Grid>
-
         <Grid item xs={12}>
           <Controller
             name="username"

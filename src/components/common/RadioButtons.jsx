@@ -5,19 +5,9 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
-import React, { useEffect } from "react";
+import React from "react";
 
-const RadioButtons = ({ name }) => {
-  const [value, setValue] = React.useState(true);
-
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
-
-  useEffect(() => {
-    console.log("Are you a health care provider ? ", value);
-  }, [value]);
-
+const RadioButtons = ({ name, value, setValue }) => {
   return (
     <>
       <FormControl
@@ -38,7 +28,7 @@ const RadioButtons = ({ name }) => {
           aria-labelledby="controlled-radio-buttons-group"
           name={name}
           value={value}
-          onChange={handleChange}
+          onChange={() => setValue(!value)}
         >
           <FormControlLabel
             value={true}

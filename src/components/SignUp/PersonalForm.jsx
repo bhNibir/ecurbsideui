@@ -1,11 +1,12 @@
 import { useQuery } from "@apollo/client";
-import { Box, Grid, TextField } from "@mui/material";
+import { Grid, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { Controller } from "react-hook-form";
 import CountrySelect from "../common/CountrySelect";
 import RadioButtons from "../common/RadioButtons";
 import SingleSelect from "../common/SingleSelect";
 import {
+  GET_COUNTRIES_LIST,
   GET_DISEASE_CATEGORIES,
   GET_MEDICAL_PROVIDER,
   GET_MEDICAL_SETTING,
@@ -16,6 +17,8 @@ const PersonalForm = ({ control, setValue, validationError }) => {
   const [MedicalProviderData, setMedicalProviderData] = useState([]);
   const [MedicalSettingData, setMedicalSettingData] = useState([]);
   const [medicalSpecialtyData, setMedicalSpecialtyData] = useState([]);
+  const [countryListData, setCountryListData] = useState([]);
+  const [healthCareProviderValue, setHealthCareProviderValue] = useState(false);
 
   const { loading: medicalProviderLoading, error: medicalProviderError } =
     useQuery(GET_MEDICAL_PROVIDER, {
@@ -39,6 +42,15 @@ const PersonalForm = ({ control, setValue, validationError }) => {
         setMedicalSpecialtyData(data.diseasesCategories);
       },
     });
+
+  const { loading: countryListLoading, error: countryListError } = useQuery(
+    GET_COUNTRIES_LIST,
+    {
+      onCompleted: (data) => {
+        setCountryListData(data.countryList);
+      },
+    }
+  );
 
   return (
     <>
@@ -120,49 +132,53 @@ const PersonalForm = ({ control, setValue, validationError }) => {
           <CountrySelect
             control={control}
             name={"country"}
-            // loading={CategoryLoading}
-            // error={CategoryError}
-            // data={CategoryData}
+            loading={countryListLoading}
+            error={countryListError}
+            data={countryListData}
             size="small"
           />
 
-          {/* <FormControlLabel
-            value="end"
-            control={<Checkbox />}
-            label="Are you a health care provider ?"
-            labelPlacement="start"
-          /> */}
-          <Box>
-            <RadioButtons />
-          </Box>
-          <SingleSelect
-            control={control}
-            name={"medicalProviderId"}
-            loading={medicalProviderLoading}
-            error={medicalProviderError}
-            data={MedicalProviderData}
-            size="small"
-            label="Medical Provider Type"
+          <RadioButtons
+            name={"healthCareProvider"}
+            value={healthCareProviderValue}
+            setValue={setHealthCareProviderValue}
           />
-          <MultiSelect
-            control={control}
-            setValue={setValue}
-            name={"medicalSpecialty"}
-            loading={medicalSpecialtyLoading}
-            error={medicalSpecialtyError}
-            data={medicalSpecialtyData}
-            size="small"
-            label="Medical Specialty"
-          />
-          <SingleSelect
-            control={control}
-            name={"medicalSettingId"}
-            loading={MedicalSettingLoading}
-            error={MedicalSettingError}
-            data={MedicalSettingData}
-            size="small"
-            label="Medical Setting"
-          />
+
+          {healthCareProviderValue && (
+            <>
+              <SingleSelect
+                control={control}
+                name={"medicalProviderId"}
+                loading={medicalProviderLoading}
+                error={medicalProviderError}
+                data={MedicalProviderData}
+                size="small"
+                label="Medical Provider Type"
+                disabled={!healthCareProviderValue}
+              />
+              <MultiSelect
+                control={control}
+                setValue={setValue}
+                name={"medicalSpecialty"}
+                loading={medicalSpecialtyLoading}
+                error={medicalSpecialtyError}
+                data={medicalSpecialtyData}
+                size="small"
+                label="Medical Specialty"
+                disabled={!healthCareProviderValue}
+              />
+              <SingleSelect
+                control={control}
+                name={"medicalSettingId"}
+                loading={MedicalSettingLoading}
+                error={MedicalSettingError}
+                data={MedicalSettingData}
+                size="small"
+                label="Medical Setting"
+                disabled={!healthCareProviderValue}
+              />
+            </>
+          )}
         </Grid>
       </Grid>
     </>

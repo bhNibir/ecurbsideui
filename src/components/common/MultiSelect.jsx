@@ -11,6 +11,7 @@ const MultiSelect = ({
   data,
   size = "normal",
   label,
+  disabled,
 }) => {
   const [inputValue, setInputValue] = useState("");
 
@@ -24,6 +25,7 @@ const MultiSelect = ({
       defaultValue={inputValue}
       render={({ field: { onChange, value }, fieldState: { error } }) => (
         <Autocomplete
+          disabled={disabled}
           multiple
           margin="dense"
           loading={loading}

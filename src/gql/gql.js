@@ -18,6 +18,15 @@ export const GET_MEDICAL_SETTING = gql`
   }
 `;
 
+export const GET_COUNTRIES_LIST = gql`
+  query GetCountryList {
+    countryList {
+      name
+      code
+    }
+  }
+`;
+
 export const USER_REGISTER = gql`
   mutation UserRegister(
     $email: String!
@@ -74,12 +83,6 @@ export const GET_DISEASES = gql`
         id
         firstName
         lastName
-        professionalProfile {
-          medicalSpecialty {
-            id
-            name
-          }
-        }
       }
       createdAt
       updatedAt
