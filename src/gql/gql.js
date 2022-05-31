@@ -29,19 +29,53 @@ export const GET_COUNTRIES_LIST = gql`
 
 export const USER_REGISTER = gql`
   mutation UserRegister(
+    $firstName: String!
+    $lastName: String!
+    $country: String!
+    $email: String!
+    $username: String!
+    $password: String!
+  ) {
+    register(
+      firstName: $firstName
+      lastName: $lastName
+      country: $country
+      email: $email
+      username: $username
+      password1: $password
+      password2: $password
+    ) {
+      success
+      errors
+    }
+  }
+`;
+export const USER_REGISTRATION = gql`
+  mutation UserRegister(
     $email: String!
     $username: String!
     $firstName: String!
     $lastName: String!
     $password: String!
+    # $password2: String!
+    $country: String!
+    $medicalProviderTypeId: String!
+    $healthProvider: Boolean!
+    $medicalSpecialty: [String]!
+    $medicalSettingId: String!
   ) {
-    register(
+    userRegistration(
       email: $email
       username: $username
       firstName: $firstName
       lastName: $lastName
+      country: $country
       password1: $password
       password2: $password
+      medicalSettingId: $medicalSettingId
+      medicalSpecialty: $medicalSpecialty
+      healthProvider: $healthProvider
+      medicalProviderTypeId: $medicalProviderTypeId
     ) {
       success
       errors

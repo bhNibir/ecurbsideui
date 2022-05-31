@@ -2,7 +2,7 @@ import React from "react";
 import PersonalForm from "./PersonalForm";
 import ProfessionalFrom from "./ProfessionalFrom";
 
-const StepOption = ({ step, setValue, control, validationError }) => {
+const StepOption = ({ register, step, setValue, control, validationError }) => {
   switch (step) {
     case 0:
       return (
@@ -10,6 +10,7 @@ const StepOption = ({ step, setValue, control, validationError }) => {
           control={control}
           setValue={setValue}
           validationError={validationError}
+          register={register}
         />
       );
     case 1:

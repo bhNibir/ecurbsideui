@@ -6,8 +6,14 @@ import {
   RadioGroup,
 } from "@mui/material";
 import React from "react";
+import { Controller } from "react-hook-form";
 
-const RadioButtons = ({ name, value, setValue }) => {
+const RadioButtons = ({
+  control,
+  name,
+  healthCareProviderValue,
+  setHealthCareProviderValue,
+}) => {
   return (
     <>
       <FormControl
@@ -23,24 +29,33 @@ const RadioButtons = ({ name, value, setValue }) => {
         <FormLabel id="controlled-radio-buttons-group">
           Are you a health care provider ?
         </FormLabel>
-        <RadioGroup
-          row
-          aria-labelledby="controlled-radio-buttons-group"
+        <Controller
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <RadioGroup
+              row
+              value={healthCareProviderValue}
+              onChange={(_, value) => {
+                console.log("value", value);
+                console.log("healthCareProviderValue", healthCareProviderValue);
+                setHealthCareProviderValue(() => !healthCareProviderValue);
+                onChange(value);
+              }}
+            >
+              <FormControlLabel
+                value={true}
+                control={<Radio size="small" color="success" />}
+                label="Yes"
+              />
+              <FormControlLabel
+                value={false}
+                control={<Radio size="small" color="error" />}
+                label="No"
+              />
+            </RadioGroup>
+          )}
           name={name}
-          value={value}
-          onChange={() => setValue(!value)}
-        >
-          <FormControlLabel
-            value={true}
-            control={<Radio size="small" color="success" />}
-            label="Yes"
-          />
-          <FormControlLabel
-            value={false}
-            control={<Radio size="small" color="error" />}
-            label="No"
-          />
-        </RadioGroup>
+          control={control}
+        />
       </FormControl>
     </>
   );

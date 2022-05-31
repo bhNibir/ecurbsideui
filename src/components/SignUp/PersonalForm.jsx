@@ -13,12 +13,12 @@ import {
 } from "./../../gql/gql";
 import MultiSelect from "./../common/MultiSelect";
 
-const PersonalForm = ({ control, setValue, validationError }) => {
+const PersonalForm = ({ register, control, setValue, validationError }) => {
   const [MedicalProviderData, setMedicalProviderData] = useState([]);
   const [MedicalSettingData, setMedicalSettingData] = useState([]);
   const [medicalSpecialtyData, setMedicalSpecialtyData] = useState([]);
   const [countryListData, setCountryListData] = useState([]);
-  const [healthCareProviderValue, setHealthCareProviderValue] = useState(false);
+  const [healthCareProviderValue, setHealthCareProviderValue] = useState(true);
 
   const { loading: medicalProviderLoading, error: medicalProviderError } =
     useQuery(GET_MEDICAL_PROVIDER, {
@@ -139,16 +139,17 @@ const PersonalForm = ({ control, setValue, validationError }) => {
           />
 
           <RadioButtons
-            name={"healthCareProvider"}
-            value={healthCareProviderValue}
-            setValue={setHealthCareProviderValue}
+            control={control}
+            name={"healthProvider"}
+            healthCareProviderValue={healthCareProviderValue}
+            setHealthCareProviderValue={setHealthCareProviderValue}
           />
 
-          {healthCareProviderValue && (
+          {healthCareProviderValue === true && (
             <>
               <SingleSelect
                 control={control}
-                name={"medicalProviderId"}
+                name={"medicalProviderTypeId"}
                 loading={medicalProviderLoading}
                 error={medicalProviderError}
                 data={MedicalProviderData}
