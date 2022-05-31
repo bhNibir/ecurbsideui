@@ -5,19 +5,15 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
-import React, { useEffect } from "react";
+import React from "react";
+import { Controller } from "react-hook-form";
 
-const RadioButtons = ({ name }) => {
-  const [value, setValue] = React.useState(true);
-
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
-
-  useEffect(() => {
-    console.log("Are you a health care provider ? ", value);
-  }, [value]);
-
+const RadioButtons = ({
+  control,
+  name,
+  healthCareProviderValue,
+  setHealthCareProviderValue,
+}) => {
   return (
     <>
       <FormControl
@@ -33,24 +29,33 @@ const RadioButtons = ({ name }) => {
         <FormLabel id="controlled-radio-buttons-group">
           Are you a health care provider ?
         </FormLabel>
-        <RadioGroup
-          row
-          aria-labelledby="controlled-radio-buttons-group"
+        <Controller
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <RadioGroup
+              row
+              value={healthCareProviderValue}
+              onChange={(_, value) => {
+                console.log("value", value);
+                console.log("healthCareProviderValue", healthCareProviderValue);
+                setHealthCareProviderValue(() => !healthCareProviderValue);
+                onChange(value);
+              }}
+            >
+              <FormControlLabel
+                value={true}
+                control={<Radio size="small" color="success" />}
+                label="Yes"
+              />
+              <FormControlLabel
+                value={false}
+                control={<Radio size="small" color="error" />}
+                label="No"
+              />
+            </RadioGroup>
+          )}
           name={name}
-          value={value}
-          onChange={handleChange}
-        >
-          <FormControlLabel
-            value={true}
-            control={<Radio size="small" color="success" />}
-            label="Yes"
-          />
-          <FormControlLabel
-            value={false}
-            control={<Radio size="small" color="error" />}
-            label="No"
-          />
-        </RadioGroup>
+          control={control}
+        />
       </FormControl>
     </>
   );

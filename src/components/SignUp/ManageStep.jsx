@@ -31,6 +31,19 @@ const schema = yup
   })
   .required();
 
+const defaultValues = {
+  firstName: "",
+  lastName: "",
+  country: "",
+  healthProvider: true,
+  medicalProviderTypeId: "",
+  medicalSpecialty: [],
+  medicalSettingId: "",
+  username: "",
+  email: "",
+  password: "",
+};
+
 const ManageStep = ({
   steps,
   activeStep,
@@ -39,8 +52,9 @@ const ManageStep = ({
   mutationLoading,
   validationError,
 }) => {
-  const { setValue, control, handleSubmit, reset } = useForm({
+  const { register, setValue, control, handleSubmit, reset } = useForm({
     // resolver: yupResolver(schema),
+    defaultValues,
   });
 
   const handleNext = () => {
@@ -62,6 +76,7 @@ const ManageStep = ({
           control={control}
           validationError={validationError}
           setValue={setValue}
+          register={register}
         />
 
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>

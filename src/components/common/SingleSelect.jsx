@@ -1,5 +1,5 @@
 import { Autocomplete, CircularProgress, TextField } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { Controller } from "react-hook-form";
 
 const SingleSelect = ({
@@ -10,7 +10,11 @@ const SingleSelect = ({
   data,
   size = "normal",
   label,
+  disabled,
 }) => {
+  useEffect(() => {
+    console.log("Are you a health care provider ? ", disabled);
+  }, [disabled]);
   if (error) return <p>Error :(</p>;
 
   return (
@@ -21,6 +25,7 @@ const SingleSelect = ({
         rules={{ required: "Category is required" }}
         render={({ field: { onChange, value }, fieldState: { error } }) => (
           <Autocomplete
+            disabled={disabled}
             size={size}
             margin="dense"
             loading={loading}

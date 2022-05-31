@@ -45,7 +45,7 @@ const AvatarUpload = ({ control }) => {
   };
 
   return (
-    <Box fullWidth sx={{ mb: 1 }}>
+    <Box fullWidth sx={{ mb: 1.5 }}>
       <Badge
         overlap="circular"
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
