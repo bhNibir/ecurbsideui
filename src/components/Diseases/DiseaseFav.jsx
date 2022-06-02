@@ -3,8 +3,9 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Box, IconButton } from "@mui/material";
 import React, { useState } from "react";
 
-const DiseaseFav = () => {
-  const [fav, setFav] = useState(false);
+const DiseaseFav = ({ row }) => {
+  console.log("favoriteDisease", !!row?.favoriteDisease?.isFavorite);
+  const [fav, setFav] = useState(!!row?.favoriteDisease?.isFavorite);
 
   const handleFav = (event) => {
     event.stopPropagation();

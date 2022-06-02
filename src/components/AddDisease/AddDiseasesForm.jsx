@@ -59,6 +59,7 @@ const AddDiseasesForm = ({ onSubmit, mutationLoading }) => {
               loading={CategoryLoading}
               error={CategoryError}
               data={CategoryData}
+              label={"Select Categories"}
             />
           </Grid>
           <Grid item xs={12} my={1}>

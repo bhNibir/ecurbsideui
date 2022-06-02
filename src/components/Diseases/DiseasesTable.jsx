@@ -44,31 +44,41 @@ const dataColumns = [
     renderCell: DiseasesDateTime,
     width: 200,
     type: "dateTime",
+    filterable: false,
   },
   {
     field: "categories",
-    headerName: "Category",
+    headerName: "Specialty",
     renderCell: DiseasesCat,
     width: 200,
     flex: 1,
     sortable: false,
   },
   {
-    field: "favorite",
+    field: "favoriteDisease",
     headerName: "Favorite",
     renderCell: DiseaseFav,
     width: 80,
     sortable: false,
     type: "actions",
+    filterable: true,
   },
-  {
-    field: "medicalSpecialty",
-    headerName: "Specialty",
-    width: 80,
-    sortable: false,
-    hide: true,
-  },
+  // {
+  //   field: "medicalSpecialty",
+  //   headerName: "Specialty",
+  //   width: 80,
+  //   sortable: false,
+  //   hide: true,
+  // },
 ];
+
+const filterModel = {
+  items: [
+    { id: 1, columnField: "categories", value: "4" },
+    { id: 2, columnField: "favoriteDisease", value: "true" },
+  ],
+  // linkOperator: GridLinkOperator.Or,
+};
 
 const DiseasesTable = ({ data, loading }) => {
   console.log(data);
@@ -125,9 +135,20 @@ const DiseasesTable = ({ data, loading }) => {
             clearSearch: () => requestSearch(""),
           },
         }}
+        initialState={{
+          ...data.initialState,
+          filter: {
+            filterModel: filterModel,
+          },
+        }}
       />
     </>
   );
+};
+
+const FilterPanel = (props) => {
+  console.log("FilterPanel", props);
+  return <>Hi</>;
 };
 
 export default DiseasesTable;

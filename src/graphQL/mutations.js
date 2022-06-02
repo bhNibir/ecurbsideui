@@ -121,3 +121,20 @@ export const CREATE_REVIEW = gql`
     }
   }
 `;
+export const CREATE_FAVORITE_DISEASE = gql`
+  mutation FavoriteDiseaseCreation($diseaseId: ID!, $isFavorite: Boolean!) {
+    createFavoriteDisease(diseaseId: $diseaseId, isFavorite: $isFavorite) {
+      favoriteDisease {
+        id
+        createdAt
+        updatedAt
+        user {
+          id
+          firstName
+          lastName
+          username
+        }
+      }
+    }
+  }
+`;

@@ -36,6 +36,9 @@ export const GET_DISEASES = gql`
         id
         name
       }
+      favoriteDisease {
+        isFavorite
+      }
       descriptions
       createBy {
         id
