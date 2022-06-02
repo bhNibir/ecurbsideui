@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import VerifyErrorMessage from "../../components/AlertMessages/VerifyErrorMessage";
 import VerifySuccessMessage from "../../components/AlertMessages/VerifySuccessMessage";
 import Footer from "../../components/Footer/Footer";
-import { VERIFY_ACCOUNT } from "../../gql/gql";
+import { VERIFY_ACCOUNT } from "../../graphQL/mutations";
 
 const VerifyAccountPage = () => {
   const { token } = useParams();

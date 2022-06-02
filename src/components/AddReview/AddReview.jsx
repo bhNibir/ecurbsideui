@@ -3,8 +3,8 @@ import { Paper, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useSnackbar } from "notistack";
 import React from "react";
-import { CREATE_REVIEW, GET_TREATMENT_BY_ID } from "../../gql/gql";
-import { GET_DISEASE_BY_ID } from "./../../gql/gql";
+import { CREATE_REVIEW } from "../../graphQL/mutations";
+import { GET_DISEASE_BY_ID, GET_TREATMENT_BY_ID } from "../../graphQL/queries";
 import AddReviewForm from "./AddReviewForm";
 
 const AddReview = ({ diseaseId, treatmentId }) => {

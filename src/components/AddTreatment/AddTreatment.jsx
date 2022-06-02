@@ -3,7 +3,8 @@ import { Box, Typography } from "@mui/material";
 import { useSnackbar } from "notistack";
 import React from "react";
 import { useParams } from "react-router-dom";
-import { CREATE_TREATMENT, GET_DISEASE_BY_ID } from "../../gql/gql";
+import { CREATE_TREATMENT } from "../../graphQL/mutations";
+import { GET_DISEASE_BY_ID } from "../../graphQL/queries";
 import SubmitPaper from "../StyledComponents/SubmitPaper";
 import AddTreatmentForm from "./AddTreatmentForm";
 

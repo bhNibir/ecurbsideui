@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import ThankYouMessage from "../../components/AlertMessages/ThankYouMessage";
 import FormPaper from "../../components/StyledComponents/FormPaper";
-import { USER_REGISTRATION } from "./../../gql/gql";
+import { USER_REGISTRATION } from "../../graphQL/mutations";
 import ManageStep from "./ManageStep";
 
 const steps = ["Account Details", "Professional details"];

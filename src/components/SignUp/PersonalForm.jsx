@@ -2,15 +2,15 @@ import { useQuery } from "@apollo/client";
 import { Grid, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { Controller } from "react-hook-form";
-import CountrySelect from "../common/CountrySelect";
-import RadioButtons from "../common/RadioButtons";
-import SingleSelect from "../common/SingleSelect";
 import {
   GET_COUNTRIES_LIST,
   GET_DISEASE_CATEGORIES,
   GET_MEDICAL_PROVIDER,
   GET_MEDICAL_SETTING,
-} from "./../../gql/gql";
+} from "../../graphQL/queries";
+import CountrySelect from "../common/CountrySelect";
+import RadioButtons from "../common/RadioButtons";
+import SingleSelect from "../common/SingleSelect";
 import MultiSelect from "./../common/MultiSelect";
 
 const PersonalForm = ({ register, control, setValue, validationError }) => {

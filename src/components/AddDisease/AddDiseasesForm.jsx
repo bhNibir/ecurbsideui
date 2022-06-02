@@ -4,7 +4,7 @@ import { LoadingButton } from "@mui/lab";
 import { Box, Grid, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { GET_DISEASE_CATEGORIES } from "../../gql/gql";
+import { GET_DISEASE_CATEGORIES } from "../../graphQL/queries";
 import MultiSelect from "../common/MultiSelect";
 
 const AddDiseasesForm = ({ onSubmit, mutationLoading }) => {

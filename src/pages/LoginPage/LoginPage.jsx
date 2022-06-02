@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import SnackbarMessage from "../../components/AlertMessages/SnackbarMessage";
 import FormPaper from "../../components/StyledComponents/FormPaper";
-import { GET_AUTH_TOKEN } from "../../gql/gql";
+import { AUTH_TOKEN } from "../../graphQL/mutations";
 import LoginPageLayout from "../../layouts/LoginPageLayout";
 import LoginForm from "./LoginForm";
 
@@ -14,7 +14,7 @@ const LoginPage = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const [tokenAuth, { data, loading: mutationLoading, error: mutationError }] =
-    useMutation(GET_AUTH_TOKEN, {
+    useMutation(AUTH_TOKEN, {
       onCompleted(result) {
         if (result?.tokenAuth?.token) {
           window.localStorage.setItem("token", result?.tokenAuth?.token);
