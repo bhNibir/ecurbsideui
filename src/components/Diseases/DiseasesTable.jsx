@@ -51,20 +51,17 @@ const dataColumns = [
     headerName: "Specialty",
     renderCell: DiseasesCat,
     valueGetter: ({ row }) => {
-      return row.diseaseCategories.map(
-        (item, index) => `${item.id} - ${item.name}`
-      );
+      return row.diseaseCategories.map((item) => item.name);
     },
     width: 200,
     flex: 1,
     sortable: false,
+    type: "string",
   },
   {
     field: "favoriteDisease",
     headerName: "Favorite",
-    valueGetter: ({ row }) => {
-      return `${row.favoriteDisease.id} - ${row.favoriteDisease.isFavorite}`;
-    },
+    valueGetter: ({ row }) => row.favoriteDisease.isFavorite,
     renderCell: DiseaseFav,
     width: 80,
     sortable: false,
@@ -80,13 +77,13 @@ const dataColumns = [
   // },
 ];
 
-const filterModel = {
-  items: [
-    { id: 1, columnField: "categories", value: "4" },
-    { id: 2, columnField: "favoriteDisease", value: "true" },
-  ],
-  // linkOperator: GridLinkOperator.Or,
-};
+// const filterModel = {
+//   items: [
+//     { id: 1, columnField: "categories", value: "4" },
+//     { id: 2, columnField: "favoriteDisease", value: "true" },
+//   ],
+//   // linkOperator: GridLinkOperator.Or,
+// };
 
 const DiseasesTable = ({ data, loading }) => {
   console.log(data);

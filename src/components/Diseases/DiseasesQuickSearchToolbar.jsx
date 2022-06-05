@@ -18,7 +18,6 @@ const DiseasesQuickSearchToolbar = ({ value, onChange, clearSearch }) => {
     >
       <div>
         <GridToolbarFilterButton />
-        {/* <GridToolbarDensitySelector /> */}
       </div>
       <TextField
         variant="standard"
