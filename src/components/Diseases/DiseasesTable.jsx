@@ -65,25 +65,10 @@ const dataColumns = [
     renderCell: DiseaseFav,
     width: 80,
     sortable: false,
-    type: "actions",
     filterable: true,
+    type: "boolean",
   },
-  // {
-  //   field: "medicalSpecialty",
-  //   headerName: "Specialty",
-  //   width: 80,
-  //   sortable: false,
-  //   hide: true,
-  // },
 ];
-
-// const filterModel = {
-//   items: [
-//     { id: 1, columnField: "categories", value: "4" },
-//     { id: 2, columnField: "favoriteDisease", value: "true" },
-//   ],
-//   // linkOperator: GridLinkOperator.Or,
-// };
 
 const DiseasesTable = ({ data, loading }) => {
   console.log(data);

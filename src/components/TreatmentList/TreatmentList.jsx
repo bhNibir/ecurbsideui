@@ -1,9 +1,11 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
 import AddReviewBtn from "./AddReviewBtn";
+import ratingOnlyOperators from "./FilterComponent/ratingOnlyOperators";
 import ListRating from "./ListRating";
 import TreatmentCat from "./TreatmentCat";
 import TreatmentDataGrid from "./TreatmentDataGrid";
+
 const dataColumns = [
   {
     field: "treatmentName",
@@ -35,6 +37,7 @@ const dataColumns = [
     width: 200,
     flex: 0.5,
     type: "number",
+    filterOperators: ratingOnlyOperators,
   },
   {
     field: "totalReviews",
