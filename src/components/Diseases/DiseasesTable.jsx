@@ -50,6 +50,11 @@ const dataColumns = [
     field: "categories",
     headerName: "Specialty",
     renderCell: DiseasesCat,
+    valueGetter: ({ row }) => {
+      return row.diseaseCategories.map(
+        (item, index) => `${item.id} - ${item.name}`
+      );
+    },
     width: 200,
     flex: 1,
     sortable: false,
@@ -57,6 +62,9 @@ const dataColumns = [
   {
     field: "favoriteDisease",
     headerName: "Favorite",
+    valueGetter: ({ row }) => {
+      return `${row.favoriteDisease.id} - ${row.favoriteDisease.isFavorite}`;
+    },
     renderCell: DiseaseFav,
     width: 80,
     sortable: false,
@@ -135,20 +143,9 @@ const DiseasesTable = ({ data, loading }) => {
             clearSearch: () => requestSearch(""),
           },
         }}
-        initialState={{
-          ...data.initialState,
-          filter: {
-            filterModel: filterModel,
-          },
-        }}
       />
     </>
   );
-};
-
-const FilterPanel = (props) => {
-  console.log("FilterPanel", props);
-  return <>Hi</>;
 };
 
 export default DiseasesTable;
