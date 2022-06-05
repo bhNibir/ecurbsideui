@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import React from "react";
 import { useParams } from "react-router-dom";
 import DiseaseDetails from "../../components/DiseaseDetails/DiseaseDetails";
-import { GET_DISEASE_BY_ID } from "../../gql/gql";
+import { GET_DISEASE_BY_ID } from "../../graphQL/queries";
 import { MainLayout } from "../../layouts/MainLayout";
 
 const DiseaseTreatmentListPage = () => {

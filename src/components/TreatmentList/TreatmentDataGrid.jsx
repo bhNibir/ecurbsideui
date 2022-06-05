@@ -18,11 +18,11 @@ const TreatmentDataGrid = ({ loading, error, treatments, dataColumns }) => {
   const requestSearch = (searchValue) => {
     setSearchText(searchValue);
     const searchRegex = new RegExp(escapeRegExp(searchValue), "i");
-    const filteredRows = treatments.filter((disease) =>
-      Object.keys(disease).some((field) =>
-        searchRegex.test(disease[field].toString())
-      )
+    const filteredRows = treatments.filter((treatment) =>
+      Object.keys(treatment).some((field) => searchRegex.test(treatment[field]))
     );
+    console.log("searchRegex : ", searchRegex);
+    console.log("filteredRows : ", filteredRows);
     setRows(filteredRows);
   };
 

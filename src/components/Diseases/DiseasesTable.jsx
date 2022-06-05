@@ -44,29 +44,29 @@ const dataColumns = [
     renderCell: DiseasesDateTime,
     width: 200,
     type: "dateTime",
+    filterable: false,
   },
   {
     field: "categories",
-    headerName: "Category",
+    headerName: "Specialty",
     renderCell: DiseasesCat,
+    valueGetter: ({ row }) => {
+      return row.diseaseCategories.map((item) => item.name);
+    },
     width: 200,
     flex: 1,
     sortable: false,
+    type: "string",
   },
   {
-    field: "favorite",
+    field: "favoriteDisease",
     headerName: "Favorite",
+    valueGetter: ({ row }) => row.favoriteDisease.isFavorite,
     renderCell: DiseaseFav,
     width: 80,
     sortable: false,
-    type: "actions",
-  },
-  {
-    field: "medicalSpecialty",
-    headerName: "Specialty",
-    width: 80,
-    sortable: false,
-    hide: true,
+    filterable: true,
+    type: "boolean",
   },
 ];
 

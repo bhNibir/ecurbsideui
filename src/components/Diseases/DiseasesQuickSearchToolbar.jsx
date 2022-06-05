@@ -18,7 +18,6 @@ const DiseasesQuickSearchToolbar = ({ value, onChange, clearSearch }) => {
     >
       <div>
         <GridToolbarFilterButton />
-        {/* <GridToolbarDensitySelector /> */}
       </div>
       <TextField
         variant="standard"
@@ -26,7 +25,15 @@ const DiseasesQuickSearchToolbar = ({ value, onChange, clearSearch }) => {
         onChange={onChange}
         placeholder="Search…"
         InputProps={{
-          startAdornment: <SearchIcon fontSize="small" color="primary" />,
+          startAdornment: (
+            <SearchIcon
+              fontSize="small"
+              color="primary"
+              sx={{
+                mr: 0.5,
+              }}
+            />
+          ),
           endAdornment: (
             <IconButton
               title="Clear"
@@ -45,9 +52,6 @@ const DiseasesQuickSearchToolbar = ({ value, onChange, clearSearch }) => {
             sm: "auto",
           },
           m: (theme) => theme.spacing(1, 0.5, 1.5),
-          "& .MuiSvgIcon-root": {
-            mr: 0.5,
-          },
           "& .MuiInput-underline:before": {
             borderBottom: 1,
             borderColor: "divider",

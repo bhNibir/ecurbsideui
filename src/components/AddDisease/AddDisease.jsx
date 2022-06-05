@@ -3,7 +3,8 @@ import { Box, Typography } from "@mui/material";
 import { useSnackbar } from "notistack";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { CREATE_DISEASE, GET_DISEASES } from "../../gql/gql";
+import { CREATE_DISEASE } from "../../graphQL/mutations";
+import { GET_DISEASES } from "../../graphQL/queries";
 import SubmitPaper from "../StyledComponents/SubmitPaper";
 import AddDiseasesForm from "./AddDiseasesForm";
 
