@@ -16,8 +16,20 @@ const SignUp = () => {
   const [showThankYou, setShowThankYou] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const [activeStep, setActiveStep] = React.useState(0);
+  const [userData, setUserData] = React.useState({
+    firstName: "",
+    lastName: "",
+    country: "",
+    healthProvider: true,
+    medicalProviderTypeId: "",
+    medicalSpecialty: [],
+    medicalSettingId: "",
+    username: "",
+    email: "",
+    password: "",
+  });
 
-  const [addUserData, { data, loading: mutationLoading }] = useMutation(
+  const [submitUserData, { data, loading: mutationLoading }] = useMutation(
     USER_REGISTRATION,
     {
       onError: (error) => {
@@ -57,22 +69,17 @@ const SignUp = () => {
       variant: "error",
     });
   };
-  const onSubmitData = (userData, resetFrom) => {
+
+  const onSubmitData = (inputData, resetFrom) => {
     const userObj = {
-      firstName: userData.firstName,
-      lastName: userData.lastName,
-      country: userData.country,
-      healthProvider: Boolean(userData.healthProvider),
-      medicalProviderTypeId: userData.medicalProviderTypeId,
-      medicalSpecialty: userData.medicalSpecialty,
-      medicalSettingId: userData.medicalSettingId,
-      username: userData.username,
-      email: userData.email,
-      password: userData.password,
+      ...userData,
+      username: inputData?.username,
+      email: inputData?.email,
+      password: inputData?.password,
     };
 
     console.log(userObj);
-    addUserData({
+    submitUserData({
       variables: userObj,
     });
 
@@ -120,12 +127,6 @@ const SignUp = () => {
             </Typography>
             <Divider variant="middle" />
           </Box>
-          {/* <SignUpForm
-            onSubmitData={onSubmitData}
-            mutationLoading={mutationLoading}
-            validationError={validationError}
-          /> */}
-
           <ManageStep
             steps={steps}
             activeStep={activeStep}
@@ -133,6 +134,8 @@ const SignUp = () => {
             onSubmitData={onSubmitData}
             mutationLoading={mutationLoading}
             validationError={validationError}
+            userData={userData}
+            setUserData={setUserData}
           />
         </FormPaper>
       )}

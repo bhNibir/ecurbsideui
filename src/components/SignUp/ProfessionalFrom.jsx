@@ -1,7 +1,10 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+import { LoadingButton } from "@mui/lab";
 import {
   Box,
+  Button,
   Grid,
   IconButton,
   InputAdornment,
@@ -10,14 +13,56 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import { Controller } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
+import * as yup from "yup";
 
-const ProfessionalFrom = ({ control, setValue, validationError }) => {
+const schema = yup
+  .object()
+  .shape({
+    username: yup.string().required("User Name is required"),
+    email: yup.string().email().required("Email is required"),
+    password: yup
+      .string()
+      .required("Password is required.")
+      .min(
+        8,
+        "Password must have minimum 8 characters, uppercase, lowercase , numbers and symbol."
+      )
+      .test(
+        "passwordRequirements",
+        "Password must have 1 uppercase, 1 lowercase, 1 number, 1 symbol.",
+        (value) =>
+          [/[a-z]/, /[A-Z]/, /[0-9]/, /[^a-zA-Z0-9]/].every((pattern) =>
+            pattern.test(value)
+          )
+      ),
+  })
+  .required();
+
+const defaultValues = {
+  username: "",
+  email: "",
+  password: "",
+};
+
+const ProfessionalFrom = ({
+  validationError,
+  mutationLoading,
+  handleBack,
+  onSubmitData,
+}) => {
   const [showPassBtn, setShowPassBtn] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
+  const { control, handleSubmit, reset } = useForm({
+    defaultValues,
+    resolver: yupResolver(schema),
+  });
+
   return (
-    <>
+    <form
+      onSubmit={handleSubmit((inputData) => onSubmitData(inputData, reset))}
+    >
       <Grid container spacing={1}>
         <Grid item xs={12}>
           <Controller
@@ -155,7 +200,22 @@ const ProfessionalFrom = ({ control, setValue, validationError }) => {
           </Typography>
         </Grid>
       </Grid>
-    </>
+      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
+          Back
+        </Button>
+
+        <LoadingButton
+          loading={mutationLoading}
+          variant="contained"
+          sx={{ mt: 3, ml: 1 }}
+          type="submit"
+          color="success"
+        >
+          Sign Up
+        </LoadingButton>
+      </Box>
+    </form>
   );
 };
 

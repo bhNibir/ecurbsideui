@@ -1,7 +1,9 @@
 import { useQuery } from "@apollo/client";
-import { Grid, TextField } from "@mui/material";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Box, Button, Grid, TextField } from "@mui/material";
 import React, { useState } from "react";
-import { Controller } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
+import * as yup from "yup";
 import {
   GET_COUNTRIES_LIST,
   GET_DISEASE_CATEGORIES,
@@ -13,12 +15,59 @@ import RadioButtons from "../common/RadioButtons";
 import SingleSelect from "../common/SingleSelect";
 import MultiSelect from "./../common/MultiSelect";
 
-const PersonalForm = ({ register, control, setValue, validationError }) => {
+const schema = yup
+  .object()
+  .shape({
+    firstName: yup.string().required("First Name is required"),
+    lastName: yup.string().required("Last Name is required"),
+    country: yup.string().required("Country is required"),
+    healthProvider: yup.boolean().required("Health provider is required"),
+    medicalProviderTypeId: yup.string().when("healthProvider", {
+      is: true,
+      then: yup.string().required("Medical provider type is required"),
+    }),
+
+    medicalSpecialty: yup.array().when("healthProvider", {
+      is: true,
+      then: yup
+        .array()
+        .min(1, "At least 1 Medical specialty is required")
+        .required("Medical specialty is required"),
+    }),
+
+    medicalSettingId: yup.string().when("healthProvider", {
+      is: true,
+      then: yup.string().required("Medical setting is required"),
+    }),
+  })
+  .required();
+
+const defaultValues = {
+  firstName: "",
+  lastName: "",
+  country: "",
+  healthProvider: true,
+  medicalProviderTypeId: "",
+  medicalSpecialty: [],
+  medicalSettingId: "",
+};
+
+const PersonalForm = ({
+  validationError,
+  handleNext,
+  userData,
+  setUserData,
+}) => {
   const [MedicalProviderData, setMedicalProviderData] = useState([]);
   const [MedicalSettingData, setMedicalSettingData] = useState([]);
   const [medicalSpecialtyData, setMedicalSpecialtyData] = useState([]);
   const [countryListData, setCountryListData] = useState([]);
   const [healthCareProviderValue, setHealthCareProviderValue] = useState(true);
+
+  const { setValue, control, handleSubmit } = useForm({
+    defaultValues,
+    resolver: yupResolver(schema),
+  });
 
   const { loading: medicalProviderLoading, error: medicalProviderError } =
     useQuery(GET_MEDICAL_PROVIDER, {
@@ -52,8 +101,24 @@ const PersonalForm = ({ register, control, setValue, validationError }) => {
     }
   );
 
+  const onSubmit = (inputData) => {
+    const userObj = {
+      ...userData,
+      firstName: inputData?.firstName,
+      lastName: inputData?.lastName,
+      country: inputData?.country,
+      healthProvider: Boolean(inputData?.healthProvider),
+      medicalProviderTypeId: inputData?.medicalProviderTypeId,
+      medicalSpecialty: inputData?.medicalSpecialty,
+      medicalSettingId: inputData?.medicalSettingId,
+    };
+
+    setUserData(() => userObj);
+    handleNext();
+  };
+
   return (
-    <>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={1}>
         <Grid item xs={12} sm={6}>
           <Controller
@@ -182,7 +247,12 @@ const PersonalForm = ({ register, control, setValue, validationError }) => {
           )}
         </Grid>
       </Grid>
-    </>
+      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <Button variant="contained" sx={{ mt: 3, ml: 1 }} type="submit">
+          Next
+        </Button>
+      </Box>
+    </form>
   );
 };
 
