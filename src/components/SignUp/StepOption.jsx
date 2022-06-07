@@ -2,23 +2,34 @@ import React from "react";
 import PersonalForm from "./PersonalForm";
 import ProfessionalFrom from "./ProfessionalFrom";
 
-const StepOption = ({ register, step, setValue, control, validationError }) => {
+const StepOption = ({
+  step,
+  validationError,
+  mutationLoading,
+  userData,
+  setUserData,
+  onSubmitData,
+  handleBack,
+  handleNext,
+}) => {
   switch (step) {
     case 0:
       return (
         <PersonalForm
-          control={control}
-          setValue={setValue}
           validationError={validationError}
-          register={register}
+          mutationLoading={mutationLoading}
+          userData={userData}
+          setUserData={setUserData}
+          handleNext={handleNext}
         />
       );
     case 1:
       return (
         <ProfessionalFrom
-          control={control}
-          setValue={setValue}
           validationError={validationError}
+          mutationLoading={mutationLoading}
+          onSubmitData={onSubmitData}
+          handleBack={handleBack}
         />
       );
     default:

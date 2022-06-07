@@ -61,7 +61,7 @@ const dataColumns = [
   {
     field: "favoriteDisease",
     headerName: "Favorite",
-    valueGetter: ({ row }) => row.favoriteDisease.isFavorite,
+    valueGetter: ({ row }) => row?.favoriteDisease?.isFavorite,
     renderCell: DiseaseFav,
     width: 80,
     sortable: false,
