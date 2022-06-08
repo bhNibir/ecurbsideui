@@ -1,11 +1,9 @@
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import HomeIcon from "@mui/icons-material/Home";
-import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import SearchIcon from "@mui/icons-material/Search";
-import { Badge, Chip, Link, styled } from "@mui/material";
+import { Chip, Link, styled } from "@mui/material";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
@@ -16,7 +14,6 @@ import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import LogoImg from "../../assets/images/logo.svg";
 import ElevateAppBar from "./ElevateAppBar";
-import NavBtn from "./NavBtn";
 import ProfileMenu from "./ProfileMenu";
 
 const LogoImage = styled("img")({
@@ -32,26 +29,31 @@ const pages = [
   {
     name: "Favorites",
     path: "/favorites",
-    icon: <FavoriteIcon />,
+    icon: <FavoriteBorderIcon />,
   },
   {
-    name: "Notifications",
-    path: "/notifications",
-    icon: (
-      <Badge badgeContent={17} color="error">
-        <NotificationsIcon />
-      </Badge>
-    ),
+    name: "Search",
+    path: "/search",
+    icon: <SearchIcon />,
   },
-  {
-    name: "Messages",
-    path: "/messages",
-    icon: (
-      <Badge badgeContent={4} color="error">
-        <MailIcon />
-      </Badge>
-    ),
-  },
+  // {
+  //   name: "Notifications",
+  //   path: "/notifications",
+  //   icon: (
+  //     <Badge badgeContent={17} color="error">
+  //       <NotificationsNoneIcon />
+  //     </Badge>
+  //   ),
+  // },
+  // {
+  //   name: "Messages",
+  //   path: "/messages",
+  //   icon: (
+  //     <Badge badgeContent={4} color="error">
+  //       <MailIcon />
+  //     </Badge>
+  //   ),
+  // },
 ];
 
 const NavBar = ({ btnLabel, btnPath }) => {
@@ -87,6 +89,7 @@ const NavBar = ({ btnLabel, btnPath }) => {
           aria-haspopup="true"
           onClick={handleOpenNavMenu}
           color="inherit"
+          sx={{ m: 1, p: 1, backgroundColor: "#f3f6f9" }}
         >
           <MenuIcon />
         </IconButton>
@@ -126,21 +129,22 @@ const NavBar = ({ btnLabel, btnPath }) => {
           <LogoImage src={LogoImg} alt="logo" width={130} />
         </Link>
       </Typography>
+      {/* desktop menu item */}
       <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-        {pages.map((page, index) => (
-          <NavBtn
-            key={index}
-            size="large"
-            color="inherit"
-            disableRipple
-            startIcon={page?.icon}
-            component={RouterLink}
-            to={page.path}
-            onClick={handleCloseNavMenu}
-            // sx={{ my: 2, display: "block" }}
-          >
-            {page.name}
-          </NavBtn>
+        {pages.map((item, index) => (
+          <Box key={index}>
+            <Tooltip title={item.name}>
+              <IconButton
+                size="small"
+                color="inherit"
+                component={RouterLink}
+                to={item.path}
+                sx={{ m: 1, p: 1, backgroundColor: "#f3f6f9" }}
+              >
+                {item?.icon}
+              </IconButton>
+            </Tooltip>
+          </Box>
         ))}
       </Box>
       <Chip
@@ -160,19 +164,7 @@ const NavBar = ({ btnLabel, btnPath }) => {
           },
         }}
       />
-      <Box>
-        <Tooltip title="Search">
-          <IconButton
-            size="small"
-            color="inherit"
-            component={RouterLink}
-            to="/search"
-            sx={{ ml: 2, p: 1, backgroundColor: "#f3f6f9" }}
-          >
-            <SearchIcon />
-          </IconButton>
-        </Tooltip>
-      </Box>
+
       <Box sx={{ flexGrow: 0 }}>
         <ProfileMenu />
       </Box>
