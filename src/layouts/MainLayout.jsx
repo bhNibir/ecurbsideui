@@ -7,10 +7,17 @@ import NavBar from "../components/Header/NavBar";
 
 // eslint-disable-next-line import/prefer-default-export
 export const MainLayout = ({ children }) => (
-  <>
+  <Box
+    sx={{
+      display: "flex",
+      minHeight: "100vh",
+      flexDirection: "column",
+    }}
+  >
     <Box
       sx={{
         backgroundColor: "#f4fdfb",
+        flex: 1,
       }}
     >
       <NavBar btnLabel="Add Disease" btnPath="/add-disease" />
@@ -24,6 +31,7 @@ export const MainLayout = ({ children }) => (
         {children}
       </Container>
     </Box>
+
     <Footer />
-  </>
+  </Box>
 );
