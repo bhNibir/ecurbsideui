@@ -1,6 +1,5 @@
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import LogoutIcon from "@mui/icons-material/Logout";
-import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
@@ -104,12 +103,6 @@ const ProfileMenu = () => {
           </Box>
         </MenuItem>
         <Divider />
-        <MenuItem>
-          <ListItemIcon>
-            <PersonAdd fontSize="small" />
-          </ListItemIcon>
-          Add another account
-        </MenuItem>
         <MenuItem>
           <ListItemIcon>
             <Settings fontSize="small" />
