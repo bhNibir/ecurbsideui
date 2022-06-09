@@ -3,17 +3,12 @@ import { red } from "@mui/material/colors";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import React from "react";
+import { formateName } from "../../utils/formatting";
 import RatingStar from "./RatingStar";
 
 const RatingUser = ({ review }) => {
   dayjs.extend(relativeTime);
-  const formateName = (userObj) => {
-    const { firstName, lastName, username } = userObj;
-    if (firstName) {
-      return firstName + " " + lastName;
-    }
-    return username;
-  };
+
   return (
     <>
       <Stack
