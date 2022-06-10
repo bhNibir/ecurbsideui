@@ -150,3 +150,32 @@ export const GET_TREATMENT_CATEGORIES = gql`
     }
   }
 `;
+
+export const GET_ME = gql`
+  query GetMe {
+    me {
+      id
+      username
+      profilePicture
+      firstName
+      lastName
+      healthProvider
+      country {
+        name
+        code
+      }
+      medicalSetting {
+        id
+        name
+      }
+      medicalProviderType {
+        id
+        name
+      }
+      medicalSpecialty {
+        id
+        name
+      }
+    }
+  }
+`;

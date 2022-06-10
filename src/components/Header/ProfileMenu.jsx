@@ -13,11 +13,13 @@ import Typography from "@mui/material/Typography";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import UsrAvtr from "../../assets/images/users/user-round.svg";
+import useAuth from "./../../hooks/useAuth";
 
 const ProfileMenu = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -29,6 +31,7 @@ const ProfileMenu = () => {
     window.localStorage.removeItem("token");
     navigate("/");
   };
+  console.log("ProfileMenu: ", user);
   return (
     <>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>

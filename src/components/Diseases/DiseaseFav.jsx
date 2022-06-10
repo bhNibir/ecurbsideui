@@ -4,13 +4,13 @@ import { Box, IconButton } from "@mui/material";
 import React, { useState } from "react";
 
 const DiseaseFav = ({ row }) => {
-  console.log("favoriteDisease", !!row?.favoriteDisease?.isFavorite);
+  // console.log("favoriteDisease", !!row?.favoriteDisease?.isFavorite);
   const [fav, setFav] = useState(!!row?.favoriteDisease?.isFavorite);
 
   const handleFav = (event) => {
     event.stopPropagation();
     setFav(!fav);
-    console.log(fav);
+    // console.log(fav);
   };
   return (
     <Box>

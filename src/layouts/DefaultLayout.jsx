@@ -4,7 +4,13 @@ import Footer from "../components/Footer/Footer";
 
 const DefaultLayout = ({ children }) => {
   return (
-    <>
+    <Box
+      sx={{
+        display: "flex",
+        minHeight: "100vh",
+        flexDirection: "column",
+      }}
+    >
       <Box sx={{ flexGrow: 1, backgroundColor: "#f0f2f5" }}>
         <Container fixed>
           <Grid
@@ -14,14 +20,13 @@ const DefaultLayout = ({ children }) => {
             alignItems="center"
             justifyContent="center"
             sx={{
-              minHeight: "80vh",
-
-              py: {
+              mt: 4,
+              mb: {
                 xs: 4,
                 sm: 5,
-                md: 10,
+                md: 8,
                 lg: 12,
-                xl: 13,
+                xl: 12,
               },
             }}
           >
@@ -29,8 +34,8 @@ const DefaultLayout = ({ children }) => {
           </Grid>
         </Container>
       </Box>
-      <Footer sx={{ mt: 5, mb: 4 }} />
-    </>
+      <Footer />
+    </Box>
   );
 };
 
