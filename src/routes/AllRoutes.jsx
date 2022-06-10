@@ -20,101 +20,26 @@ import ProtectedRoute from "./ProtectedRoute";
 
 const AllRoutes = () => (
   <Routes>
-    <Route
-      path="/"
-      element={
-        <ProtectedRoute>
-          <HomePage />
-        </ProtectedRoute>
-      }
-    />
-    <Route
-      path="/home"
-      element={
-        <ProtectedRoute>
-          <HomePage />
-        </ProtectedRoute>
-      }
-    />
-
-    <Route
-      path="/add-disease"
-      element={
-        <ProtectedRoute>
-          <AddDiseasePage />
-        </ProtectedRoute>
-      }
-    />
-    <Route
-      path="/diseases"
-      element={
-        <ProtectedRoute>
-          <HomePage />
-        </ProtectedRoute>
-      }
-    />
-    <Route
-      path="/disease/:id"
-      element={
-        <ProtectedRoute>
-          <DiseaseTreatmentListPage />
-        </ProtectedRoute>
-      }
-    />
-    <Route
-      path="/disease/:id/add-treatment"
-      element={
-        <ProtectedRoute>
-          <AddTreatmentPage />
-        </ProtectedRoute>
-      }
-    />
-    <Route
-      path="/treatment/:id"
-      element={
-        <ProtectedRoute>
-          <TreatmentDetailPage />
-        </ProtectedRoute>
-      }
-    />
-    <Route
-      path="/add-review/:id"
-      element={
-        <ProtectedRoute>
-          <AddReviewPage />
-        </ProtectedRoute>
-      }
-    />
-    <Route
-      path="/search"
-      element={
-        <ProtectedRoute>
-          <SearchResultPage />
-        </ProtectedRoute>
-      }
-    />
-    <Route
-      path="/favorites"
-      element={
-        <ProtectedRoute>
-          <FavoritesPage />
-        </ProtectedRoute>
-      }
-    />
-    <Route
-      path="/user/:username"
-      element={
-        <ProtectedRoute>
-          <ProfilePage />
-        </ProtectedRoute>
-      }
-    />
     <Route path="/about" element={<AboutPage />} />
     <Route path="/login" element={<LoginPage />} />
     <Route path="/sign-up" element={<SignUpPage />} />
     <Route path="/activate/:token" element={<VerifyAccountPage />} />
-    <Route path="reset-password" element={<ResetPasswordPage />} />
-    <Route path="forget-password" element={<ForgetPasswordPage />} />
+    <Route path="/reset-password" element={<ResetPasswordPage />} />
+    <Route path="/forget-password" element={<ForgetPasswordPage />} />
+
+    <Route element={<ProtectedRoute />}>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/home" element={<HomePage />} />
+      <Route path="/add-disease" element={<AddDiseasePage />} />
+      <Route path="/diseases" element={<HomePage />} />
+      <Route path="/disease/:id" element={<DiseaseTreatmentListPage />} />
+      <Route path="/disease/:id/add-treatment" element={<AddTreatmentPage />} />
+      <Route path="/treatment/:id" element={<TreatmentDetailPage />} />
+      <Route path="/add-review/:id" element={<AddReviewPage />} />
+      <Route path="/search" element={<SearchResultPage />} />
+      <Route path="/favorites" element={<FavoritesPage />} />
+      <Route path="/user/:username" element={<ProfilePage />} />
+    </Route>
     <Route path="/*" element={<Page404 />} />
   </Routes>
 );

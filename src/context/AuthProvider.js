@@ -1,12 +1,11 @@
-import { createContext, useMemo } from "react";
+import { createContext, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useLocalStorage("user", null);
-  const [token, setToken] = useLocalStorage("token", null);
+  console.log("Call AuthProvider");
+  const [user, setUser] = useState({});
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -15,8 +14,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    setToken(null);
-    navigate("/", { replace: true });
+    window.localStorage.removeItem("token");
+    setUser({});
+    navigate("/login", { replace: true });
   };
 
   const value = useMemo(

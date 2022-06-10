@@ -8,6 +8,7 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import { onError } from "@apollo/client/link/error";
 import { useSnackbar } from "notistack";
+import { AuthProvider } from "./context/AuthProvider";
 import AllRoutes from "./routes/AllRoutes";
 
 const httpLink = createHttpLink({
@@ -63,7 +64,9 @@ function App() {
   return (
     <div className="App">
       <ApolloProvider client={client}>
-        <AllRoutes />
+        <AuthProvider>
+          <AllRoutes />
+        </AuthProvider>
       </ApolloProvider>
     </div>
   );
