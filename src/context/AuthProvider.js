@@ -1,34 +1,57 @@
-import { createContext, useMemo, useState } from "react";
+import { createContext, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   console.log("Call AuthProvider");
-  const [user, setUser] = useState({});
+  const [loggedInUser, setLoggedInUser] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
 
   const login = (data) => {
-    setUser(data);
+    const userObj = {
+      id: data.id,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      username: data.username,
+      email: data.email,
+      profilePicture: data.profilePicture,
+      country: data.country,
+      healthProvider: data.healthProvider,
+      medicalProviderTypeId: data.medicalProviderTypeId,
+      medicalSpecialty: data.medicalSpecialty,
+      medicalSettingId: data.medicalSettingId,
+    };
+    setLoggedInUser(userObj);
   };
 
   const logout = () => {
     window.localStorage.removeItem("token");
-    setUser({});
+    setLoggedInUser(null);
     navigate("/login", { replace: true });
   };
 
-  const value = useMemo(
-    () => ({
-      user,
-      login,
-      logout,
-    }),
-    [user]
-  );
+  // const value = useMemo(
+  //   () => ({
+  //     loggedInUser,
+  //     login,
+  //     logout,
+  //   }),
+  //   [user]
+  // );
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider
+      value={{
+        loggedInUser,
+        login,
+        logout,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export default AuthContext;

@@ -11,7 +11,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import React from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import LogoImg from "../../assets/images/logo.svg";
 import ElevateAppBar from "./ElevateAppBar";
 import ProfileMenu from "./ProfileMenu";
@@ -58,6 +58,7 @@ const pages = [
 
 const NavBar = ({ btnLabel, btnPath }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -93,6 +94,7 @@ const NavBar = ({ btnLabel, btnPath }) => {
         >
           <MenuIcon />
         </IconButton>
+        {/* Mobile menu item */}
         <Menu
           id="menu-appbar"
           anchorEl={anchorElNav}
@@ -112,7 +114,7 @@ const NavBar = ({ btnLabel, btnPath }) => {
           }}
         >
           {pages.map((page, index) => (
-            <MenuItem key={index} onClick={handleCloseNavMenu}>
+            <MenuItem key={index} onClick={() => navigate(page.path)}>
               <Typography textAlign="center">{page.name}</Typography>
             </MenuItem>
           ))}

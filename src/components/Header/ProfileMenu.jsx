@@ -1,6 +1,5 @@
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import LogoutIcon from "@mui/icons-material/Logout";
-import Settings from "@mui/icons-material/Settings";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
@@ -19,42 +18,35 @@ const ProfileMenu = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { loggedInUser, logout } = useAuth();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   const handleLogout = () => {
-    window.localStorage.removeItem("token");
-    navigate("/");
+    logout();
   };
-  console.log("ProfileMenu: ", user);
+
+  // console.log("ProfileMenu: ", loggedInUser);
+
   return (
     <>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
-        {/* <Typography sx={{ minWidth: 100 }}>Contact</Typography> */}
-
-        <Tooltip title="Account">
+        <Tooltip title="Profile">
           <IconButton
             onClick={handleClick}
             size="small"
             color="inherit"
             sx={{ ml: 2, p: 1, backgroundColor: "#f3f6f9" }}
           >
-            {/* <Avatar
-                            alt="Biplob Hasan Nibir"
-                            src="https://mui.com/static/images/avatar/1.jpg"
-                            sx={{ width: 32, height: 32 }}
-                        />{' '} */}
             <ArrowDropDownIcon />
           </IconButton>
         </Tooltip>
-        {/* <Typography variant="subtitle2" component="div" sx={{ fontWeight: 500, ml: 0.5 }}>
-                    Biplob Hasan Nibir
-                </Typography> */}
       </Box>
       <Menu
         anchorEl={anchorEl}
@@ -90,28 +82,32 @@ const ProfileMenu = () => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem>
-          <Avatar alt="Biplob Hasan Nibir" src={UsrAvtr} />
+        <MenuItem onClick={() => navigate(`/user/${loggedInUser?.username}`)}>
+          <Avatar
+            alt={loggedInUser?.firstName + " " + loggedInUser?.lastName}
+            src={loggedInUser?.profilePicture || UsrAvtr}
+          />
           <Box>
             <Typography
               variant="subtitle1"
               component="div"
               sx={{ fontWeight: "bold" }}
             >
-              Biplob Hasan Nibir
+              {loggedInUser?.firstName + " " + loggedInUser?.lastName ||
+                "loggedInUser Name"}
             </Typography>
             <Typography variant="body2" gutterBottom>
               See your profile
             </Typography>
           </Box>
         </MenuItem>
-        <Divider />
+        {/* <Divider />
         <MenuItem>
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>
           Settings
-        </MenuItem>
+        </MenuItem> */}
         <Divider />
         <MenuItem onClick={() => handleLogout()}>
           <ListItemIcon>
