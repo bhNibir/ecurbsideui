@@ -156,6 +156,7 @@ export const GET_ME = gql`
     me {
       id
       username
+      email
       profilePicture
       firstName
       lastName

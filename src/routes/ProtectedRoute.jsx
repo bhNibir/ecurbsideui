@@ -7,16 +7,16 @@ import useAuth from "./../hooks/useAuth";
 const ProtectedRoute = ({ children }) => {
   const location = useLocation();
   const authLogin = localStorage.getItem("token");
-  const { user, login } = useAuth();
+  const { loggedInUser, login } = useAuth();
   const outlet = useOutlet();
 
   const { loading: meLoading, error: meError } = useQuery(GET_ME, {
     onCompleted: (data) => {
       login(data.me);
-      console.log("Me: ", data.me);
+      // console.log("Me: ", data.me);
     },
     onError: (error) => {
-      console.log(error.code);
+      console.log("GET_ME Query Error ", error);
     },
   });
 
