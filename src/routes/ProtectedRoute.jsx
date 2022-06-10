@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { Navigate, useLocation, useOutlet } from "react-router-dom";
+import LoadingIndicator from "../components/common/LoadingIndicator";
 import { GET_ME } from "../graphQL/queries";
 import useAuth from "./../hooks/useAuth";
 
@@ -14,14 +15,14 @@ const ProtectedRoute = ({ children }) => {
       login(data.me);
       console.log("Me: ", data.me);
     },
-    // onError: (error) => {
-    //   window.localStorage.removeItem("token");
-    //   navigate("/");
-    //   console.log(error.code);
-    // },
+    onError: (error) => {
+      console.log(error.code);
+    },
   });
 
-  console.log("ProtectedRoute: ", user);
+  if (meLoading) {
+    return <LoadingIndicator />;
+  }
   if (!authLogin) {
     return <Navigate to="/login" state={{ from: location }} replace={true} />;
   }

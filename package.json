@@ -23,6 +23,7 @@
     "react-hook-form": "^7.26.1",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
+    "spinners-react": "^1.0.7",
     "web-vitals": "^2.1.0",
     "yup": "^0.32.11"
   },

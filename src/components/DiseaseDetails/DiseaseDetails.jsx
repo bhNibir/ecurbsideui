@@ -1,14 +1,14 @@
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { Chip, Grid, Paper, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React from "react";
 import { Link as RouterLink } from "react-router-dom";
+import LoadingIndicator from "../common/LoadingIndicator";
 import TreatmentList from "./../TreatmentList/TreatmentList";
 import DiseaseDetailsSpecialty from "./DiseaseDetailsSpecialty";
 import DiseaseDetailsUser from "./DiseaseDetailsUser";
 
 const DiseaseDetails = ({ loading, error, data }) => {
-  if (loading) return "Loading...";
+  if (loading) return <LoadingIndicator />;
   if (error) return `Submission error! ${error.message}`;
   console.log(data.diseaseById);
   const {
