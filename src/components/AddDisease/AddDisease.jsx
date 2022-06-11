@@ -1,7 +1,6 @@
 import { useMutation } from "@apollo/client";
 import { Box, Typography } from "@mui/material";
 import { useSnackbar } from "notistack";
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { CREATE_DISEASE } from "../../graphQL/mutations";
 import { GET_DISEASES } from "../../graphQL/queries";
@@ -9,7 +8,7 @@ import SubmitPaper from "../StyledComponents/SubmitPaper";
 import AddDiseasesForm from "./AddDiseasesForm";
 
 const AddDisease = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
   const [register, { data, loading: mutationLoading, error: mutationError }] =

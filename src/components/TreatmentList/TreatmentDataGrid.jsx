@@ -1,5 +1,5 @@
 import { DataGrid } from "@mui/x-data-grid";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CustomPagination from "../StyledComponents/CustomPagination";
 import TreatmentLoadingOverlay from "./TreatmentLoadingOverlay";
@@ -13,7 +13,7 @@ function escapeRegExp(value) {
 const TreatmentDataGrid = ({ loading, error, treatments, dataColumns }) => {
   const [searchText, setSearchText] = useState("");
   const [rows, setRows] = useState([]);
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const requestSearch = (searchValue) => {
     setSearchText(searchValue);

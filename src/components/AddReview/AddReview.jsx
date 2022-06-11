@@ -2,12 +2,13 @@ import { useMutation } from "@apollo/client";
 import { Paper, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useSnackbar } from "notistack";
-import React from "react";
+import { useNavigate } from "react-router-dom";
 import { CREATE_REVIEW } from "../../graphQL/mutations";
 import { GET_DISEASE_BY_ID, GET_TREATMENT_BY_ID } from "../../graphQL/queries";
 import AddReviewForm from "./AddReviewForm";
 
-const AddReview = ({ diseaseId, treatmentId }) => {
+const AddReview = ({ diseaseId, treatmentId, gotoTreatment = false }) => {
+  const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
   const [register, { data, loading: mutationLoading, error: mutationError }] =
@@ -20,6 +21,10 @@ const AddReview = ({ diseaseId, treatmentId }) => {
         enqueueSnackbar("Successfully add a Review!", {
           variant: "success",
         });
+
+        if (gotoTreatment) {
+          navigate(`/treatment/${treatmentId}`);
+        }
       },
     });
 

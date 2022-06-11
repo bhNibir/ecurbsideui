@@ -1,3 +1,9 @@
+/**
+ *
+ * @param {User Object} userObj
+ * @returns capitalize Name
+ */
+
 export const formateName = (userObj) => {
   const { firstName, lastName, username } = userObj;
   let name = "";
@@ -6,17 +12,19 @@ export const formateName = (userObj) => {
     name = firstName + " " + lastName;
   } else if (firstName) {
     name = firstName;
-  } else {
+  } else if (username) {
     name = username;
+  } else {
+    return name;
   }
 
   const arr = name.split(" ");
 
-  for (var i = 0; i < arr.length; i++) {
-    arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
-  }
+  const newArr = arr.map(
+    (item) => item.charAt(0).toUpperCase() + item.slice(1)
+  );
 
-  const capitalizeName = arr.join(" ");
+  const capitalizeName = newArr.join(" ");
 
   return capitalizeName;
 };

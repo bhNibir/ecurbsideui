@@ -18,7 +18,11 @@ export const AddReviewPage = () => {
   return (
     <>
       <MainLayout>
-        <AddReview diseaseId={disease.id} treatmentId={treatmentId} />
+        <AddReview
+          diseaseId={disease.id}
+          treatmentId={treatmentId}
+          gotoTreatment={true}
+        />
       </MainLayout>
     </>
   );
