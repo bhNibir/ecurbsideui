@@ -3,18 +3,21 @@ import { Box, Typography } from "@mui/material";
 import { useSnackbar } from "notistack";
 import { useNavigate, useParams } from "react-router-dom";
 import { CREATE_TREATMENT } from "../../graphQL/mutations";
+import { GET_DISEASE_BY_ID } from "../../graphQL/queries";
 import SubmitPaper from "../StyledComponents/SubmitPaper";
 import AddTreatmentForm from "./AddTreatmentForm";
 
 const AddTreatment = () => {
-  let { id } = useParams();
+  let { id: diseaseID } = useParams();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
   const [register, { data, loading: mutationLoading }] = useMutation(
     CREATE_TREATMENT,
     {
-      // refetchQueries: [{ query: GET_DISEASE_BY_ID }],
+      refetchQueries: [
+        { query: GET_DISEASE_BY_ID, variables: { id: diseaseID } },
+      ],
       onCompleted: (data) => {
         enqueueSnackbar("Successfully add a new Treatment!", {
           variant: "success",
@@ -33,7 +36,7 @@ const AddTreatment = () => {
   console.log("data", data);
 
   const onSubmit = (treatmentData) => {
-    treatmentData.diseaseId = id;
+    treatmentData.diseaseId = diseaseID;
     register({ variables: treatmentData });
     console.log("Add Treatment", treatmentData);
   };
