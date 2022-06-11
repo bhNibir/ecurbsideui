@@ -1,11 +1,24 @@
 export const formateName = (userObj) => {
   const { firstName, lastName, username } = userObj;
+  let name = "";
+
   if (firstName && lastName) {
-    return firstName + " " + lastName;
+    name = firstName + " " + lastName;
   } else if (firstName) {
-    return firstName;
+    name = firstName;
+  } else {
+    name = username;
   }
-  return username;
+
+  const arr = name.split(" ");
+
+  for (var i = 0; i < arr.length; i++) {
+    arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
+  }
+
+  const capitalizeName = arr.join(" ");
+
+  return capitalizeName;
 };
 
 export const stringToColor = (string) => {

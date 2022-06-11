@@ -13,6 +13,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import UsrAvtr from "../../assets/images/users/user-round.svg";
 import useAuth from "./../../hooks/useAuth";
+import { formateName } from "./../../utils/formatting";
 
 const ProfileMenu = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -20,12 +21,18 @@ const ProfileMenu = () => {
   const navigate = useNavigate();
   const { loggedInUser, logout } = useAuth();
 
+  const { firstName, lastName, username, profilePicture } = loggedInUser;
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleProfile = () => {
+    username && navigate(`/user/${username}`);
   };
 
   const handleLogout = () => {
@@ -82,10 +89,12 @@ const ProfileMenu = () => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={() => navigate(`/user/${loggedInUser?.username}`)}>
+        <MenuItem onClick={handleProfile}>
           <Avatar
-            alt={loggedInUser?.firstName + " " + loggedInUser?.lastName}
-            src={loggedInUser?.profilePicture || UsrAvtr}
+            alt={
+              firstName && lastName ? formateName(loggedInUser) : "User Name"
+            }
+            src={profilePicture ? profilePicture : UsrAvtr}
           />
           <Box>
             <Typography
@@ -93,8 +102,7 @@ const ProfileMenu = () => {
               component="div"
               sx={{ fontWeight: "bold" }}
             >
-              {loggedInUser?.firstName + " " + loggedInUser?.lastName ||
-                "loggedInUser Name"}
+              {firstName && lastName ? formateName(loggedInUser) : "User Name"}
             </Typography>
             <Typography variant="body2" gutterBottom>
               See your profile

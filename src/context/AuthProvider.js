@@ -5,7 +5,7 @@ const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   console.log("Call AuthProvider");
-  const [loggedInUser, setLoggedInUser] = useState(null);
+  const [loggedInUser, setLoggedInUser] = useState({});
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     window.localStorage.removeItem("token");
-    setLoggedInUser(null);
+    setLoggedInUser({});
     navigate("/login", { replace: true });
   };
 
