@@ -22,8 +22,6 @@ const StyledRating = styled(Rating)({
 
 const RatingScale = ({ value, onChange, error }) => {
   const [hover, setHover] = React.useState(-1);
-  console.log("RatingError", error);
-  console.log("hover", hover);
 
   return (
     <Box
@@ -47,7 +45,7 @@ const RatingScale = ({ value, onChange, error }) => {
       {value !== null && (
         <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
       )}
-      {hover === -1 && error?.message && (
+      {hover === -1 && error !== null && (
         <FormHelperText error={true}>{error?.message}</FormHelperText>
       )}
     </Box>

@@ -9,7 +9,10 @@ import RatingScale from "./RatingScale";
 const schema = yup
   .object()
   .shape({
-    rating: yup.string().required("Rating is required"),
+    rating: yup
+      .number()
+      .typeError("Rating is required")
+      .required("Rating is required"),
   })
   .required();
 
