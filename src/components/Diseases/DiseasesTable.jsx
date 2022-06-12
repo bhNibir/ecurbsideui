@@ -1,5 +1,5 @@
 import { DataGrid } from "@mui/x-data-grid";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CustomPagination from "./../StyledComponents/CustomPagination";
 import DiseaseAvatar from "./DiseaseAvatar";
@@ -74,7 +74,7 @@ const DiseasesTable = ({ data, loading }) => {
   console.log(data);
   const [searchText, setSearchText] = useState("");
   const [rows, setRows] = useState([]);
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const requestSearch = (searchValue) => {
     setSearchText(searchValue);

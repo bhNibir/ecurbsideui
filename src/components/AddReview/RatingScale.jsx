@@ -1,5 +1,6 @@
 import StarOutlineRoundedIcon from "@mui/icons-material/StarOutlineRounded";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
+import { FormHelperText } from "@mui/material";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import { styled } from "@mui/material/styles";
@@ -21,6 +22,8 @@ const StyledRating = styled(Rating)({
 
 const RatingScale = ({ value, onChange, error }) => {
   const [hover, setHover] = React.useState(-1);
+  console.log("RatingError", error);
+  console.log("hover", hover);
 
   return (
     <Box
@@ -43,6 +46,9 @@ const RatingScale = ({ value, onChange, error }) => {
       />
       {value !== null && (
         <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
+      )}
+      {hover === -1 && error?.message && (
+        <FormHelperText error={true}>{error?.message}</FormHelperText>
       )}
     </Box>
   );

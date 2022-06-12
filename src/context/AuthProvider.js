@@ -5,7 +5,7 @@ const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   console.log("Call AuthProvider");
-  const [loggedInUser, setLoggedInUser] = useState(null);
+  const [loggedInUser, setLoggedInUser] = useState({});
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -19,16 +19,16 @@ export const AuthProvider = ({ children }) => {
       profilePicture: data.profilePicture,
       country: data.country,
       healthProvider: data.healthProvider,
-      medicalProviderTypeId: data.medicalProviderTypeId,
+      medicalProviderType: data.medicalProviderType,
       medicalSpecialty: data.medicalSpecialty,
-      medicalSettingId: data.medicalSettingId,
+      medicalSetting: data.medicalSetting,
     };
     setLoggedInUser(userObj);
   };
 
   const logout = () => {
     window.localStorage.removeItem("token");
-    setLoggedInUser(null);
+    setLoggedInUser({});
     navigate("/login", { replace: true });
   };
 
