@@ -1,12 +1,22 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import SaveIcon from "@mui/icons-material/Save";
 import { LoadingButton } from "@mui/lab";
 import { Box, Grid, TextField, Typography } from "@mui/material";
-import React from "react";
 import { Controller, useForm } from "react-hook-form";
+import * as yup from "yup";
 import RatingScale from "./RatingScale";
 
+const schema = yup
+  .object()
+  .shape({
+    rating: yup.string().required("Rating is required"),
+  })
+  .required();
+
 const AddReviewForm = ({ onSubmit, mutationLoading }) => {
-  const { register, setValue, handleSubmit, control } = useForm();
+  const { register, setValue, handleSubmit, control } = useForm({
+    resolver: yupResolver(schema),
+  });
 
   return (
     <>
@@ -23,7 +33,7 @@ const AddReviewForm = ({ onSubmit, mutationLoading }) => {
               }) => (
                 <RatingScale onChange={onChange} value={value} error={error} />
               )}
-              rules={{ required: "Rating Name required" }}
+              rules={{ required: "Rating required" }}
             />
           </Grid>
 
@@ -53,7 +63,7 @@ const AddReviewForm = ({ onSubmit, mutationLoading }) => {
                   type="text"
                 />
               )}
-              rules={{ required: "Comments required" }}
+              // rules={{ required: "Comments required" }}
             />
           </Grid>
         </Grid>
