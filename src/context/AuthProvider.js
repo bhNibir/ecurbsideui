@@ -19,9 +19,9 @@ export const AuthProvider = ({ children }) => {
       profilePicture: data.profilePicture,
       country: data.country,
       healthProvider: data.healthProvider,
-      medicalProviderTypeId: data.medicalProviderTypeId,
+      medicalProviderType: data.medicalProviderType,
       medicalSpecialty: data.medicalSpecialty,
-      medicalSettingId: data.medicalSettingId,
+      medicalSetting: data.medicalSetting,
     };
     setLoggedInUser(userObj);
   };

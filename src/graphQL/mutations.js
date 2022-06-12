@@ -7,12 +7,11 @@ export const USER_REGISTRATION = gql`
     $firstName: String!
     $lastName: String!
     $password: String!
-    # $password2: String!
     $country: String!
-    $medicalProviderTypeId: String!
     $healthProvider: Boolean!
-    $medicalSpecialty: [String]!
-    $medicalSettingId: String!
+    $medicalProviderType: ID
+    $medicalSpecialty: [ID]
+    $medicalSetting: ID
   ) {
     userRegistration(
       email: $email
@@ -22,10 +21,10 @@ export const USER_REGISTRATION = gql`
       country: $country
       password1: $password
       password2: $password
-      medicalSettingId: $medicalSettingId
+      medicalSetting: $medicalSetting
       medicalSpecialty: $medicalSpecialty
       healthProvider: $healthProvider
-      medicalProviderTypeId: $medicalProviderTypeId
+      medicalProviderType: $medicalProviderType
     ) {
       success
       errors

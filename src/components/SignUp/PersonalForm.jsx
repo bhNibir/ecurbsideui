@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Box, Button, Grid, TextField } from "@mui/material";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 import {
@@ -22,7 +22,7 @@ const schema = yup
     lastName: yup.string().required("Last Name is required"),
     country: yup.string().required("Country is required"),
     healthProvider: yup.boolean().required("Health provider is required"),
-    medicalProviderTypeId: yup.string().when("healthProvider", {
+    medicalProviderType: yup.string().when("healthProvider", {
       is: true,
       then: yup.string().required("Medical provider type is required"),
     }),
@@ -35,7 +35,7 @@ const schema = yup
         .required("Medical specialty is required"),
     }),
 
-    medicalSettingId: yup.string().when("healthProvider", {
+    medicalSetting: yup.string().when("healthProvider", {
       is: true,
       then: yup.string().required("Medical setting is required"),
     }),
@@ -47,9 +47,9 @@ const defaultValues = {
   lastName: "",
   country: "",
   healthProvider: true,
-  medicalProviderTypeId: "",
+  medicalProviderType: "",
   medicalSpecialty: [],
-  medicalSettingId: "",
+  medicalSetting: "",
 };
 
 const PersonalForm = ({
@@ -108,9 +108,9 @@ const PersonalForm = ({
       lastName: inputData?.lastName,
       country: inputData?.country,
       healthProvider: Boolean(inputData?.healthProvider),
-      medicalProviderTypeId: inputData?.medicalProviderTypeId,
+      medicalProviderType: inputData?.medicalProviderType,
       medicalSpecialty: inputData?.medicalSpecialty,
-      medicalSettingId: inputData?.medicalSettingId,
+      medicalSetting: inputData?.medicalSetting,
     };
 
     setUserData(() => userObj);
@@ -214,7 +214,7 @@ const PersonalForm = ({
             <>
               <SingleSelect
                 control={control}
-                name={"medicalProviderTypeId"}
+                name={"medicalProviderType"}
                 loading={medicalProviderLoading}
                 error={medicalProviderError}
                 data={MedicalProviderData}
@@ -235,7 +235,7 @@ const PersonalForm = ({
               />
               <SingleSelect
                 control={control}
-                name={"medicalSettingId"}
+                name={"medicalSetting"}
                 loading={MedicalSettingLoading}
                 error={MedicalSettingError}
                 data={MedicalSettingData}
