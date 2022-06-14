@@ -40,6 +40,31 @@ export const VERIFY_ACCOUNT = gql`
     }
   }
 `;
+export const SEND_PASSWORD_RESET_EMAIL = gql`
+  mutation SendPasswordResetEmail($email: String!) {
+    sendPasswordResetEmail(email: $email) {
+      success
+      errors
+    }
+  }
+`;
+
+export const PASSWORD_RESET = gql`
+  mutation PasswordReset(
+    $token: String!
+    $newPassword1: String!
+    $newPassword2: String!
+  ) {
+    passwordReset(
+      token: $token
+      newPassword1: $newPassword1
+      newPassword2: $newPassword2
+    ) {
+      success
+      errors
+    }
+  }
+`;
 
 export const AUTH_TOKEN = gql`
   mutation TokenAuth($email: String!, $password: String!) {
