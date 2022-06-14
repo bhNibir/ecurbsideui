@@ -7,7 +7,12 @@ import { CREATE_REVIEW } from "../../graphQL/mutations";
 import { GET_DISEASE_BY_ID, GET_TREATMENT_BY_ID } from "../../graphQL/queries";
 import AddReviewForm from "./AddReviewForm";
 
-const AddReview = ({ diseaseId, treatmentId, gotoTreatment = false }) => {
+const AddReview = ({
+  diseaseId,
+  treatmentId,
+  treatmentName,
+  gotoTreatment = false,
+}) => {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -18,13 +23,27 @@ const AddReview = ({ diseaseId, treatmentId, gotoTreatment = false }) => {
         { query: GET_DISEASE_BY_ID, variables: { id: diseaseId } },
       ],
       onCompleted: (data) => {
-        enqueueSnackbar("Successfully add a Review!", {
+        console.log(data);
+        enqueueSnackbar(`${treatmentName}, Successfully Rated! `, {
           variant: "success",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
         });
 
         if (gotoTreatment) {
           navigate(`/treatment/${treatmentId}`);
         }
+      },
+      onError: (error) => {
+        enqueueSnackbar(error.message, {
+          variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        });
       },
     });
 

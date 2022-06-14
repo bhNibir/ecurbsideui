@@ -15,10 +15,26 @@ const AddDisease = () => {
     useMutation(CREATE_DISEASE, {
       refetchQueries: [{ query: GET_DISEASES }],
       onCompleted: (data) => {
-        enqueueSnackbar("Successfully add a new Disease!", {
-          variant: "success",
-        });
+        enqueueSnackbar(
+          ` ${data.createDisease.disease.diseaseName}, Successfully added!`,
+          {
+            anchorOrigin: {
+              vertical: "top",
+              horizontal: "right",
+            },
+            variant: "success",
+          }
+        );
         navigate(`/disease/${data.createDisease.disease.id}`);
+      },
+      onError: (error) => {
+        enqueueSnackbar(error.message, {
+          variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        });
       },
     });
 
