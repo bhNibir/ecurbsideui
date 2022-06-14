@@ -25,10 +25,7 @@ const ProtectedRoute = ({ children }) => {
     },
     onError: (error) => {
       console.log("GET_ME Query Error ", error);
-      if (
-        error.message.match("Login Required") ||
-        error.message.match("Authorization Required")
-      ) {
+      if (error.message.match("Authorization Required")) {
         enqueueSnackbar(`${error.message} Please Login again.`, {
           variant: "error",
           anchorOrigin: {
@@ -38,14 +35,6 @@ const ProtectedRoute = ({ children }) => {
         });
         logout();
         navigate("/login");
-      } else {
-        enqueueSnackbar(`${error.message}`, {
-          variant: "error",
-          anchorOrigin: {
-            vertical: "top",
-            horizontal: "right",
-          },
-        });
       }
     },
   });
