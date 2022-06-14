@@ -4,13 +4,13 @@ import AddDiseasePage from "../pages/DiseasePages/AddDiseasePage";
 import HomePage from "../pages/HomePage/HomePage";
 import LoginPage from "../pages/LoginPage/LoginPage";
 import Page404 from "../pages/NotFoundPage/Page404";
-import ForgetPasswordPage from "../pages/SignUpPage/ForgetPasswordPage";
-import ResetPasswordPage from "../pages/SignUpPage/ResetPasswordPage";
+import ForgetPasswordPage from "../pages/PasswordResetPages/ForgetPasswordPage";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";
 import AddTreatmentPage from "../pages/TreatmentPages/AddTreatmentPage";
 import DiseaseTreatmentListPage from "../pages/TreatmentPages/DiseaseTreatmentListPage";
 import TreatmentDetailPage from "../pages/TreatmentPages/TreatmentDetailPage";
 import VerifyAccountPage from "../pages/VerifyAccountPage/VerifyAccountPage";
+import ResetPasswordPage from "./../pages/PasswordResetPages/ResetPasswordPage";
 import ProfilePage from "./../pages/ProfilePages/ProfilePage";
 import { AddReviewPage } from "./../pages/ReviewPage/AddReviewPage";
 import ProtectedRoute from "./ProtectedRoute";
@@ -21,7 +21,7 @@ const AllRoutes = () => (
     <Route path="/login" element={<LoginPage />} />
     <Route path="/sign-up" element={<SignUpPage />} />
     <Route path="/activate/:token" element={<VerifyAccountPage />} />
-    <Route path="/reset-password" element={<ResetPasswordPage />} />
+    <Route path="/password-reset/:token" element={<ResetPasswordPage />} />
     <Route path="/forget-password" element={<ForgetPasswordPage />} />
 
     <Route element={<ProtectedRoute />}>

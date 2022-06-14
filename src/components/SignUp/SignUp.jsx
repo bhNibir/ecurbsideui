@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/client";
 import { Box, Divider, Link, Typography } from "@mui/material";
 import { useSnackbar } from "notistack";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import ThankYouMessage from "../../components/AlertMessages/ThankYouMessage";
 import FormPaper from "../../components/StyledComponents/FormPaper";
@@ -32,6 +32,20 @@ const SignUp = () => {
   const [submitUserData, { data, loading: mutationLoading }] = useMutation(
     USER_REGISTRATION,
     {
+      onCompleted: (data) => {
+        const { success, errors } = data.userRegistration;
+        // set server validation error
+        if (success) {
+          setShowThankYou(success);
+        } else {
+          setValidationError(errors);
+          console.log(errors);
+
+          for (const [key, value] of Object.entries(errors)) {
+            value.map(({ message }) => handleShowErrorMessage(key, message));
+          }
+        }
+      },
       onError: (error) => {
         enqueueSnackbar(error.message, {
           variant: "error",
@@ -43,26 +57,6 @@ const SignUp = () => {
       },
     }
   );
-
-  useEffect(() => {
-    if (data) {
-      // set server validation error
-      if (data.userRegistration.errors) {
-        setValidationError(data.userRegistration.errors);
-        console.log(data.userRegistration.errors);
-
-        for (const [key, value] of Object.entries(
-          data.userRegistration.errors
-        )) {
-          value.map(({ message }) => handleShowErrorMessage(key, message));
-        }
-      }
-      if (data.userRegistration.success) {
-        setShowThankYou(data.userRegistration.success);
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, mutationLoading]);
 
   const handleShowErrorMessage = (name, message) => {
     enqueueSnackbar(message, {

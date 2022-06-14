@@ -1,10 +1,10 @@
-import React from "react";
 import LoginPageLayout from "../../layouts/LoginPageLayout";
+import ForgetPassEmail from "./../../components/PasswordReset/ForgetPassEmail";
 
 const ForgetPasswordPage = () => (
   <>
     <LoginPageLayout>
-      <p>Forget Page</p>
+      <ForgetPassEmail />
     </LoginPageLayout>
   </>
 );

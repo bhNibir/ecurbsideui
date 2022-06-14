@@ -115,6 +115,7 @@ export const GET_TREATMENT_BY_ID = gql`
       descriptions
       disease {
         id
+        diseaseName
       }
       createBy {
         id
