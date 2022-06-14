@@ -92,6 +92,7 @@ export const CREATE_TREATMENT = gql`
     ) {
       treatment {
         id
+        treatmentName
       }
     }
   }

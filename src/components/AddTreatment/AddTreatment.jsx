@@ -19,14 +19,26 @@ const AddTreatment = () => {
         { query: GET_DISEASE_BY_ID, variables: { id: diseaseID } },
       ],
       onCompleted: (data) => {
-        enqueueSnackbar("Successfully add a new Treatment!", {
-          variant: "success",
-        });
+        console.log("Treatment Data: ", data);
+        enqueueSnackbar(
+          `${data.createTreatment?.treatment.treatmentName}, Successfully added!`,
+          {
+            anchorOrigin: {
+              vertical: "top",
+              horizontal: "right",
+            },
+            variant: "success",
+          }
+        );
         navigate(`/treatment/${data.createTreatment.treatment.id}`);
       },
       onError: (error) => {
-        enqueueSnackbar("Successfully add a new Treatment!", {
+        enqueueSnackbar(error.message, {
           variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
         });
       },
     }

@@ -14,13 +14,14 @@ export const AddReviewPage = () => {
 
   if (loading) return <LoadingIndicator />;
   if (error) return `Submission error! ${error.message}`;
-  const { id: treatmentId, disease } = data.treatmentById;
+  const { id: treatmentId, treatmentName, disease } = data.treatmentById;
   return (
     <>
       <MainLayout>
         <AddReview
           diseaseId={disease.id}
           treatmentId={treatmentId}
+          treatmentName={treatmentName}
           gotoTreatment={true}
         />
       </MainLayout>

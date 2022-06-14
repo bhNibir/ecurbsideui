@@ -33,8 +33,12 @@ const SignUp = () => {
     USER_REGISTRATION,
     {
       onError: (error) => {
-        enqueueSnackbar(`Submission error! ${error.message}`, {
+        enqueueSnackbar(error.message, {
           variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
         });
       },
     }
@@ -61,7 +65,7 @@ const SignUp = () => {
   }, [data, mutationLoading]);
 
   const handleShowErrorMessage = (name, message) => {
-    enqueueSnackbar(`${name}: ${message}`, {
+    enqueueSnackbar(message, {
       anchorOrigin: {
         vertical: "top",
         horizontal: "right",
