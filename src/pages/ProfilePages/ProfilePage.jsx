@@ -1,10 +1,10 @@
-import React from "react";
+import Profile from "../../components/Profile/Profile";
 import { MainLayout } from "../../layouts/MainLayout";
 
 const ProfilePage = () => (
   <>
     <MainLayout>
-      <p>Profile Page</p>
+      <Profile />
     </MainLayout>
   </>
 );

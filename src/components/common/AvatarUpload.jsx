@@ -7,7 +7,7 @@ const Input = styled("input")({
   display: "none",
 });
 
-const AvatarUpload = ({ control }) => {
+const AvatarUpload = () => {
   const [image, _setImage] = useState(null);
   const inputFileRef = createRef(null);
 
@@ -53,7 +53,7 @@ const AvatarUpload = ({ control }) => {
           <label htmlFor="icon-button-file">
             <Controller
               name="profilePicture"
-              control={control}
+              // control={control}
               defaultValue=""
               render={({ field }) => (
                 <Input

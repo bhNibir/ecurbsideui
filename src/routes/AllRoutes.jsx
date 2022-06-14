@@ -1,12 +1,9 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
 import AboutPage from "../pages/AboutPage";
 import AddDiseasePage from "../pages/DiseasePages/AddDiseasePage";
-import FavoritesPage from "../pages/FavoritesPages/FavoritesPage";
 import HomePage from "../pages/HomePage/HomePage";
 import LoginPage from "../pages/LoginPage/LoginPage";
 import Page404 from "../pages/NotFoundPage/Page404";
-import SearchResultPage from "../pages/SearchPages/SearchResultPage";
 import ForgetPasswordPage from "../pages/SignUpPage/ForgetPasswordPage";
 import ResetPasswordPage from "../pages/SignUpPage/ResetPasswordPage";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";
@@ -36,8 +33,10 @@ const AllRoutes = () => (
       <Route path="/disease/:id/add-treatment" element={<AddTreatmentPage />} />
       <Route path="/treatment/:id" element={<TreatmentDetailPage />} />
       <Route path="/add-review/:id" element={<AddReviewPage />} />
-      <Route path="/search" element={<SearchResultPage />} />
-      <Route path="/favorites" element={<FavoritesPage />} />
+      {/* <Route path="/search" element={<SearchResultPage />} /> */}
+      <Route path="/search" element={<HomePage />} />
+      {/* <Route path="/favorites" element={<FavoritesPage />} /> */}
+      <Route path="/favorites" element={<HomePage />} />
       <Route path="/user/:username" element={<ProfilePage />} />
     </Route>
     <Route path="/*" element={<Page404 />} />

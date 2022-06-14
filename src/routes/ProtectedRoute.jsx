@@ -1,13 +1,21 @@
 import { useQuery } from "@apollo/client";
-import { Navigate, useLocation, useOutlet } from "react-router-dom";
+import { useSnackbar } from "notistack";
+import {
+  Navigate,
+  useLocation,
+  useNavigate,
+  useOutlet,
+} from "react-router-dom";
 import LoadingIndicator from "../components/common/LoadingIndicator";
 import { GET_ME } from "../graphQL/queries";
 import useAuth from "./../hooks/useAuth";
 
 const ProtectedRoute = ({ children }) => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
   const authLogin = localStorage.getItem("token");
-  const { loggedInUser, login } = useAuth();
+  const { loggedInUser, login, logout } = useAuth();
   const outlet = useOutlet();
 
   const { loading: meLoading, error: meError } = useQuery(GET_ME, {
@@ -17,6 +25,28 @@ const ProtectedRoute = ({ children }) => {
     },
     onError: (error) => {
       console.log("GET_ME Query Error ", error);
+      if (
+        error.message.match("Login Required") ||
+        error.message.match("Authorization Required")
+      ) {
+        enqueueSnackbar(`${error.message} Please Login again.`, {
+          variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        });
+        logout();
+        navigate("/login");
+      } else {
+        enqueueSnackbar(`${error.message}`, {
+          variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        });
+      }
     },
   });
 
