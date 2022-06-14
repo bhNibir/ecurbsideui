@@ -1,4 +1,4 @@
-import { Grid, Paper, Stack, Typography } from "@mui/material";
+import { Chip, Grid, Paper, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import AddReview from "../AddReview/AddReview";
 import RatingView from "./../RatingView/RatingView";
@@ -30,6 +30,21 @@ const TreatmentDetails = ({ data }) => {
                 <Typography variant="h3" fontWeight={"400"} gutterBottom>
                   {treatmentName ? treatmentName : "treatment Name"}
                 </Typography>
+              </Box>
+              <Box>
+                <Chip
+                  variant="outlined"
+                  color={"secondary"}
+                  sx={"string"}
+                  label={
+                    <Typography variant="subtitle2" color="secondary">
+                      Disease:{" "}
+                      {disease.diseaseName
+                        ? disease.diseaseName
+                        : "Disease Name"}
+                    </Typography>
+                  }
+                />
               </Box>
               <Box marginBottom={{ md: 1, sm: 2, xs: 3 }}>
                 <Stack
@@ -67,7 +82,11 @@ const TreatmentDetails = ({ data }) => {
           </Paper>
         </Grid>
         <Grid item xs={12} md={5}>
-          <AddReview diseaseId={disease.id} treatmentId={id} treatmentName={treatmentName} />
+          <AddReview
+            diseaseId={disease.id}
+            treatmentId={id}
+            treatmentName={treatmentName}
+          />
         </Grid>
         <Grid item xs={12} md={7}>
           <Paper sx={{ borderRadius: 5 }} elevation={3}>
