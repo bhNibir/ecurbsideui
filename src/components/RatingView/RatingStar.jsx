@@ -2,7 +2,6 @@ import StarOutlineRoundedIcon from "@mui/icons-material/StarOutlineRounded";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import Rating from "@mui/material/Rating";
 import { styled } from "@mui/material/styles";
-import React from "react";
 
 const StyledRating = styled(Rating)({
   "& .MuiRating-iconFilled": {
@@ -21,7 +20,7 @@ const RatingStar = ({ id, value }) => {
         icon={<StarRoundedIcon fontSize="inherit" />}
         emptyIcon={<StarOutlineRoundedIcon fontSize="inherit" />}
         sx={{
-          fontSize: "1rem",
+          fontSize: "1.2rem",
         }}
         readOnly
       />

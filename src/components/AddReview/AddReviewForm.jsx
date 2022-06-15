@@ -9,10 +9,7 @@ import RatingScale from "./RatingScale";
 const schema = yup
   .object()
   .shape({
-    rating: yup
-      .number()
-      .typeError("Rating is required")
-      .required("Rating is required"),
+    rating: yup.number().typeError("Required").required("Required"),
   })
   .required();
 
@@ -79,6 +76,7 @@ const AddReviewForm = ({ onSubmit, mutationLoading }) => {
               color="primary"
               variant="contained"
               startIcon={<SaveIcon />}
+              size="small"
             >
               <Typography>
                 <Box component="span" fontWeight={600}>

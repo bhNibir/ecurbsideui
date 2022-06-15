@@ -1,4 +1,4 @@
-import { Chip, Grid, Paper, Stack, Typography } from "@mui/material";
+import { Card, Chip, Grid, Paper, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import AddReview from "../AddReview/AddReview";
 import RatingView from "./../RatingView/RatingView";
@@ -22,12 +22,12 @@ const TreatmentDetails = ({ data }) => {
   console.log("treatmentById", data);
   return (
     <>
-      <Grid container spacing={1}>
-        <Grid item xs={12} md={7}>
-          <Paper sx={{ mt: 2, borderRadius: 5 }} elevation={3}>
-            <Box paddingX={6} paddingY={2}>
+      <Grid container spacing={4}>
+        <Grid item xs={12} md={5}>
+          <Paper sx={{ mt: 2, mb: 2, borderRadius: 3 }} variant="outlined">
+            <Box padding={3}>
               <Box>
-                <Typography variant="h3" fontWeight={"400"} gutterBottom>
+                <Typography variant="h4" fontWeight={"400"} gutterBottom>
                   {treatmentName ? treatmentName : "treatment Name"}
                 </Typography>
               </Box>
@@ -80,26 +80,31 @@ const TreatmentDetails = ({ data }) => {
               </Box>
             </Box>
           </Paper>
-        </Grid>
-        <Grid item xs={12} md={5}>
-          <AddReview
-            diseaseId={disease.id}
-            treatmentId={id}
-            treatmentName={treatmentName}
-          />
-        </Grid>
-        <Grid item xs={12} md={7}>
-          <Paper sx={{ borderRadius: 5 }} elevation={3}>
-            <Box paddingX={6} paddingY={3}>
-              <Typography variant="h6">Reviews</Typography>
-              <Typography variant="subtitle2">From users</Typography>
-            </Box>
-            <Box paddingX={6} paddingBottom={3}>
-              {reviews.map((review) => (
-                <RatingView key={review.id} review={review} />
-              ))}
+          <Paper sx={{ mt: 2, mb: 2, borderRadius: 3 }} variant="outlined">
+            <Box padding={3}>
+              <AddReview
+                diseaseId={disease.id}
+                treatmentId={id}
+                treatmentName={treatmentName}
+              />
             </Box>
           </Paper>
+        </Grid>
+        <Grid item xs={12} md={7}>
+          <Paper sx={{ mt: 2, mb: 2, borderRadius: 3 }} variant="outlined">
+            <Box padding={3}>
+              <Box>
+                <Typography variant="h6">Reviews</Typography>
+                <Typography variant="subtitle2">From users</Typography>
+              </Box>
+            </Box>
+          </Paper>
+
+          {reviews.map((review) => (
+            <Card sx={{ mt: 2, mb: 2, borderRadius: 3 }} variant="outlined">
+              <RatingView key={review.id} review={review} />
+            </Card>
+          ))}
         </Grid>
       </Grid>
     </>

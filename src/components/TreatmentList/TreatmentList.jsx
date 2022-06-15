@@ -1,6 +1,4 @@
 import { Box, Typography } from "@mui/material";
-import React from "react";
-import AddReviewBtn from "./AddReviewBtn";
 import ratingOnlyOperators from "./FilterComponent/ratingOnlyOperators";
 import ListRating from "./ListRating";
 import TreatmentCat from "./TreatmentCat";
@@ -29,11 +27,11 @@ const dataColumns = [
   },
   {
     field: "avgRating",
-    headerName: "Rating",
-    renderCell: ListRating,
+    headerName: "Average Rating",
     valueGetter: ({ value }) => {
       return value;
     },
+    renderCell: ListRating,
     width: 200,
     flex: 0.5,
     type: "number",
@@ -41,21 +39,21 @@ const dataColumns = [
   },
   {
     field: "totalReviews",
-    headerName: "Reviews",
+    headerName: "Total Reviews",
     width: 120,
     flex: 0.5,
     // type: "number",
     filterable: false,
   },
-  {
-    field: " ",
-    headerName: "Add Review",
-    renderCell: AddReviewBtn,
-    width: 120,
-    sortable: false,
-    flex: 0.5,
-    type: "actions",
-  },
+  // {
+  //   field: " ",
+  //   headerName: "Add Review",
+  //   renderCell: AddReviewBtn,
+  //   width: 120,
+  //   sortable: false,
+  //   flex: 0.5,
+  //   type: "actions",
+  // },
 ];
 
 const TreatmentList = ({ loading, error, treatments }) => {

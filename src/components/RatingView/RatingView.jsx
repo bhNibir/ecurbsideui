@@ -1,27 +1,19 @@
-import { Box, Paper, Typography } from "@mui/material";
-import React from "react";
+import { Box, Typography } from "@mui/material";
 import RatingUser from "./RatingUser";
 
 const RatingView = ({ review }) => {
   return (
-    <Paper
-      variant="outlined"
-      sx={{
-        marginBottom: 2,
-      }}
-    >
-      <Box padding={2}>
-        <Box marginBottom={1}>
-          <RatingUser review={review} />
-        </Box>
+    <Box padding={2}>
+      <Box my={1} marginLeft={1}>
+        <RatingUser review={review} />
+      </Box>
 
-        <Box>
-          <Box paddingBottom={1}>
-            <Typography variant="body1">{review?.content}</Typography>
-          </Box>
+      <Box>
+        <Box py={1.5} px={3}>
+          <Typography variant="body2">{review?.content}</Typography>
         </Box>
       </Box>
-    </Paper>
+    </Box>
   );
 };
 

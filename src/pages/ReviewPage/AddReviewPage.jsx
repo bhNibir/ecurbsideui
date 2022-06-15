@@ -1,9 +1,9 @@
 import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
+import Review from "../../components/AddReview/Review";
 import LoadingIndicator from "../../components/common/LoadingIndicator";
 import { GET_TREATMENT_BY_ID } from "../../graphQL/queries";
 import { MainLayout } from "../../layouts/MainLayout";
-import AddReview from "./../../components/AddReview/AddReview";
 
 export const AddReviewPage = () => {
   let { id } = useParams();
@@ -18,7 +18,7 @@ export const AddReviewPage = () => {
   return (
     <>
       <MainLayout>
-        <AddReview
+        <Review
           diseaseId={disease.id}
           treatmentId={treatmentId}
           treatmentName={treatmentName}
