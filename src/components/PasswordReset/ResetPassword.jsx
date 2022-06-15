@@ -115,12 +115,12 @@ const ResetPassword = ({ token }) => {
               <InputPassword
                 name={"newPassword1"}
                 control={control}
-                label={"New Password 1"}
+                label={"New Password"}
               />
               <InputPassword
                 name={"newPassword2"}
                 control={control}
-                label={"New Password 2"}
+                label={"Confirm Password"}
                 helperText={
                   "Password must have minimum 8 characters, uppercase, lowercase, numbers and symbol."
                 }
