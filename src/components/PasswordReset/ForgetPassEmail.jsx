@@ -1,10 +1,11 @@
 import { useMutation } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LoadingButton } from "@mui/lab";
-import { Box, Divider, TextField, Typography } from "@mui/material";
+import { Box, Button, Divider, TextField, Typography } from "@mui/material";
 import { useSnackbar } from "notistack";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { Link as RouterLink } from "react-router-dom";
 import * as yup from "yup";
 import { SEND_PASSWORD_RESET_EMAIL } from "../../graphQL/mutations";
 import ThankYouMessage from "../AlertMessages/ThankYouMessage";
@@ -91,7 +92,7 @@ const ForgetPassEmail = () => {
               </Typography>
               <Divider variant="middle" />
             </Box>
-            <Box my={3}>
+            <Box mt={3}>
               <form noValidate onSubmit={handleSubmit(onSubmitData)}>
                 <Box mb={3}>
                   <Controller
@@ -134,6 +135,22 @@ const ForgetPassEmail = () => {
                   >
                     Send
                   </LoadingButton>
+                </Box>
+                <Divider variant="middle" />
+                <Box mt={2}>
+                  <Button
+                    size="small"
+                    variant="outlined"
+                    color="primary"
+                    disableElevation
+                    sx={{
+                      fontWeight: "bold",
+                    }}
+                    component={RouterLink}
+                    to="/login"
+                  >
+                    Login
+                  </Button>
                 </Box>
               </form>
             </Box>
