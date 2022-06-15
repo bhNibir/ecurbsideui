@@ -23,6 +23,7 @@ export const AddReviewPage = () => {
           treatmentId={treatmentId}
           treatmentName={treatmentName}
           gotoTreatment={true}
+          headerTitle={treatmentName}
         />
       </MainLayout>
     </>

@@ -12,6 +12,8 @@ const AddReview = ({
   treatmentId,
   treatmentName,
   gotoTreatment = false,
+  headerTitle,
+  textRow,
 }) => {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
@@ -60,13 +62,16 @@ const AddReview = ({
   return (
     <>
       <Box>
-        <Box>
-          <Typography variant="h6">Add Review</Typography>
+        <Box marginLeft={1}>
+          <Typography variant="h6" color={"text.secondary"} gutterBottom>
+            {headerTitle ? headerTitle : " Add Review"}
+          </Typography>
         </Box>
         <Box>
           <AddReviewForm
             onSubmit={onSubmit}
             mutationLoading={mutationLoading}
+            textRow={textRow}
           />
         </Box>
       </Box>

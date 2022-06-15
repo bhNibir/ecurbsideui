@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import AddReviewBtn from "./AddReviewBtn";
 import ratingOnlyOperators from "./FilterComponent/ratingOnlyOperators";
 import ListRating from "./ListRating";
 import TreatmentCat from "./TreatmentCat";
@@ -45,15 +46,15 @@ const dataColumns = [
     // type: "number",
     filterable: false,
   },
-  // {
-  //   field: " ",
-  //   headerName: "Add Review",
-  //   renderCell: AddReviewBtn,
-  //   width: 120,
-  //   sortable: false,
-  //   flex: 0.5,
-  //   type: "actions",
-  // },
+  {
+    field: " ",
+    headerName: "Add Review",
+    renderCell: AddReviewBtn,
+    width: 120,
+    sortable: false,
+    flex: 0.5,
+    type: "actions",
+  },
 ];
 
 const TreatmentList = ({ loading, error, treatments }) => {

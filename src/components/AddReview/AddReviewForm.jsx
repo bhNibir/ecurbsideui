@@ -13,7 +13,7 @@ const schema = yup
   })
   .required();
 
-const AddReviewForm = ({ onSubmit, mutationLoading }) => {
+const AddReviewForm = ({ onSubmit, mutationLoading, textRow = 3 }) => {
   const { register, setValue, handleSubmit, control } = useForm({
     resolver: yupResolver(schema),
     mode: "onChange",
@@ -56,7 +56,7 @@ const AddReviewForm = ({ onSubmit, mutationLoading }) => {
                   placeholder="Add your comment"
                   name="content"
                   multiline
-                  rows={3}
+                  rows={textRow}
                   value={value}
                   onChange={onChange}
                   error={!!error}
@@ -73,14 +73,14 @@ const AddReviewForm = ({ onSubmit, mutationLoading }) => {
             <LoadingButton
               loading={mutationLoading}
               type="submit"
-              color="primary"
+              color="success"
               variant="contained"
               startIcon={<SaveIcon />}
               size="small"
             >
               <Typography>
                 <Box component="span" fontWeight={600}>
-                  Save
+                  Post Review
                 </Box>
               </Typography>
             </LoadingButton>

@@ -1,7 +1,9 @@
 import { Card, Chip, Grid, Paper, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import { useEffect, useState } from "react";
 import AddReview from "../AddReview/AddReview";
 import RatingView from "./../RatingView/RatingView";
+import SortSelect from "./SortSelect";
 import TreatmentCategory from "./TreatmentCategory";
 import TreatmentRating from "./TreatmentRating";
 import TreatmentUser from "./TreatmentUser";
@@ -19,6 +21,21 @@ const TreatmentDetails = ({ data }) => {
     createdAt,
     reviews,
   } = data.treatmentById;
+
+  const [sortedReviews, setSortedReviews] = useState([]);
+
+  useEffect(() => {
+    const arrayForSort = [...reviews];
+    /**
+     *by default show latest reviews
+     */
+    setSortedReviews(
+      arrayForSort?.sort((a, b) => {
+        return new Date(b.createdAt) - new Date(a.createdAt);
+      })
+    );
+  }, [data]);
+
   console.log("treatmentById", data);
   return (
     <>
@@ -93,16 +110,33 @@ const TreatmentDetails = ({ data }) => {
         <Grid item xs={12} md={7}>
           <Paper sx={{ mt: 2, mb: 2, borderRadius: 3 }} variant="outlined">
             <Box padding={3}>
-              <Box>
-                <Typography variant="h6">Reviews</Typography>
-                <Typography variant="subtitle2">From users</Typography>
-              </Box>
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+                spacing={1}
+              >
+                <Box>
+                  <Typography variant="h6">Reviews</Typography>
+                  <Typography variant="subtitle2">From users</Typography>
+                </Box>
+                <Box>
+                  <SortSelect
+                    sortedReviews={sortedReviews}
+                    setSortedReviews={setSortedReviews}
+                  />
+                </Box>
+              </Stack>
             </Box>
           </Paper>
 
-          {reviews.map((review) => (
-            <Card sx={{ mt: 2, mb: 2, borderRadius: 3 }} variant="outlined">
-              <RatingView key={review.id} review={review} />
+          {sortedReviews.map((review) => (
+            <Card
+              key={review.id}
+              sx={{ mt: 2, mb: 2, borderRadius: 3 }}
+              variant="outlined"
+            >
+              <RatingView review={review} />
             </Card>
           ))}
         </Grid>
