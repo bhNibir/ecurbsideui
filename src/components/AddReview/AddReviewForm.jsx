@@ -19,6 +19,7 @@ const schema = yup
 const AddReviewForm = ({ onSubmit, mutationLoading }) => {
   const { register, setValue, handleSubmit, control } = useForm({
     resolver: yupResolver(schema),
+    mode: "onChange",
   });
 
   return (

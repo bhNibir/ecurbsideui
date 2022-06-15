@@ -21,6 +21,7 @@ const schema = yup
 const ForgetPassEmail = () => {
   const { control, handleSubmit } = useForm({
     resolver: yupResolver(schema),
+    mode: "onChange",
   });
   const [userEmail, setUserEmail] = useState("");
   const { enqueueSnackbar } = useSnackbar();

@@ -67,6 +67,7 @@ const PersonalForm = ({
   const { setValue, control, handleSubmit } = useForm({
     defaultValues,
     resolver: yupResolver(schema),
+    mode: "onChange",
   });
 
   const { loading: medicalProviderLoading, error: medicalProviderError } =

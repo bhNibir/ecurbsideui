@@ -37,6 +37,7 @@ const schema = yup
 const ResetPassword = ({ token }) => {
   const { control, handleSubmit } = useForm({
     resolver: yupResolver(schema),
+    mode: "onChange",
   });
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
