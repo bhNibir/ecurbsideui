@@ -35,7 +35,7 @@ const TreatmentDetails = ({ data }) => {
                 <Chip
                   variant="outlined"
                   color={"secondary"}
-                  sx={"string"}
+                  size={"string"}
                   label={
                     <Typography variant="subtitle2" color="secondary">
                       Disease:{" "}

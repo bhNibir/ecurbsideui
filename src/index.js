@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { SnackbarProvider } from "notistack";
 import React from "react";
@@ -8,9 +9,23 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import theme from "./theme";
 
+const notistackRef = React.createRef();
+
+const onClickDismiss = (key) => () => {
+  notistackRef.current.closeSnackbar(key);
+};
+
 ReactDOM.render(
   <React.StrictMode>
-    <SnackbarProvider maxSnack={3}>
+    <SnackbarProvider
+      maxSnack={3}
+      ref={notistackRef}
+      action={(key) => (
+        <Button size="small" color="inherit" onClick={onClickDismiss(key)}>
+          Dismiss
+        </Button>
+      )}
+    >
       <BrowserRouter>
         <ThemeProvider theme={theme}>
           <App />

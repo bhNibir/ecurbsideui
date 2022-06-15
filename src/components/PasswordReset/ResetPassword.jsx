@@ -58,20 +58,19 @@ const ResetPassword = ({ token }) => {
         });
         navigate(`/login`);
       } else {
-        const errorArrayList = Object.keys(errors).map(
-          (error) => errors[error]
-        );
-        errorArrayList.map((errorArray) => {
-          errorArray.map(({ message }) => {
-            enqueueSnackbar(message, {
-              variant: "error",
-              anchorOrigin: {
-                vertical: "top",
-                horizontal: "right",
-              },
-            });
-          });
-        });
+        if (!success) {
+          for (const [_, value] of Object.entries(errors)) {
+            value.map(({ message }) =>
+              enqueueSnackbar(message, {
+                variant: "error",
+                anchorOrigin: {
+                  vertical: "top",
+                  horizontal: "right",
+                },
+              })
+            );
+          }
+        }
       }
     },
     onError: (error) => {
