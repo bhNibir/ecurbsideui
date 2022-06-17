@@ -3,10 +3,10 @@ import { Avatar, Box, Stack, Typography } from "@mui/material";
 import { red } from "@mui/material/colors";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { formateName } from "../../utils/formatting";
-import RatingStar from "./RatingStar";
+import { formateName } from "../../../utils/formatting";
+import ReviewRatingStar from "./ReviewRatingStar";
 
-const RatingUser = ({ review }) => {
+const ReviewUser = ({ review }) => {
   dayjs.extend(relativeTime);
 
   return (
@@ -40,7 +40,7 @@ const RatingUser = ({ review }) => {
               >
                 {formateName(review?.createBy)}
               </Typography>
-              <RatingStar id={1} value={review?.rating} />
+              <ReviewRatingStar id={1} value={review?.rating} />
             </Box>
           </Stack>
         </Box>
@@ -68,4 +68,4 @@ const RatingUser = ({ review }) => {
   );
 };
 
-export default RatingUser;
+export default ReviewUser;

@@ -101,7 +101,7 @@ export const GET_DISEASE_BY_ID = gql`
 `;
 
 export const GET_TREATMENT_BY_ID = gql`
-  query GetTreatmentById($id: String!) {
+  query GetTreatmentById($id: String!, $orderBy: [String]) {
     treatmentById(id: $id) {
       id
       treatmentName
@@ -126,18 +126,57 @@ export const GET_TREATMENT_BY_ID = gql`
       avgRating
       createdAt
       updatedAt
-      reviews {
-        id
-        content
-        rating
-        createBy {
-          id
-          firstName
-          lastName
-          username
+      reviews(orderBy: $orderBy, offset: 2) {
+        pageInfo {
+          hasNextPage
+          hasPreviousPage
+          endCursor
         }
-        createdAt
-        updatedAt
+        edges {
+          node {
+            id
+            content
+            rating
+            createBy {
+              id
+              firstName
+              lastName
+              username
+            }
+            createdAt
+            updatedAt
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_REVIEWS_BY_TREATMENT_ID = gql`
+  query GetReviewsByTreatmentId($id: String!, $orderBy: [String]) {
+    reviewsByTreatmentId(id: $id, orderBy: $orderBy) {
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        endCursor
+      }
+      edges {
+        node {
+          id
+          treatment {
+            id
+          }
+          content
+          rating
+          createBy {
+            id
+            firstName
+            lastName
+            username
+          }
+          createdAt
+          updatedAt
+        }
       }
     }
   }

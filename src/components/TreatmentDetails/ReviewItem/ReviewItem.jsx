@@ -1,11 +1,12 @@
 import { Box, Typography } from "@mui/material";
-import RatingUser from "./RatingUser";
+import ReviewUser from "./ReviewUser";
 
-const RatingView = ({ review }) => {
+const ReviewItem = ({ review }) => {
+  console.log(review);
   return (
     <Box padding={2}>
       <Box my={1} marginLeft={1}>
-        <RatingUser review={review} />
+        <ReviewUser review={review} />
       </Box>
 
       <Box>
@@ -17,4 +18,4 @@ const RatingView = ({ review }) => {
   );
 };
 
-export default RatingView;
+export default ReviewItem;

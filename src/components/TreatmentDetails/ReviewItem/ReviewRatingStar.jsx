@@ -9,7 +9,7 @@ const StyledRating = styled(Rating)({
   },
 });
 
-const RatingStar = ({ id, value }) => {
+const ReviewRatingStar = ({ id, value }) => {
   return (
     <>
       <StyledRating
@@ -28,4 +28,4 @@ const RatingStar = ({ id, value }) => {
   );
 };
 
-export default RatingStar;
+export default ReviewRatingStar;
