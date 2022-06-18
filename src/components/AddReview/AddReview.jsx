@@ -4,7 +4,11 @@ import { Box } from "@mui/system";
 import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
 import { CREATE_REVIEW } from "../../graphQL/mutations";
-import { GET_DISEASE_BY_ID, GET_TREATMENT_BY_ID } from "../../graphQL/queries";
+import {
+  GET_DISEASE_BY_ID,
+  GET_REVIEWS_BY_TREATMENT_ID,
+  GET_TREATMENT_BY_ID,
+} from "../../graphQL/queries";
 import AddReviewForm from "./AddReviewForm";
 
 const AddReview = ({
@@ -23,6 +27,7 @@ const AddReview = ({
       refetchQueries: [
         { query: GET_TREATMENT_BY_ID, variables: { id: treatmentId } },
         { query: GET_DISEASE_BY_ID, variables: { id: diseaseId } },
+        { query: GET_REVIEWS_BY_TREATMENT_ID, variables: { id: treatmentId } },
       ],
       onCompleted: (data) => {
         console.log(data);

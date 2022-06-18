@@ -1,6 +1,7 @@
-import { Chip, Grid, Paper, Stack, Typography } from "@mui/material";
+import { Divider, Grid, Paper, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import AddReview from "../AddReview/AddReview";
+import AddReviewUserCard from "./AddReviewUserCard/AddReviewUserCard";
+import ReviewItem from "./ReviewItem/ReviewItem";
 import TreatmentCategory from "./TreatmentCategory";
 import TreatmentRating from "./TreatmentRating";
 import TreatmentReview from "./TreatmentReview/TreatmentReview";
@@ -17,10 +18,10 @@ const TreatmentDetails = ({ TreatmentDetailData }) => {
     otherName,
     avgRating,
     createdAt,
-    reviews,
+    userReview,
   } = TreatmentDetailData;
 
-  // console.log("treatmentById", TreatmentDetailData);
+  console.log("TreatmentDetailData", TreatmentDetailData);
   return (
     <>
       <Grid container spacing={4}>
@@ -33,7 +34,7 @@ const TreatmentDetails = ({ TreatmentDetailData }) => {
                 </Typography>
               </Box>
               <Box>
-                <Chip
+                {/* <Chip
                   variant="outlined"
                   color={"secondary"}
                   size={"string"}
@@ -45,7 +46,7 @@ const TreatmentDetails = ({ TreatmentDetailData }) => {
                         : "Disease Name"}
                     </Typography>
                   }
-                />
+                /> */}
               </Box>
               <Box marginBottom={{ md: 1, sm: 2, xs: 3 }}>
                 <Stack
@@ -82,13 +83,26 @@ const TreatmentDetails = ({ TreatmentDetailData }) => {
             </Box>
           </Paper>
           <Paper sx={{ mt: 2, mb: 2, borderRadius: 3 }} variant="outlined">
-            <Box padding={3}>
-              <AddReview
+            {userReview ? (
+              <>
+                <Box padding={3}>
+                  <Box>
+                    <Typography variant="h6" gutterBottom>
+                      Your Review
+                    </Typography>
+                  </Box>
+                  <Divider />
+                  <ReviewItem review={userReview} />
+                </Box>
+              </>
+            ) : (
+              <AddReviewUserCard treatmentId={id} />
+            )}
+            {/* <AddReview
                 diseaseId={disease.id}
                 treatmentId={id}
                 treatmentName={treatmentName}
-              />
-            </Box>
+              /> */}
           </Paper>
         </Grid>
         <Grid item xs={12} md={7}>
