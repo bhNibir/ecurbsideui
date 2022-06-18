@@ -1,6 +1,5 @@
 import { useMutation } from "@apollo/client";
-import { Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import { Box, Typography } from "@mui/material";
 import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
 import { CREATE_REVIEW } from "../../graphQL/mutations";

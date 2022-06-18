@@ -1,6 +1,5 @@
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { Chip, Grid, Paper, Stack, Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import { Box, Chip, Grid, Paper, Stack, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import LoadingIndicator from "../common/LoadingIndicator";
 import TreatmentList from "./../TreatmentList/TreatmentList";

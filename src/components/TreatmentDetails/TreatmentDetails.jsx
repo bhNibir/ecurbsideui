@@ -1,5 +1,4 @@
-import { Divider, Grid, Paper, Stack, Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import { Box, Divider, Grid, Paper, Stack, Typography } from "@mui/material";
 import AddReviewUserCard from "./AddReviewUserCard/AddReviewUserCard";
 import ReviewItem from "./ReviewItem/ReviewItem";
 import TreatmentCategory from "./TreatmentCategory";
