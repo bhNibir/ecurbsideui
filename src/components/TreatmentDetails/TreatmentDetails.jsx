@@ -1,12 +1,12 @@
-import { Chip, Grid, Paper, Stack, Typography } from "@mui/material";
-import { Box } from "@mui/system";
-import AddReview from "../AddReview/AddReview";
-import RatingView from "./../RatingView/RatingView";
+import { Box, Divider, Grid, Paper, Stack, Typography } from "@mui/material";
+import AddReviewUserCard from "./AddReviewUserCard/AddReviewUserCard";
+import ReviewItem from "./ReviewItem/ReviewItem";
 import TreatmentCategory from "./TreatmentCategory";
 import TreatmentRating from "./TreatmentRating";
+import TreatmentReview from "./TreatmentReview/TreatmentReview";
 import TreatmentUser from "./TreatmentUser";
 
-const TreatmentDetails = ({ data }) => {
+const TreatmentDetails = ({ TreatmentDetailData }) => {
   const {
     id,
     disease,
@@ -17,25 +17,26 @@ const TreatmentDetails = ({ data }) => {
     otherName,
     avgRating,
     createdAt,
-    reviews,
-  } = data.treatmentById;
-  console.log("treatmentById", data);
+    userReview,
+  } = TreatmentDetailData;
+
+  console.log("TreatmentDetailData", TreatmentDetailData);
   return (
     <>
-      <Grid container spacing={1}>
-        <Grid item xs={12} md={7}>
-          <Paper sx={{ mt: 2, borderRadius: 5 }} elevation={3}>
-            <Box paddingX={6} paddingY={2}>
+      <Grid container spacing={4}>
+        <Grid item xs={12} md={5}>
+          <Paper sx={{ mt: 2, mb: 2, borderRadius: 3 }} variant="outlined">
+            <Box padding={3}>
               <Box>
-                <Typography variant="h3" fontWeight={"400"} gutterBottom>
+                <Typography variant="h4" fontWeight={"400"} gutterBottom>
                   {treatmentName ? treatmentName : "treatment Name"}
                 </Typography>
               </Box>
               <Box>
-                <Chip
+                {/* <Chip
                   variant="outlined"
                   color={"secondary"}
-                  sx={"string"}
+                  size={"string"}
                   label={
                     <Typography variant="subtitle2" color="secondary">
                       Disease:{" "}
@@ -44,7 +45,7 @@ const TreatmentDetails = ({ data }) => {
                         : "Disease Name"}
                     </Typography>
                   }
-                />
+                /> */}
               </Box>
               <Box marginBottom={{ md: 1, sm: 2, xs: 3 }}>
                 <Stack
@@ -80,26 +81,31 @@ const TreatmentDetails = ({ data }) => {
               </Box>
             </Box>
           </Paper>
-        </Grid>
-        <Grid item xs={12} md={5}>
-          <AddReview
-            diseaseId={disease.id}
-            treatmentId={id}
-            treatmentName={treatmentName}
-          />
+          <Paper sx={{ mt: 2, mb: 2, borderRadius: 3 }} variant="outlined">
+            {userReview ? (
+              <>
+                <Box padding={3}>
+                  <Box>
+                    <Typography variant="h6" gutterBottom>
+                      Your Review
+                    </Typography>
+                  </Box>
+                  <Divider />
+                  <ReviewItem review={userReview} />
+                </Box>
+              </>
+            ) : (
+              <AddReviewUserCard treatmentId={id} />
+            )}
+            {/* <AddReview
+                diseaseId={disease.id}
+                treatmentId={id}
+                treatmentName={treatmentName}
+              /> */}
+          </Paper>
         </Grid>
         <Grid item xs={12} md={7}>
-          <Paper sx={{ borderRadius: 5 }} elevation={3}>
-            <Box paddingX={6} paddingY={3}>
-              <Typography variant="h6">Reviews</Typography>
-              <Typography variant="subtitle2">From users</Typography>
-            </Box>
-            <Box paddingX={6} paddingBottom={3}>
-              {reviews.map((review) => (
-                <RatingView key={review.id} review={review} />
-              ))}
-            </Box>
-          </Paper>
+          <TreatmentReview treatmentId={id} />
         </Grid>
       </Grid>
     </>

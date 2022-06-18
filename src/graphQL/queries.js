@@ -126,7 +126,7 @@ export const GET_TREATMENT_BY_ID = gql`
       avgRating
       createdAt
       updatedAt
-      reviews {
+      userReview {
         id
         content
         rating
@@ -138,6 +138,36 @@ export const GET_TREATMENT_BY_ID = gql`
         }
         createdAt
         updatedAt
+      }
+    }
+  }
+`;
+
+export const GET_REVIEWS_BY_TREATMENT_ID = gql`
+  query GetReviewsByTreatmentId($id: String!, $orderBy: [String]) {
+    reviewsByTreatmentId(id: $id, orderBy: $orderBy) {
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        endCursor
+      }
+      edges {
+        node {
+          id
+          treatment {
+            id
+          }
+          content
+          rating
+          createBy {
+            id
+            firstName
+            lastName
+            username
+          }
+          createdAt
+          updatedAt
+        }
       }
     }
   }

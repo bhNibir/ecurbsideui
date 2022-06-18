@@ -1,14 +1,13 @@
-import { Box, Chip, Tooltip, Typography } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import { Box, Chip, Tooltip } from "@mui/material";
 
-const DiseaseDetailsSpecialty = ({ diseaseCategories }) => {
-  const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down("sm"));
+const MedicalSpecialty = ({ medicalSpecialty }) => {
+  // const theme = useTheme();
+  const medicalSpecialty3 = medicalSpecialty.slice(0, 3);
+  // const matches = useMediaQuery(theme.breakpoints.down("sm"));
 
   const formateLabel = (name) => {
-    if (matches && name.length >= 25) {
-      return name.slice(0, 22) + "...";
+    if (name.length >= 15) {
+      return name.slice(0, 12) + "...";
     }
 
     return name;
@@ -27,10 +26,7 @@ const DiseaseDetailsSpecialty = ({ diseaseCategories }) => {
         }}
         component="ul"
       >
-        <Box component="span" margin={0.25}>
-          <Typography variant="subtitle2">Specialty:</Typography>
-        </Box>
-        {diseaseCategories.map((category) => {
+        {medicalSpecialty3?.map((category) => {
           return (
             <Box component="span" margin={0.25} key={category.id}>
               <Tooltip title={category.name} placement="top" arrow>
@@ -49,4 +45,4 @@ const DiseaseDetailsSpecialty = ({ diseaseCategories }) => {
   );
 };
 
-export default DiseaseDetailsSpecialty;
+export default MedicalSpecialty;

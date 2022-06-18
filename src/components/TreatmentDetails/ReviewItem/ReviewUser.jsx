@@ -1,12 +1,12 @@
+import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
 import { Avatar, Box, Stack, Typography } from "@mui/material";
 import { red } from "@mui/material/colors";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import React from "react";
-import { formateName } from "../../utils/formatting";
-import RatingStar from "./RatingStar";
+import { formateName } from "../../../utils/formatting";
+import ReviewRatingStar from "./ReviewRatingStar";
 
-const RatingUser = ({ review }) => {
+const ReviewUser = ({ review }) => {
   dayjs.extend(relativeTime);
 
   return (
@@ -40,22 +40,32 @@ const RatingUser = ({ review }) => {
               >
                 {formateName(review?.createBy)}
               </Typography>
-              <RatingStar id={1} value={review?.rating} />
+              <ReviewRatingStar id={1} value={review?.rating} />
             </Box>
           </Stack>
         </Box>
-        <Box>
-          <Typography
-            variant="body2"
-            color="text.secondary"
-            textAlign="justify"
-          >
-            {dayjs(review?.createdAt).fromNow()}
-          </Typography>
+        <Box paddingRight={3}>
+          <Stack direction="row">
+            <AccessTimeFilledIcon
+              sx={{
+                fontSize: "1rem",
+                color: "text.secondary",
+                marginRight: 0.4,
+                marginTop: 0.2,
+              }}
+            />
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              textAlign="justify"
+            >
+              {dayjs(review?.createdAt).fromNow()}
+            </Typography>
+          </Stack>
         </Box>
       </Stack>
     </>
   );
 };
 
-export default RatingUser;
+export default ReviewUser;

@@ -9,16 +9,14 @@ import RatingScale from "./RatingScale";
 const schema = yup
   .object()
   .shape({
-    rating: yup
-      .number()
-      .typeError("Rating is required")
-      .required("Rating is required"),
+    rating: yup.number().typeError("Required").required("Required"),
   })
   .required();
 
-const AddReviewForm = ({ onSubmit, mutationLoading }) => {
+const AddReviewForm = ({ onSubmit, mutationLoading, textRow = 3 }) => {
   const { register, setValue, handleSubmit, control } = useForm({
     resolver: yupResolver(schema),
+    mode: "onChange",
   });
 
   return (
@@ -58,7 +56,7 @@ const AddReviewForm = ({ onSubmit, mutationLoading }) => {
                   placeholder="Add your comment"
                   name="content"
                   multiline
-                  rows={3}
+                  rows={textRow}
                   value={value}
                   onChange={onChange}
                   error={!!error}
@@ -75,13 +73,14 @@ const AddReviewForm = ({ onSubmit, mutationLoading }) => {
             <LoadingButton
               loading={mutationLoading}
               type="submit"
-              color="primary"
+              color="success"
               variant="contained"
               startIcon={<SaveIcon />}
+              size="small"
             >
               <Typography>
                 <Box component="span" fontWeight={600}>
-                  Save
+                  Post Review
                 </Box>
               </Typography>
             </LoadingButton>

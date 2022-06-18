@@ -16,7 +16,7 @@ const TreatmentDetailPage = () => {
 
   return (
     <MainLayout>
-      <TreatmentDetails data={data} />
+      <TreatmentDetails TreatmentDetailData={data.treatmentById} />
     </MainLayout>
   );
 };

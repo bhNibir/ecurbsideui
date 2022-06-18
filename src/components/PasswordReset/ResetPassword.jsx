@@ -37,6 +37,7 @@ const schema = yup
 const ResetPassword = ({ token }) => {
   const { control, handleSubmit } = useForm({
     resolver: yupResolver(schema),
+    mode: "onChange",
   });
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
@@ -57,20 +58,19 @@ const ResetPassword = ({ token }) => {
         });
         navigate(`/login`);
       } else {
-        const errorArrayList = Object.keys(errors).map(
-          (error) => errors[error]
-        );
-        errorArrayList.map((errorArray) => {
-          errorArray.map(({ message }) => {
-            enqueueSnackbar(message, {
-              variant: "error",
-              anchorOrigin: {
-                vertical: "top",
-                horizontal: "right",
-              },
-            });
-          });
-        });
+        if (!success) {
+          for (const [_, value] of Object.entries(errors)) {
+            value.map(({ message }) =>
+              enqueueSnackbar(message, {
+                variant: "error",
+                anchorOrigin: {
+                  vertical: "top",
+                  horizontal: "right",
+                },
+              })
+            );
+          }
+        }
       }
     },
     onError: (error) => {
@@ -115,12 +115,12 @@ const ResetPassword = ({ token }) => {
               <InputPassword
                 name={"newPassword1"}
                 control={control}
-                label={"New Password 1"}
+                label={"New Password"}
               />
               <InputPassword
                 name={"newPassword2"}
                 control={control}
-                label={"New Password 2"}
+                label={"Confirm Password"}
                 helperText={
                   "Password must have minimum 8 characters, uppercase, lowercase, numbers and symbol."
                 }
