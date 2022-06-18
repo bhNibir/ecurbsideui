@@ -146,13 +146,23 @@ export const CREATE_REVIEW = gql`
     }
   }
 `;
-export const CREATE_FAVORITE_DISEASE = gql`
-  mutation FavoriteDiseaseCreation($diseaseId: ID!, $isFavorite: Boolean!) {
-    createFavoriteDisease(diseaseId: $diseaseId, isFavorite: $isFavorite) {
+export const UPDATE_OR_CREATE_FAVORITE_DISEASE = gql`
+  mutation FavoriteDiseaseUpdateOrCreation(
+    $diseaseId: ID!
+    $isFavorite: Boolean!
+  ) {
+    updateOrCreateFavoriteDisease(
+      diseaseId: $diseaseId
+      isFavorite: $isFavorite
+    ) {
       favoriteDisease {
         id
+        isFavorite
         createdAt
         updatedAt
+        disease {
+          diseaseName
+        }
         user {
           id
           firstName
