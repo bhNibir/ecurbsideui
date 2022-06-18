@@ -161,6 +161,7 @@ const AddReviewUserCard = ({ treatmentId }) => {
             </Typography>
           </Box>
         </Stack>
+        {/* <MedicalSpecialty medicalSpecialty={medicalSpecialty} /> */}
       </Box>
     </>
   );

@@ -26,7 +26,10 @@ const AddReview = ({
       refetchQueries: [
         { query: GET_TREATMENT_BY_ID, variables: { id: treatmentId } },
         { query: GET_DISEASE_BY_ID, variables: { id: diseaseId } },
-        { query: GET_REVIEWS_BY_TREATMENT_ID, variables: { id: treatmentId } },
+        {
+          query: GET_REVIEWS_BY_TREATMENT_ID,
+          variables: { id: treatmentId, orderBy: "-createdAt" },
+        },
       ],
       onCompleted: (data) => {
         console.log(data);

@@ -6,11 +6,11 @@ import Select from "@mui/material/Select";
 const sortList = [
   {
     label: "Newest First",
-    value: "-createBy",
+    value: "-createdAt",
   },
   {
     label: "Oldest First",
-    value: "createBy",
+    value: "createdAt",
   },
   {
     label: "Highest Rated",
