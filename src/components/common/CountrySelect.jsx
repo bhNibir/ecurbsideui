@@ -2,7 +2,6 @@ import { CircularProgress } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import React from "react";
 import { Controller } from "react-hook-form";
 
 const CountrySelect = ({
@@ -66,7 +65,7 @@ const CountrySelect = ({
                       {params.InputProps.endAdornment}
                     </>
                   ),
-                  autoComplete: "select-country",
+                  autoComplete: "country",
                 }}
               />
             )}

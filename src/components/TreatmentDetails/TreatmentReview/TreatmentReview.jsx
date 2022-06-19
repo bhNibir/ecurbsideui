@@ -1,5 +1,6 @@
 import { Box, Paper, Stack, Typography } from "@mui/material";
 import { useState } from "react";
+import FilterCard from "../FilterCard/FilterCard";
 import ReviewItemList from "./ReviewItemList";
 import SortSelect from "./SortSelect";
 
@@ -32,6 +33,7 @@ const TreatmentReview = ({ treatmentId }) => {
           </Stack>
         </Box>
       </Paper>
+      <FilterCard />
       <ReviewItemList orderBy={orderBy} treatmentId={treatmentId} />
     </>
   );
