@@ -15,7 +15,7 @@ const TreatmentReview = ({ treatmentId }) => {
   return (
     <>
       {" "}
-      <Paper sx={{ mt: 2, mb: 2, borderRadius: 3 }} variant="outlined">
+      <Paper sx={{ mb: 2, borderRadius: 3 }} variant="outlined">
         <Box padding={3}>
           <Stack
             direction="row"

@@ -19,6 +19,7 @@ export const AddReviewPage = () => {
     <>
       <MainLayout>
         <Review
+          diseaseName={disease.diseaseName}
           diseaseId={disease.id}
           treatmentId={treatmentId}
           treatmentName={treatmentName}

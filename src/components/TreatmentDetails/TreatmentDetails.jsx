@@ -1,4 +1,14 @@
-import { Box, Divider, Grid, Paper, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Breadcrumbs,
+  Divider,
+  Grid,
+  Link,
+  Paper,
+  Stack,
+  Typography,
+} from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
 import AddReviewUserCard from "./AddReviewUserCard/AddReviewUserCard";
 import ReviewItem from "./ReviewItem/ReviewItem";
 import TreatmentCategory from "./TreatmentCategory";
@@ -23,9 +33,25 @@ const TreatmentDetails = ({ TreatmentDetailData }) => {
   console.log("TreatmentDetailData", TreatmentDetailData);
   return (
     <>
+      <Box role="presentation" my={2}>
+        <Breadcrumbs separator="›" aria-label="breadcrumb">
+          <Link underline="hover" color="inherit" component={RouterLink} to="/">
+            Home
+          </Link>
+          <Link
+            underline="hover"
+            color="inherit"
+            component={RouterLink}
+            to={`/disease/${disease.id}`}
+          >
+            {disease.diseaseName}
+          </Link>
+          <Typography color="text.primary">{treatmentName}</Typography>
+        </Breadcrumbs>
+      </Box>
       <Grid container spacing={4}>
         <Grid item xs={12} md={5}>
-          <Paper sx={{ mt: 2, mb: 2, borderRadius: 3 }} variant="outlined">
+          <Paper sx={{ mb: 2, borderRadius: 3 }} variant="outlined">
             <Box padding={3}>
               <Box>
                 <Typography variant="h4" fontWeight={"400"} gutterBottom>
@@ -81,7 +107,7 @@ const TreatmentDetails = ({ TreatmentDetailData }) => {
               </Box>
             </Box>
           </Paper>
-          <Paper sx={{ mt: 2, mb: 2, borderRadius: 3 }} variant="outlined">
+          <Paper sx={{ mb: 2, borderRadius: 3 }} variant="outlined">
             {userReview ? (
               <>
                 <Box padding={3}>
