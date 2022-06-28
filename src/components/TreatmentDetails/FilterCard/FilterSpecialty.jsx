@@ -3,8 +3,7 @@ import { Autocomplete, CircularProgress, TextField } from "@mui/material";
 import { useState } from "react";
 import { GET_DISEASE_CATEGORIES } from "../../../graphQL/queries";
 
-const FilterSpecialty = () => {
-  const [inputValue, setInputValue] = useState("");
+const FilterSpecialty = ({ handleFilter }) => {
   const [SpecialtyData, setSpecialtyData] = useState([]);
   const { loading, error } = useQuery(GET_DISEASE_CATEGORIES, {
     onCompleted: (data) => {
@@ -28,11 +27,10 @@ const FilterSpecialty = () => {
         filterSelectedOptions
         onChange={(_, values) => {
           console.log(values);
-          // name, values.map(({ id }) => id);
-        }}
-        inputValue={inputValue}
-        onInputChange={(event, newInputValue) => {
-          setInputValue(newInputValue);
+          handleFilter({
+            name: "medicalSpecialty",
+            value: values.map(({ id }) => id),
+          });
         }}
         renderInput={(params) => (
           <TextField

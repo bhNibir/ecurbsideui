@@ -3,7 +3,7 @@ import { Autocomplete, Box, CircularProgress, TextField } from "@mui/material";
 import { useState } from "react";
 import { GET_COUNTRIES_LIST } from "../../../graphQL/queries";
 
-const FilterCountry = () => {
+const FilterCountry = ({ handleFilter }) => {
   const [countries, setCountries] = useState([]);
 
   const { loading, error } = useQuery(GET_COUNTRIES_LIST, {
@@ -18,6 +18,7 @@ const FilterCountry = () => {
     <Autocomplete
       size="small"
       margin="dense"
+      multiple
       // sx={{ width: 300 }}
       options={countries}
       loading={loading}
@@ -25,7 +26,10 @@ const FilterCountry = () => {
       getOptionLabel={(option) => option.name}
       onChange={(_, values) => {
         console.log(values);
-        // name, values.map(({ id }) => id);
+        handleFilter({
+          name: "country",
+          value: values.map(({ code }) => code),
+        });
       }}
       renderOption={(props, option) => (
         <Box

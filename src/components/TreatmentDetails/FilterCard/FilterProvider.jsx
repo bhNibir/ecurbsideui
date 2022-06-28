@@ -3,7 +3,7 @@ import { Autocomplete, CircularProgress, TextField } from "@mui/material";
 import { useState } from "react";
 import { GET_MEDICAL_PROVIDER } from "../../../graphQL/queries";
 
-const FilterProvider = () => {
+const FilterProvider = ({ handleFilter }) => {
   const [providers, setProviders] = useState([]);
 
   const { loading, error } = useQuery(GET_MEDICAL_PROVIDER, {
@@ -17,6 +17,7 @@ const FilterProvider = () => {
   return (
     <Autocomplete
       size="small"
+      multiple
       margin="dense"
       options={providers}
       loading={loading}
@@ -24,7 +25,10 @@ const FilterProvider = () => {
       getOptionLabel={(option) => option.name}
       onChange={(_, values) => {
         console.log(values);
-        // name, values.map(({ id }) => id);
+        handleFilter({
+          name: "medicalProvider",
+          value: values.map(({ id }) => id),
+        });
       }}
       renderInput={(params) => (
         <TextField

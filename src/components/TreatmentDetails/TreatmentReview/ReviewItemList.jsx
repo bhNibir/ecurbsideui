@@ -1,21 +1,9 @@
-import { useQuery } from "@apollo/client";
 import { Card } from "@mui/material";
-import { useState } from "react";
-import { GET_REVIEWS_BY_TREATMENT_ID } from "../../../graphQL/queries";
 import LoadingIndicator from "../../common/LoadingIndicator";
 
 import ReviewItem from "./../ReviewItem/ReviewItem";
 
-const ReviewItemList = ({ treatmentId, orderBy }) => {
-  const [reviews, setReviews] = useState([]);
-  const { loading, error, data } = useQuery(GET_REVIEWS_BY_TREATMENT_ID, {
-    variables: { id: treatmentId, orderBy: orderBy },
-    onCompleted: (data) => {
-      setReviews(data.reviewsByTreatmentId.edges);
-    },
-  });
-
-  console.log("ReviewItemList orderBy -------->", orderBy);
+const ReviewItemList = ({ reviews, setReviews, loading, error }) => {
   console.log("ReviewItemList orderBy -------->", reviews);
 
   if (loading) return <LoadingIndicator />;
@@ -27,7 +15,7 @@ const ReviewItemList = ({ treatmentId, orderBy }) => {
           sx={{ mt: 2, mb: 2, borderRadius: 3, padding: 5 }}
           variant="outlined"
         >
-          Rating not yet!
+          Rating not found!
         </Card>
       ) : (
         reviews.map((review, index) => {

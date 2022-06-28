@@ -1,17 +1,42 @@
+import { useLazyQuery } from "@apollo/client";
 import { Box, Paper, Stack, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { GET_REVIEWS_BY_TREATMENT_ID } from "../../../graphQL/queries";
 import FilterCard from "../FilterCard/FilterCard";
 import ReviewItemList from "./ReviewItemList";
 import SortSelect from "./SortSelect";
 
 const TreatmentReview = ({ treatmentId }) => {
-  const [orderBy, setOrderBy] = useState("");
+  const [reviews, setReviews] = useState([]);
+  const [filterBy, setFilterBy] = useState({
+    medicalProvider: [],
+    country: [],
+    specialty: [],
+  });
+  const [orderBy, setOrderBy] = useState("-createdAt");
 
   const handleOrdering = (e) => {
     setOrderBy(e.target.value);
   };
 
+  const [getReview, { loading, error, data }] = useLazyQuery(
+    GET_REVIEWS_BY_TREATMENT_ID
+  );
+
+  useEffect(() => {
+    const values = { ...filterBy, id: treatmentId, orderBy: orderBy };
+    console.log("values", values);
+    getReview({
+      variables: values,
+      fetchPolicy: "no-cache",
+      onCompleted: (data) => {
+        setReviews(data.reviewsByTreatmentId.edges);
+      },
+    });
+  }, [treatmentId, orderBy]);
+
   console.log("treatmentId", treatmentId);
+
   return (
     <>
       {" "}
@@ -33,8 +58,21 @@ const TreatmentReview = ({ treatmentId }) => {
           </Stack>
         </Box>
       </Paper>
-      <FilterCard />
-      <ReviewItemList orderBy={orderBy} treatmentId={treatmentId} />
+      <FilterCard
+        treatmentId={treatmentId}
+        getReview={getReview}
+        reviews={reviews}
+        setReviews={setReviews}
+        filterBy={filterBy}
+        setFilterBy={setFilterBy}
+        orderBy={orderBy}
+      />
+      <ReviewItemList
+        treatmentId={treatmentId}
+        reviews={reviews}
+        loading={loading}
+        error={error}
+      />
     </>
   );
 };
