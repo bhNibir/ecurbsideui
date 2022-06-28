@@ -144,8 +144,20 @@ export const GET_TREATMENT_BY_ID = gql`
 `;
 
 export const GET_REVIEWS_BY_TREATMENT_ID = gql`
-  query GetReviewsByTreatmentId($id: String!, $orderBy: [String]) {
-    reviewsByTreatmentId(id: $id, orderBy: $orderBy) {
+  query GetReviewsByTreatmentId(
+    $id: String!
+    $orderBy: String
+    $medicalProvider: [ID]
+    $country: [String]
+    $medicalSpecialty: [ID]
+  ) {
+    reviewsByTreatmentId(
+      id: $id
+      orderBy: $orderBy
+      medicalProvider: $medicalProvider
+      country: $country
+      medicalSpecialty: $medicalSpecialty
+    ) {
       pageInfo {
         hasNextPage
         hasPreviousPage

@@ -1,12 +1,15 @@
 import FilterListIcon from "@mui/icons-material/FilterList";
 import {
   Accordion,
+  AccordionActions,
   AccordionDetails,
   AccordionSummary,
   Box,
+  Button,
   Grid,
   Typography,
 } from "@mui/material";
+import { useState } from "react";
 import FilterCountry from "./FilterCountry";
 import FilterProvider from "./FilterProvider";
 import FilterSpecialty from "./FilterSpecialty";
@@ -20,7 +23,35 @@ import FilterSpecialty from "./FilterSpecialty";
 //   },
 // }));
 
-const FilterCard = () => {
+const FilterCard = ({
+  treatmentId,
+  getReview,
+  reviews,
+  setReviews,
+  filterBy,
+  setFilterBy,
+  orderBy,
+}) => {
+  const [filterDisable, setFilterDisable] = useState(true);
+
+  const handleFilter = ({ name, value }) => {
+    setFilterBy({ ...filterBy, [name]: value });
+    setFilterDisable(false);
+  };
+
+  const handleSubmit = () => {
+    const values = { ...filterBy, id: treatmentId, orderBy: orderBy };
+    console.log("values", values);
+    getReview({
+      variables: values,
+      fetchPolicy: "no-cache",
+      onCompleted: (data) => {
+        setReviews(data.reviewsByTreatmentId.edges);
+        setFilterDisable(true);
+      },
+    });
+  };
+
   return (
     <>
       <Accordion sx={{ borderRadius: "8px" }}>
@@ -33,19 +64,29 @@ const FilterCard = () => {
           <Typography ml={2}>Filters</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Box sx={{ flexGrow: 1 }}>
+          <Box sx={{ flexGrow: 1, mb: 1 }}>
             <Grid container spacing={3}>
               <Grid item xs={12} md={4}>
-                <FilterCountry />
+                <FilterCountry handleFilter={handleFilter} />
               </Grid>
               <Grid item xs={12} md={4}>
-                <FilterSpecialty />
+                <FilterSpecialty handleFilter={handleFilter} />
               </Grid>
               <Grid item xs={12} md={4}>
-                <FilterProvider />
+                <FilterProvider handleFilter={handleFilter} />
               </Grid>
             </Grid>
           </Box>
+          <AccordionActions>
+            <Button
+              variant="outlined"
+              size="small"
+              onClick={handleSubmit}
+              disabled={filterDisable}
+            >
+              filter
+            </Button>
+          </AccordionActions>
         </AccordionDetails>
       </Accordion>
     </>
