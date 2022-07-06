@@ -1,10 +1,13 @@
 import { useMutation } from "@apollo/client";
-import { Paper, Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import { Box, Typography } from "@mui/material";
 import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
 import { CREATE_REVIEW } from "../../graphQL/mutations";
-import { GET_DISEASE_BY_ID, GET_TREATMENT_BY_ID } from "../../graphQL/queries";
+import {
+  GET_DISEASE_BY_ID,
+  GET_REVIEWS_BY_TREATMENT_ID,
+  GET_TREATMENT_BY_ID,
+} from "../../graphQL/queries";
 import AddReviewForm from "./AddReviewForm";
 
 const AddReview = ({
@@ -12,6 +15,8 @@ const AddReview = ({
   treatmentId,
   treatmentName,
   gotoTreatment = false,
+  headerTitle,
+  textRow,
 }) => {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
@@ -21,6 +26,10 @@ const AddReview = ({
       refetchQueries: [
         { query: GET_TREATMENT_BY_ID, variables: { id: treatmentId } },
         { query: GET_DISEASE_BY_ID, variables: { id: diseaseId } },
+        {
+          query: GET_REVIEWS_BY_TREATMENT_ID,
+          variables: { id: treatmentId, orderBy: "-createdAt" },
+        },
       ],
       onCompleted: (data) => {
         console.log(data);
@@ -59,20 +68,20 @@ const AddReview = ({
 
   return (
     <>
-      <Paper
-        sx={{ mt: 2, mb: 2, ml: { md: 3 }, borderRadius: 5 }}
-        elevation={3}
-      >
-        <Box paddingX={6} paddingTop={3} paddingBottom={1.5}>
-          <Typography variant="h6"> Add Review</Typography>
+      <Box>
+        <Box marginLeft={1}>
+          <Typography variant="h6" color={"text.secondary"} gutterBottom>
+            {headerTitle ? headerTitle : " Add Review"}
+          </Typography>
         </Box>
-        <Box paddingX={6} paddingBottom={3}>
+        <Box>
           <AddReviewForm
             onSubmit={onSubmit}
             mutationLoading={mutationLoading}
+            textRow={textRow}
           />
         </Box>
-      </Paper>
+      </Box>
     </>
   );
 };

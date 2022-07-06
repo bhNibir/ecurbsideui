@@ -1,6 +1,6 @@
 import StarOutlineRoundedIcon from "@mui/icons-material/StarOutlineRounded";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
-import { FormHelperText } from "@mui/material";
+import { FormHelperText, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import { styled } from "@mui/material/styles";
@@ -31,7 +31,7 @@ const RatingScale = ({ value, onChange, error }) => {
       }}
     >
       <StyledRating
-        sx={{ fontSize: 42 }}
+        size="large"
         name="hover-feedback"
         value={Number(value)}
         precision={1}
@@ -40,10 +40,19 @@ const RatingScale = ({ value, onChange, error }) => {
         }}
         onChange={(_, value) => onChange(value)}
         icon={<StarRoundedIcon fontSize="inherit" />}
-        emptyIcon={<StarOutlineRoundedIcon fontSize="inherit" />}
+        emptyIcon={
+          <StarOutlineRoundedIcon
+            fontSize="inherit"
+            color={error ? "error" : "inherit"}
+          />
+        }
       />
       {value !== null && (
-        <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
+        <Box sx={{ ml: 1 }}>
+          <Typography variant="caption">
+            {labels[hover !== -1 ? hover : value]}
+          </Typography>
+        </Box>
       )}
       {hover === -1 && error !== null && (
         <FormHelperText error={true}>{error?.message}</FormHelperText>
