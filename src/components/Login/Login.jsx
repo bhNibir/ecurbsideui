@@ -66,6 +66,23 @@ const Login = () => {
           >
             Ecubside
           </Typography>
+          <Box sx={{ p: 1, mb: 1, border: '1px dashed grey' }}>
+            <Typography
+              variant="body2"
+              sx={{ pb: 1 }}
+              gutterBottom
+            >
+              user :
+
+              <strong> admin@test.com</strong>
+
+              <br />
+              password :
+
+              <strong> password</strong>
+
+            </Typography>
+          </Box>
           <Divider variant="middle" />
         </Box>
         <LoginForm

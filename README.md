@@ -11,7 +11,7 @@
     Medical Treatment Review and Rating Social App!
     <br />
     <br />
-    <a href="https://ecurbside-17b9c.web.app/"><strong>» Live Demo </strong></a> ||
+    <a href="https://ecrubside.web.app/"><strong>» Live Demo </strong></a> ||
     <a href="https://github.com/bhNibir/ecurbsideapi/"><strong>» Ecurbside Api</strong></a>
     <br />
   </p>
@@ -45,6 +45,7 @@ To get a local copy up and running follow these simple example steps.
 ### Prerequisites
 
 - yarn
+
   ```sh
   npm install yarn -g
   ```
@@ -54,9 +55,11 @@ To get a local copy up and running follow these simple example steps.
 <br/>
 
 1. Clone the repo
+
    ```sh
    git clone https://github.com/bhNibir/ecurbsideui.git
    ```
+
 2. Go to project root folder and Install NPM packages
 
    ```sh
@@ -73,6 +76,7 @@ To get a local copy up and running follow these simple example steps.
    ```
 
 4. run devlopment sever
+
    ```sh
    yarn start
    ```
@@ -85,13 +89,13 @@ To get a local copy up and running follow these simple example steps.
 
 Home Page
 
-[![Login Page Screen Shot][login-screenshot]](https://ecurbside-17b9c.web.app/)
-[![Signup Page Screen Shot][signup-screenshot]](https://ecurbside-17b9c.web.app/)
-[![Home Page Screen Shot][home-screenshot]](https://ecurbside-17b9c.web.app/)
-[![Disease Page Screen Shot][disease-screenshot]](https://ecurbside-17b9c.web.app/)
-[![Add disease Page Screen Shot][add-disease-screenshot]](https://ecurbside-17b9c.web.app/)
-[![Treatment Page Screen Shot][treatment-screenshot]](https://ecurbside-17b9c.web.app/)
-[![Add Review Page Screen Shot][add-review-screenshot]](https://ecurbside-17b9c.web.app/)
+[![Login Page Screen Shot][login-screenshot]](https://ecrubside.web.app/)
+[![Signup Page Screen Shot][signup-screenshot]](https://ecrubside.web.app/)
+[![Home Page Screen Shot][home-screenshot]](https://ecrubside.web.app/)
+[![Disease Page Screen Shot][disease-screenshot]](https://ecrubside.web.app/)
+[![Add disease Page Screen Shot][add-disease-screenshot]](https://ecrubside.web.app/)
+[![Treatment Page Screen Shot][treatment-screenshot]](https://ecrubside.web.app/)
+[![Add Review Page Screen Shot][add-review-screenshot]](https://ecrubside.web.app/)
 
 <!-- GETTING STARTED -->
 <br/>
